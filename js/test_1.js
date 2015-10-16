@@ -42,7 +42,7 @@
 			
 			if ($(this).hasClass("sq_" + n)) {
 				
-				if (n == 2) {
+				if (n == 1) {
 //				if (n == 25) {
 //				if (n == 50) {
 					
