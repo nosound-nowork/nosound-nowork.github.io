@@ -1,6 +1,6 @@
 {
 	"dice": {
-		"description": "裏面をタップしてください。",
+		"description": "サイコロにしたときの裏面はどれ？",
 		"questions": [
 			"011120010030",
 			"003011020110",
@@ -15,199 +15,199 @@
 		]
 	},
 	
+	"image": [
+		{
+			"question": "四角はいくつ？",
+			"file": "B-1.jpg",
+			"selections": [
+				"4",
+				"5",
+				"6"
+			],
+			"answer": 1
+		},
+		{
+			"question": "三角はいくつ？",
+			"file": "B-2.jpg",
+			"selections": [
+				"4",
+				"5",
+				"6"
+			],
+			"answer": 0
+		},
+		{
+			"question": "三角はいくつ？",
+			"file": "B-3.jpg",
+			"selections": [
+				"4",
+				"5",
+				"6"
+			],
+			"answer": 1
+		},
+		{
+			"question": "四角はいくつ？",
+			"file": "B-4.jpg",
+			"selections": [
+				"4",
+				"5",
+				"6"
+			],
+			"answer": 0
+		},
+		{
+			"question": "四角はいくつ？",
+			"file": "B-5.jpg",
+			"selections": [
+				"4",
+				"5",
+				"6"
+			],
+			"answer": 0
+		},
+		{
+			"question": "丸はいくつ？",
+			"file": "B-6.jpg",
+			"selections": [
+				"4",
+				"5",
+				"6"
+			],
+			"answer": 2
+		},
+		{
+			"question": "丸はいくつ？",
+			"file": "B-7.jpg",
+			"selections": [
+				"4",
+				"5",
+				"6"
+			],
+			"answer": 2
+		},
+		{
+			"question": "三角はいくつ？",
+			"file": "B-8.jpg",
+			"selections": [
+				"5",
+				"6",
+				"7"
+			],
+			"answer": 0
+		},
+		{
+			"question": "四角はいくつ？",
+			"file": "B-9.jpg",
+			"selections": [
+				"5",
+				"6",
+				"7"
+			],
+			"answer": 1
+		},
+		{
+			"question": "丸はいくつ？",
+			"file": "B-9.jpg",
+			"selections": [
+				"5",
+				"6",
+				"7"
+			],
+			"answer": 2
+		}
+	],
+	
 	"calc": [
 		{
-			"question": "1 + 1 =",
+			"question": "1 + 1 = ?",
 			"selections": [
 				"2",
 				"22",
 				"222"
 			],
-			"answer": "0"
+			"answer": 0
 		},
 		{
-			"question": "2 + 2 =",
+			"question": "2 + 2 = ?",
 			"selections": [
 				"444",
 				"44",
 				"4"
 			],
-			"answer": "2"
+			"answer": 2
 		},
 		{
-			"question": "3 + 3 =",
+			"question": "3 + 3 = ?",
 			"selections": [
 				"66",
 				"6",
 				"666"
 			],
-			"answer": "1"
+			"answer": 1
 		},
 		{
-			"question": "4 + 4 =",
+			"question": "4 + 4 = ?",
 			"selections": [
 				"888",
 				"8",
 				"88"
 			],
-			"answer": "1"
+			"answer": 1
 		},
 		{
-			"question": "5 + 5 =",
+			"question": "5 + 5 = ?",
 			"selections": [
 				"100",
 				"1000",
 				"10"
 			],
-			"answer": "2"
+			"answer": 2
 		},
 		{
-			"question": "6 + 6 =",
+			"question": "6 + 6 = ?",
 			"selections": [
 				"11",
 				"12",
 				"13"
 			],
-			"answer": "1"
+			"answer": 1
 		},
 		{
-			"question": "7 + 7 =",
+			"question": "7 + 7 = ?",
 			"selections": [
 				"14",
 				"15",
 				"16"
 			],
-			"answer": "0"
+			"answer": 0
 		},
 		{
-			"question": "8 + 8 =",
+			"question": "8 + 8 = ?",
 			"selections": [
 				"16",
 				"26",
 				"36"
 			],
-			"answer": "0"
+			"answer": 0
 		},
 		{
-			"question": "9 + 9 =",
+			"question": "9 + 9 = ?",
 			"selections": [
 				"8",
 				"19",
 				"18"
 			],
-			"answer": "2"
+			"answer": 2
 		},
 		{
-			"question": "10 + 10 =",
+			"question": "10 + 10 = ?",
 			"selections": [
 				"200",
 				"20",
 				"30"
 			],
-			"answer": "1"
-		}
-	],
-	
-	"image": [
-		{
-			"question": "1.りんごは何個？",
-			"file": "apple1.jpg",
-			"selections": [
-				"2",
-				"3",
-				"4"
-			],
-			"answer": "1"
-		},
-		{
-			"question": "2.果物は何種類？",
-			"file": "fruits1.jpg",
-			"selections": [
-				"5",
-				"6",
-				"8"
-			],
-			"answer": "0"
-		},
-		{
-			"question": "3.りんごは何個？",
-			"file": "apple2.jpg",
-			"selections": [
-				"2",
-				"3",
-				"4"
-			],
-			"answer": "1"
-		},
-		{
-			"question": "4.果物は何種類？",
-			"file": "fruits2.jpg",
-			"selections": [
-				"5",
-				"6",
-				"8"
-			],
-			"answer": "0"
-		},
-		{
-			"question": "5.りんごは何個？",
-			"file": "apple3.jpg",
-			"selections": [
-				"2",
-				"3",
-				"4"
-			],
-			"answer": "1"
-		},
-		{
-			"question": "6.果物は何種類？",
-			"file": "fruits3.jpg",
-			"selections": [
-				"5",
-				"6",
-				"8"
-			],
-			"answer": "0"
-		},
-		{
-			"question": "7.りんごは何個？",
-			"file": "apple4.jpg",
-			"selections": [
-				"2",
-				"3",
-				"4"
-			],
-			"answer": "1"
-		},
-		{
-			"question": "8.果物は何種類？",
-			"file": "fruits4.jpg",
-			"selections": [
-				"5",
-				"6",
-				"8"
-			],
-			"answer": "0"
-		},
-		{
-			"question": "9.りんごは何個？",
-			"file": "apple5.jpg",
-			"selections": [
-				"2",
-				"3",
-				"4"
-			],
-			"answer": "1"
-		},
-		{
-			"question": "10.果物は何種類？",
-			"file": "fruits5.jpg",
-			"selections": [
-				"5",
-				"6",
-				"8"
-			],
-			"answer": "0"
+			"answer": 1
 		}
 	]
 }

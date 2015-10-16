@@ -48,11 +48,3 @@ div.contents > div.page_q > table td.q_3 {
 	border: 5px solid #0070C0;
 	cursor: pointer;
 }
-
-div.contents > div.page_q > table td > span {
-	display: none;
-}
-
-div.contents > div.page_q > table td.q_2 > span {
-/*	display: inline;*/
-}
