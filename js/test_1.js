@@ -42,7 +42,8 @@
 			
 			if ($(this).hasClass("sq_" + n)) {
 				
-				if (n == 25) {
+				if (n == 2) {
+//				if (n == 25) {
 //				if (n == 50) {
 					
 					timer.stop();
@@ -54,7 +55,7 @@
 					
 					$("div.page_e > h2").text((timer.result() / 1000).toFixed(2) + " 秒");
 					
-					changePage(4);
+					pages.next();
 					
 				} else {
 					
