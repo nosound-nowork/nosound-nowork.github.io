@@ -5,7 +5,8 @@ div.contents {
 }
 
 div.contents > img {
-	width: 300px;
+	width: 90%;
+	max-width: 440px;
 	margin: 0 auto 15px auto;
 	display: block;
 }

@@ -2,43 +2,32 @@
 	
 	$(function () {
 		
-		changePage(1);
-		
-		var sound = false,
+		var pages = new Pages("div.contents"),
+			squares = $("#squares");
+			$window = $(window).resize(function () { squares.height(squares.width()); }),
 			timer = new Timer(),
 			timerId = null,
-			squares = $("table.squares td"),
+			cells = squares.find("td"),
 			next = $("div.next"),
-			time = $("div.time"),
-			sec = $("#sec");
+			time = $("div.time");
 		
-		$("#sound_off").click(function () {
-			
-			sound = false;
-			
-			changePage(2);
-		});
+		$("#sound_off").click(function () { load(false); });
 		
-		$("#sound_on").click(function () {
-			
-			sound = true;
-			
-			changePage(2);
-		});
-
+		$("#sound_on").click(function () { load(true); });
+		
 		$("#start").click(function () {
-			
-			if (sound) {
-				
-			};
 			
 			time.show();
 			
 			shuffle(25);
 			
-			changePage(3);
+			pages.next();
+			
+			$window.trigger("resize");
 			
 			timer.start();
+			
+			var sec = $("#sec");
 			
 			timerId = setInterval(function () {
 				
@@ -47,14 +36,14 @@
 			}, 111);
 		});
 		
-		squares.click(function () {
+		cells.click(function () {
 			
 			var n = next.text();
 			
 			if ($(this).hasClass("sq_" + n)) {
 				
-//				if (n == 50) {
 				if (n == 25) {
+//				if (n == 50) {
 					
 					timer.stop();
 					
@@ -63,24 +52,31 @@
 					
 					clearInterval(timerId);
 					
-					$("div.page4 > h2").text((timer.result() / 1000).toFixed(2) + " 秒");
+					$("div.page_e > h2").text((timer.result() / 1000).toFixed(2) + " 秒");
 					
 					changePage(4);
 					
 				} else {
 					
-					next.text(parseInt(n) + 1);
+//					if (n == 25) { shuffle(50); }
 					
-//					if (n == 25) shuffle(50);
+					next.text(parseInt(n) + 1);
 				}
 			}
 		});
 		
-		function changePage(n) {
+		function load(sound) {
 			
-			$("div.contents > div").hide();
-			
-			$("div.page" + n).show();
+			if (sound) {
+				
+				pages.next();
+				
+				setTimeout(function () { pages.next(); }, 1500);
+				
+			} else {
+				
+				pages.jump(2);
+			}
 		}
 		
 		function shuffle(m) {
@@ -98,7 +94,7 @@
 				
 				var n = l.splice(Math.floor(Math.random() * (l.length - 1) + 1), 1);
 				
-				$(squares[j]).addClass("sq_" + n).text(n);
+				$(cells[j]).addClass("sq_" + n).text(n);
 				
 				j++;
 			}

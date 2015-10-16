@@ -1,0 +1,50 @@
+@charset "utf-8";
+
+div.header > div {
+	text-align: right;
+	color: #ffffff;
+}
+
+div.header > div.next {
+	width: 70px;
+	margin: 6px 10px;
+	float: left;
+	font-size: 60px;
+}
+
+div.header > div.time {
+	width: 150px;
+	margin: 35px 15px 0;
+	float: right;
+	font-size: 30px;
+	display: none;
+}
+
+div.contents {
+	padding-top: 95px;
+}
+
+div.contents > div {
+	display: none;
+}
+
+div.contents > div > h1 {
+	margin: 20px 0;
+	padding: 0;
+	text-align: center;
+	font-size: 32px;
+}
+
+div.contents > div > h2 {
+	margin: 30px 0;
+	padding: 0;
+	text-align: center;
+	font-size: 32px;
+	text-decoration: underline;
+}
+
+div.contents > div > div.summary {
+	margin: 40px 25px;
+	padding: 0;
+	line-height: 1.5;
+}
