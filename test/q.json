@@ -1,5 +1,4 @@
-var Q = {
-	
+{
 	"dice": {
 		"description": "裏面をタップしてください。",
 		"questions": [
@@ -9,10 +8,10 @@ var Q = {
 			"210010010013",
 			"130010020011",
 			"020010130011",
-			"300110121001",
+			"300110021001",
 			"111020010030",
 			"010031110020",
-			"001031110200",
+			"001031110200"
 		]
 	},
 	
@@ -111,7 +110,7 @@ var Q = {
 	
 	"image": [
 		{
-			"question": "1.りんごは何個？"
+			"question": "1.りんごは何個？",
 			"file": "apple1.jpg",
 			"selections": [
 				"2",
@@ -121,7 +120,7 @@ var Q = {
 			"answer": "1"
 		},
 		{
-			"question": "2.果物は何種類？"
+			"question": "2.果物は何種類？",
 			"file": "fruits1.jpg",
 			"selections": [
 				"5",
@@ -131,7 +130,7 @@ var Q = {
 			"answer": "0"
 		},
 		{
-			"question": "3.りんごは何個？"
+			"question": "3.りんごは何個？",
 			"file": "apple2.jpg",
 			"selections": [
 				"2",
@@ -141,7 +140,7 @@ var Q = {
 			"answer": "1"
 		},
 		{
-			"question": "4.果物は何種類？"
+			"question": "4.果物は何種類？",
 			"file": "fruits2.jpg",
 			"selections": [
 				"5",
@@ -151,7 +150,7 @@ var Q = {
 			"answer": "0"
 		},
 		{
-			"question": "5.りんごは何個？"
+			"question": "5.りんごは何個？",
 			"file": "apple3.jpg",
 			"selections": [
 				"2",
@@ -161,7 +160,7 @@ var Q = {
 			"answer": "1"
 		},
 		{
-			"question": "6.果物は何種類？"
+			"question": "6.果物は何種類？",
 			"file": "fruits3.jpg",
 			"selections": [
 				"5",
@@ -171,7 +170,7 @@ var Q = {
 			"answer": "0"
 		},
 		{
-			"question": "7.りんごは何個？"
+			"question": "7.りんごは何個？",
 			"file": "apple4.jpg",
 			"selections": [
 				"2",
@@ -181,7 +180,7 @@ var Q = {
 			"answer": "1"
 		},
 		{
-			"question": "8.果物は何種類？"
+			"question": "8.果物は何種類？",
 			"file": "fruits4.jpg",
 			"selections": [
 				"5",
@@ -191,7 +190,7 @@ var Q = {
 			"answer": "0"
 		},
 		{
-			"question": "9.りんごは何個？"
+			"question": "9.りんごは何個？",
 			"file": "apple5.jpg",
 			"selections": [
 				"2",
@@ -201,7 +200,7 @@ var Q = {
 			"answer": "1"
 		},
 		{
-			"question": "10.果物は何種類？"
+			"question": "10.果物は何種類？",
 			"file": "fruits5.jpg",
 			"selections": [
 				"5",
@@ -209,6 +208,6 @@ var Q = {
 				"8"
 			],
 			"answer": "0"
-		},
+		}
 	]
-};
+}

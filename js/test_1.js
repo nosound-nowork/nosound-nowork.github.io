@@ -17,8 +17,6 @@
 		
 		$("#start").click(function () {
 			
-			time.show();
-			
 			shuffle(25);
 			
 			pages.next();
@@ -72,10 +70,15 @@
 				
 				pages.next();
 				
-				setTimeout(function () { pages.next(); }, 1500);
+				setTimeout(sPage, 1500);
 				
 			} else {
 				
+				sPage();
+			}
+			
+			function sPage() {
+				time.show();
 				pages.jump(2);
 			}
 		}
