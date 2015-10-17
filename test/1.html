@@ -6,31 +6,26 @@
 	<meta http-equiv="Content-Type" content="text/html; charset=UTF-8">
 	<meta http-equiv="cache-control" content="no-cache">
 	<meta http-equiv="pragma" content="no-cache">
+
 	<meta name="robots" content="none">
-	
-	<meta name="viewport" content="width=device-width,initial-scale=1.0,minimum-scale=1.0,maximum-scale=1.0,user-scalable=no">
+	<meta name="viewport" content="width=320,user-scalable=no">
 	
 	<title>○○○○テスト - ユニ研2015 静岡グループ</title>
 	
-	<!-- <link rel="shortcut icon" type="image/png" href="img/favicon.png"> -->
-	
-	<!-- Common CSS -->
-	<link rel="stylesheet" type="text/css" href="../css/common.css">
+	<!-- Common Settings -->
+	<script src="../js/settings.js"></script>
 	
 	<!-- Test Page CSS -->
-	<link rel="stylesheet" type="text/css" href="../css/test_common.css">
+	<link rel="stylesheet" type="text/css" href="../css/test/common.css">
 	
 	<!-- Current Page CSS -->
-	<link rel="stylesheet" type="text/css" href="../css/test_1.css">
-	
-	<!-- jQuery -->
-	<script type="text/javascript" src="../js/jquery.min.js"></script>
+	<link rel="stylesheet" type="text/css" href="../css/test/1.css">
 	
 	<!-- Test Page JS -->
-	<script type="text/javascript" src="../js/test_common.js"></script>
+	<script src="../js/test/common.js"></script>
 	
 	<!-- Current Page JS -->
-	<script type="text/javascript" src="../js/test_1.js"></script>
+	<script src="../js/test/1.js"></script>
 </head>
 
 <body>
@@ -38,8 +33,10 @@
 	<div class="container">
 		
 		<div class="header">
-			<div class="next"></div>
-			<div class="time"><span id="sec">0.00</span> 秒</div>
+			<div>
+				<div class="next"></div>
+				<div class="time"><span id="sec">0.00</span> 秒</div>
+			</div>
 		</div>
 		
 		<div class="contents">
@@ -96,10 +93,10 @@
 			
 			<div class="page_e">
 				<h1>テスト結果</h1>
-				<h2></h2>
+				<div id="result"></div>
 				<ol class="buttons">
-				<li><a href="1.html">もう1回</a></li>
-				<li><a href="../">トップページ</a></li>
+					<li><a href="1.html">もう1回</a></li>
+					<li><a href="../">トップページ</a></li>
 				</ol>
 			</div>
 		</div>

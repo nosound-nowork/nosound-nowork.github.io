@@ -4,7 +4,6 @@
 		
 		var pages = new Pages("div.contents"),
 			squares = $("#squares");
-			$window = $(window).resize(function () { squares.height(squares.width()); }),
 			timer = new Timer(),
 			timerId = null,
 			cells = squares.find("td"),
@@ -20,8 +19,6 @@
 			shuffle(25);
 			
 			pages.next();
-			
-			$window.trigger("resize");
 			
 			timer.start();
 			
@@ -40,8 +37,8 @@
 			
 			if ($(this).hasClass("sq_" + n)) {
 				
-				if (n == 1) {
-//				if (n == 25) {
+//				if (n == 5) {
+				if (n == 25) {
 //				if (n == 50) {
 					
 					timer.stop();
@@ -51,7 +48,7 @@
 					
 					clearInterval(timerId);
 					
-					$("div.page_e > h2").text((timer.result() / 1000).toFixed(2) + " 秒");
+					$("#result").text((timer.result() / 1000).toFixed(2) + " 秒");
 					
 					pages.next();
 					
@@ -59,7 +56,9 @@
 					
 //					if (n == 25) { shuffle(50); }
 					
-					next.text(parseInt(n) + 1);
+					next.text(parseInt(n) + 1).addClass("highlight");
+					
+					setTimeout(function () { next.removeClass("highlight"); }, 200);
 				}
 			}
 		});
@@ -70,7 +69,7 @@
 				
 				pages.next();
 				
-				setTimeout(sPage, 1500);
+				setTimeout(sPage, 1000);
 				
 			} else {
 				

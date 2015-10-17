@@ -1,0 +1,120 @@
+@charset "utf-8";
+
+div.contents > div > h2 {
+	width: 270px;
+	padding: 0;
+	font-size: 16px;
+}
+
+div.contents > div.dice > h2 {
+	margin: 20px auto;
+}
+
+div.contents > div.image > h2 {
+	margin: 20px auto 2px;
+}
+
+div.contents > div.calc > h2 {
+	margin: 20px auto 14px;
+}
+
+div.contents > div.page_q > table {
+	border-collapse: collapse;
+	margin: 0 auto 20px;
+}
+
+div.contents > div.page_q > table td {
+	width: 55px;
+	height: 55px;
+	padding: 0;
+	text-align: center;
+	vertical-align: middle;
+	color: #ffffff;
+	font-size: 28px;
+	cursor: default;
+	
+	user-select: none;
+	-ms-user-select: none;
+	-moz-user-select: none;
+	-webkit-user-select: none;
+}
+
+div.contents > div.page_q > table td.q_1 {
+	border: 5px solid #0070C0;
+	cursor: pointer;
+}
+
+div.contents > div.page_q > table td.q_2 {
+	background-color: #ff6600;
+	border: 5px solid #0070C0;
+}
+
+div.contents > div.page_q > table td.q_3 {
+	border: 5px solid #0070C0;
+	cursor: pointer;
+}
+
+div.contents > div.page_q > img {
+	border: 1px solid #afafaf;
+	width: 270px;
+	margin: 0 auto 14px;
+	display: block;
+}
+
+div.contents > div.page_q > ul {
+	width: 290px;
+	margin: 20px auto 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+div.contents > div.page_q > ul > li {
+	border-bottom: 1px solid #afafaf;
+	margin: 17px 0;
+	padding: 0 5px;
+}
+
+div.contents > div.page_q > ul > li > span.a {
+	margin: 0 0 0 20px;
+}
+
+div.contents > div.page_e > dl {
+	width: auto;
+	margin: 40px auto 19px;
+	padding: 0;
+	overflow: hidden;
+}
+
+div.contents > div.page_e > dl:nth-child(2n) {
+	margin-top: 0px;
+}
+
+div.contents > div.page_e > dl > * {
+	margin: 0 0 10px;
+	padding: 0;
+	float: left;
+	text-align: right;
+	color: #ff6600;
+	font-size: 32px;
+	font-weight: bold;
+}
+
+div.contents > div.page_e > dl > dt {
+	width: 130px;
+	margin-left: 28px;
+}
+
+div.contents > div.page_e > dl > dd {
+	width: 130px;
+}
+
+div.container.android > div.contents > div.page_e > dl > dt,
+div.container.iPhone > div.contents > div.page_e > dl > dt {
+	width: 130px;
+	margin-left: 37px;
+}
+
+div.container.android > div.contents > div.page_e > dl > dd,
+div.container.iPhone > div.contents > div.page_e > dl > dd {
+	width: 110px;
+}

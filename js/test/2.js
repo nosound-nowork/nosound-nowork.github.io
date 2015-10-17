@@ -1,5 +1,10 @@
 (function ($) {
 	
+	var SETTINGS = {
+		IMG_PATH: "../img/q/",
+		Q:{ MAX: 13, DICE: 3, IMAGE: 5, CALC: 5 }
+	};
+	
 	$(function () {
 		
 		var pages = new Pages("div.contents"),
@@ -26,9 +31,7 @@
 				
 				if (s < 0) {
 					
-					timer.stop();
-					pages.end();
-					time.hide();
+					end();
 					
 				} else {
 					
@@ -37,6 +40,28 @@
 				
 			}, 111);
 		});
+		
+		function end(forced) {
+			
+			timer.stop();
+			pages.end();
+			time.hide();
+			
+			$("#answer").text(count.total);
+			$("#rate").text(Math.round(count.correct / count.total * 1000) / 10);
+		}
+		
+		function nextQ() {
+			
+			if (count.total == SETTINGS.Q.MAX) {
+				
+				end();
+				
+			} else {
+				
+				pages.next();
+			}
+		}
 		
 		function load(sound) {
 			
@@ -52,22 +77,22 @@
 			
 			$.getJSON("../test/q.json", function (data) {
 				
-				var dice = random(data.dice.questions, 3),
-					image = random(data.image, 5),
-					calc = random(data.calc, 5),
+				var dice = random(data.dice.questions, SETTINGS.Q.DICE),
+					image = random(data.image, SETTINGS.Q.IMAGE),
+					calc = random(data.calc, SETTINGS.Q.CALC),
 					ePage = $("div.page_e");
 				
 				$.each(dice, function (index, value) { ePage.before(makePageQ("dice", value)); });
 				
-				$.each(image, function (index, value) { ePage.before(makePageQ("image", value[0])); });
+				$.each(image, function (index, value) { ePage.before(makePageQ("image", value)); });
 				
-				$.each(calc, function (index, value) { ePage.before(makePageQ("calc", value[0])); });
+				$.each(calc, function (index, value) { ePage.before(makePageQ("calc", value)); });
 				
-				setTimeout(function () { time.show(); pages.next(); }, 1500);
+				setTimeout(function () { time.show(); pages.next(); }, 1000);
 				
 				function makePageQ(type, value) {
 					
-					var pageQ = $("<div>").addClass("page_q");
+					var pageQ = $("<div>").addClass("page_q").addClass(type);
 					
 					if (type == "dice") {
 						
@@ -97,27 +122,28 @@
 									
 									if (c == "3") count.correct++;
 									
-									pages.next();
+									nextQ();
 								}
 							});
 						}
 						
-						pageQ.append($("<h3>").append($("<span>").text(data.dice.description))).append(table);
+						pageQ.append($("<h2>").text(data.dice.description)).append(table);
 						
 					} else {
 						
-						pageQ.append($("<h3>").append($("<span>").text(value.question))).append(list);
+						pageQ.append($("<h2>").text(value.question));
 						
 						if (typeof value.file !== "undefined") {
 							
-							pageQ.append($("<img>").attr("src", "../img/q/" + value.file));
+							pageQ.append($("<img>").attr("src", SETTINGS.IMG_PATH + value.file));
 						}
 						
-						var list = $("<ol>");
+						var ol1 = $("<ol>").addClass("buttons"),
+							ol2 = $("<ol>").addClass("buttons");
 						
 						$.each(value.selections, function (j, val) {
 							
-							var answer = $("<li>").text(val);
+							var answer = $("<a>").attr("href", "javascript:void(0);").text(val);
 							
 							if (value.answer == j) answer.addClass("correct");
 							
@@ -127,13 +153,13 @@
 								
 								if ($(this).hasClass("correct")) count.correct++;
 								
-								pages.next();
+								nextQ();
 							});
 							
-							list.append(answer);
+							(j < 2 ? ol1 : ol2).append($("<li>").append(answer));
 						});
 						
-						pageQ.append(list);
+						pageQ.append(ol1).append(ol2);
 					}
 					
 					return pageQ;
@@ -149,7 +175,7 @@
 			
 			while (n > 0) {
 				
-				ret.push(ary.splice(Math.floor(Math.random() * ary.length), 1));
+				ret.push(ary.splice(Math.floor(Math.random() * ary.length), 1)[0]);
 				
 				n--;
 			}
