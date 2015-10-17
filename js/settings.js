@@ -48,7 +48,7 @@
 	/**
 	 * Google Analytics
 	 */
-	if (location.host == "http://nosound-nowork.github.io/") {
+	if (location.host == "nosound-nowork.github.io") {
 		alert("a");
 	}
 	
