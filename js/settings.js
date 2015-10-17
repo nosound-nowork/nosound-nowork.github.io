@@ -48,6 +48,17 @@
 	/**
 	 * Google Analytics
 	 */
-	document.write("");
+	if (location.host == "http://nosound-nowork.github.io/") {
+		alert("a");
+	}
+	
+//	document.write("<script>");
+//	document.write("  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){");
+//	document.write("  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),");
+//	document.write("  m=s.getElementsByTagName(o)[0];a.async=1;a.src=g;m.parentNode.insertBefore(a,m)");
+//	document.write("  })(window,document,'script','//www.google-analytics.com/analytics.js','ga');");
+//	document.write("  ga('create', 'UA-68962662-1', 'auto');");
+//	document.write("  ga('send', 'pageview');");
+//	document.write("</script>");
 	
 })();
