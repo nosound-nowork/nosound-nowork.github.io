@@ -48,7 +48,9 @@
 					
 					clearInterval(timerId);
 					
-					$("#result").text((timer.result() / 1000).toFixed(2) + " 秒");
+					var result = (timer.result() / 1000).toFixed(2);
+					
+					$("#result").text(result + " 秒");
 					
 					pages.next();
 					

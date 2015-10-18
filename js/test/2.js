@@ -41,14 +41,16 @@
 			}, 111);
 		});
 		
-		function end(forced) {
+		function end() {
 			
 			timer.stop();
-			pages.end();
 			time.hide();
+			pages.end();
+			
+			var rate = Math.round(count.correct / count.total * 1000) / 10;
 			
 			$("#answer").text(count.total);
-			$("#rate").text(Math.round(count.correct / count.total * 1000) / 10);
+			$("#rate").text(rate);
 		}
 		
 		function nextQ() {
