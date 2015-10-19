@@ -1,5 +1,7 @@
 (function ($) {
 	
+	window.TOUCH_EVENT = window.ontouchstart === null ? "touchstart" : "click";
+	
 	$(function () {
 		
 		if (navigator.userAgent.indexOf('Android') > 0 ) $("div.container").addClass("android");

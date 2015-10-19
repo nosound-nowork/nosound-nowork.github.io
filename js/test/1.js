@@ -2,21 +2,65 @@
 	
 	$(function () {
 		
-		var pages = new Pages("div.contents"),
-			timer = new Timer(),
+		alert(TOUCH_EVENT);
+		
+		var timer = new Timer(),
 			timerId = null,
 			sound = "";
 		
 		var squares = $("#squares"),
 			cells = squares.find("td"),
+			link = $("#link"),
 			next = $("div.next"),
 			time = $("div.time");
 		
-		$("#sound_off").click(function () { load(false); });
+		var pages = new Pages("div.contents");
 		
-		$("#sound_on").click(function () { load(true); });
+		pages.onTop(function () {
+			
+			link.show();
+			
+			time.hide();
+		});
 		
-		$("#start").click(function () {
+		pages.onEnd(function () {
+			
+			timer.stop();
+			
+			next.hide();
+			time.hide();
+			
+			clearInterval(timerId);
+			
+			var result = (timer.result() / 1000).toFixed(2);
+			
+			$("#result").text(result + " 秒");
+			
+			// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			$.cookie.json = true;
+			
+			var cookie = $.cookie("record");
+			
+			if (typeof cookie !== "undefined") {
+				
+				if (cookie.test1[sound].time > result) {
+					
+					cookie.test1[sound].time = result;
+					cookie.test1[sound].date = (new Date()).getTime();
+					
+					$.cookie("record", cookie, { path: "/", expires: 365 });
+				}
+			}
+			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		});
+		
+		pages.top();
+		
+		$("#sound_off").on(TOUCH_EVENT, function () { load("off"); });
+		
+		$("#sound_on").on(TOUCH_EVENT, function () { load("on"); });
+		
+		$("#start").on(TOUCH_EVENT, function () {
 			
 			shuffle(25);
 			
@@ -30,10 +74,15 @@
 				
 				sec.text((timer.now() / 1000).toFixed(2));
 				
-			}, 111);
+			}, 233);
 		});
 		
-		cells.click(function () {
+		$("#back").on(TOUCH_EVENT, function () {
+			
+			pages.top();
+		});
+		
+		cells.on(TOUCH_EVENT, function () {
 			
 			var n = next.text();
 			
@@ -43,35 +92,7 @@
 				if (n == 25) {
 //				if (n == 50) {
 					
-					timer.stop();
-					
-					next.text("");
-					time.hide();
-					
-					clearInterval(timerId);
-					
-					var result = (timer.result() / 1000).toFixed(2);
-					
-					$("#result").text(result + " 秒");
-					
-					// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-					$.cookie.json = true;
-					
-					var cookie = $.cookie("record");
-					
-					if (typeof cookie !== "undefined") {
-						
-						if (cookie.test1[sound].time > result) {
-							
-							cookie.test1[sound].time = result;
-							cookie.test1[sound].date = (new Date()).getTime();
-							
-							$.cookie("record", cookie, { path: "/", expires: 365 });
-						}
-					}
-					//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-					
-					pages.next();
+					pages.end();
 					
 				} else {
 					
@@ -86,25 +107,25 @@
 		
 		function load(s) {
 			
-			$("#link").hide();
+			link.hide();
 			
-			if (s) {
+			if (s == "off") {
 				
-				sound = "on";
+				sPage();
+				
+			} else if (s == "on") {
 				
 				pages.next();
 				
 				setTimeout(sPage, 1000);
-				
-			} else {
-				
-				sound = "off";
-				
-				sPage();
 			}
 			
+			sound = s;
+			
 			function sPage() {
+				
 				time.show();
+				
 				pages.jump(2);
 			}
 		}

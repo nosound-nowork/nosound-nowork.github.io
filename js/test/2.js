@@ -7,45 +7,27 @@
 	
 	$(function () {
 		
-		var pages = new Pages("div.contents"),
-			timer = new Timer(),
+		var timer = new Timer(),
 			timerId = null,
 			sound = "",
 			count = { total: 0, correct: 0 };
 		
-		var time = $("div.time");
+		var link = $("#link"),
+			time = $("div.time");
 		
-		$("#sound_slow").click(function () { load("slow"); });
+		var pages = new Pages("div.contents");
 		
-		$("#sound_fast").click(function () { load("fast"); });
-		
-		$("#start").click(function () {
+		pages.onTop(function () {
 			
-			pages.next();
+			link.show();
 			
-			timer.start();
-			
-			var sec = $("#sec");
-			
-			timerId = setInterval(function () {
-				
-				var s = (30 - timer.now() / 1000).toFixed(2);
-				
-				if (s < 0) {
-					
-					end();
-					
-				} else {
-					
-					sec.text(s);
-				}
-				
-			}, 111);
+			time.hide();
 		});
 		
-		function end() {
+		pages.onEnd(function () {
 			
 			timer.stop();
+			
 			time.hide();
 			
 			clearInterval(timerId);
@@ -83,15 +65,48 @@
 				}
 			}
 			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		});
+		
+		pages.top();
+		
+		$("#sound_slow").on(TOUCH_EVENT, function () { load("slow"); });
+		
+		$("#sound_fast").on(TOUCH_EVENT, (function () { load("fast"); });
+		
+		$("#start").on(TOUCH_EVENT, function () {
 			
-			pages.end();
-		}
+			pages.next();
+			
+			timer.start();
+			
+			var sec = $("#sec");
+			
+			timerId = setInterval(function () {
+				
+				var s = (30 - timer.now() / 1000).toFixed(2);
+				
+				if (s < 0) {
+					
+					pages.end();
+					
+				} else {
+					
+					sec.text(s);
+				}
+				
+			}, 233);
+		});
+		
+		$("#back").on(TOUCH_EVENT, function () {
+			
+			pages.top();
+		});
 		
 		function nextQ() {
 			
 			if (count.total == SETTINGS.Q.MAX) {
 				
-				end();
+				pages.end();
 				
 			} else {
 				
@@ -101,7 +116,7 @@
 		
 		function load(s) {
 			
-			$("#link").hide();
+			link.hide();
 			
 			if (s == "slow") {
 				
@@ -152,7 +167,7 @@
 							var char = value.charAt(i),
 								cell = $(cells[i]).addClass("q_" + char).data("char", char);
 							
-							cell.click(function () {
+							cell.on(TOUCH_EVENT, function () {
 								
 								var c = $(this).data("char");
 								
@@ -187,7 +202,7 @@
 							
 							if (value.answer == j) answer.addClass("correct");
 							
-							answer.click(function () {
+							answer.on(TOUCH_EVENT, function () {
 								
 								count.total++;
 								

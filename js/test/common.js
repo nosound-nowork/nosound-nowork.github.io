@@ -24,12 +24,21 @@
 	
 	var Pages = function (node) {
 		this._n = $(node);
-		this.top();
 	};
 	
 	Pages.prototype = {
 		_n: null,
 		_c: 0,
+		_tf: $.noop,
+		_ef: $.noop,
+		onTop: function (f) {
+			if ($.isFunction(f)) this._tf = f;
+			return this;
+		},
+		onEnd: function (f) {
+			if ($.isFunction(f)) this._ef = f;
+			return this;
+		},
 		next: function () {
 			if (this._n.children().length > this._c) this.jump(this._c + 1);
 			return this;
@@ -50,6 +59,8 @@
 			if ((this._n.children().length > c) && (c >= 0)) {
 				this._c = c;
 				this._n.children().hide().filter(":eq(" + c + ")").show();
+				if (c == 0) this._tf.apply(this);
+				if (c == (this._n.children().length - 1)) this._ef.apply(this);
 			}
 			return this;
 		}

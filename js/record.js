@@ -4,7 +4,7 @@
 		
 		$.cookie.json = true;
 		
-		$("div.footer > span").click(function () {
+		$("div.footer > span").on(TOUCH_EVENT, function () {
 			
 			if (confirm("Remove Cookie?")) {
 				
