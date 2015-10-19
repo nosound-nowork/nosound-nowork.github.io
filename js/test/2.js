@@ -94,7 +94,7 @@
 					sec.text(s);
 				}
 				
-			}, 233);
+			}, 123);
 		});
 		
 		$("#back").on(TOUCH_EVENT, function () {
