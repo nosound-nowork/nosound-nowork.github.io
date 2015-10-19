@@ -18,7 +18,7 @@
 	"image": [
 		{
 			"question": "四角はいくつ？",
-			"file": "B-1.jpg",
+			"file": "B-1.png",
 			"selections": [
 				"4",
 				"5",
@@ -29,7 +29,7 @@
 		},
 		{
 			"question": "三角はいくつ？",
-			"file": "B-2.jpg",
+			"file": "B-2.png",
 			"selections": [
 				"4",
 				"5",
@@ -40,7 +40,7 @@
 		},
 		{
 			"question": "三角はいくつ？",
-			"file": "B-3.jpg",
+			"file": "B-3.png",
 			"selections": [
 				"4",
 				"5",
@@ -51,7 +51,7 @@
 		},
 		{
 			"question": "四角はいくつ？",
-			"file": "B-4.jpg",
+			"file": "B-4.png",
 			"selections": [
 				"4",
 				"5",
@@ -62,7 +62,7 @@
 		},
 		{
 			"question": "四角はいくつ？",
-			"file": "B-5.jpg",
+			"file": "B-5.png",
 			"selections": [
 				"4",
 				"5",
@@ -73,7 +73,7 @@
 		},
 		{
 			"question": "丸はいくつ？",
-			"file": "B-6.jpg",
+			"file": "B-6.png",
 			"selections": [
 				"4",
 				"5",
@@ -84,7 +84,7 @@
 		},
 		{
 			"question": "丸はいくつ？",
-			"file": "B-7.jpg",
+			"file": "B-7.png",
 			"selections": [
 				"4",
 				"5",
@@ -95,7 +95,7 @@
 		},
 		{
 			"question": "三角はいくつ？",
-			"file": "B-8.jpg",
+			"file": "B-8.png",
 			"selections": [
 				"4",
 				"5",
@@ -106,7 +106,7 @@
 		},
 		{
 			"question": "四角はいくつ？",
-			"file": "B-9.jpg",
+			"file": "B-9.png",
 			"selections": [
 				"4",
 				"5",
@@ -117,7 +117,7 @@
 		},
 		{
 			"question": "丸はいくつ？",
-			"file": "B-9.jpg",
+			"file": "B-9.png",
 			"selections": [
 				"4",
 				"5",

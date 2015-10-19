@@ -20,12 +20,28 @@ div.header > div {
 	margin: 0 auto;
 }
 
-div.header > div > span {
-	position: relative;
-	top: 20px;
-	left: 10px;
+div.header > div > div.title {
+	width: 200px;
+	margin: 15px 0 0 10px;
+	float: left;
 	color: #ffffff;
 	font-size: 28px;
+}
+
+div.android > div.header > div > div.title {
+	margin-top: 20px;
+}
+
+div.header > div > div.link {
+	width: 100px;
+	margin: 42px 10px 0 0;
+	float: right;
+	text-align: right;
+}
+
+div.header > div > div.link > a {
+	color: #ffffff;
+	font-size: 14px;
 }
 
 div.contents {

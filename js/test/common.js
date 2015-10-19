@@ -1,5 +1,27 @@
 (function ($) {
 	
+	$.cookie.json = true;
+	
+	if (typeof $.cookie("record") === "undefined") {
+		
+		$.cookie("record", {
+			test1: {
+				off: { time: 99999, date: 0 },
+				on: { time: 99999, date: 0 }
+			},
+			test2: {
+				slow: {
+					total: { total: 0, correct: 0, rate: 0.00, date: 0 },
+					rate: { total: 0, correct: 0, rate: 0.00, date: 0 }
+				},
+				fast: {
+					total: { total: 0, correct: 0, rate: 0.0, date: 0 },
+					rate: { total: 0, correct: 0, rate: 0.0, date: 0 }
+				}
+			}
+		}, { path: "/", expires: 365 });
+	}
+	
 	var Pages = function (node) {
 		this._n = $(node);
 		this.top();

@@ -3,3 +3,76 @@
 div.contents {
 	padding-top: 75px;
 }
+
+div.contents > h1 {
+	width: 200px;
+	margin: 15px;
+	color: #0070c0;
+	font-size: 20px;
+	font-weight: bold;
+}
+
+div.contents > ol {
+	margin: 0;
+	padding: 0;
+	list-style-type: none;
+}
+
+div.contents > ol > li {
+	margin: 0 0 5px 0;
+	overflow: hidden;
+}
+
+div.contents > ol > li > h2 {
+	width: 200px;
+	margin: 0 0 10px 30px;
+	text-decoration: underline;
+	font-size: 16px;
+	font-weight: normal;
+}
+
+div.contents dl {
+	width: 240px;
+	margin: 0 0 10px 45px;
+	overflow: hidden;
+}
+
+div.contents dl > * {
+	margin: 0 0 5px 0;
+	float: left;
+}
+
+div.contents > dl > * {
+	margin-bottom: 10px;
+	float: left;
+}
+
+div.contents dl > dt {
+	width: 100px;
+	clear: left;
+}
+
+div.contents > dl > dt {
+	text-decoration: underline;
+}
+
+div.contents dl > dd {
+	width: 140px;
+	margin: 0px;
+	clear: right;
+	overflow: hidden;
+	text-align: left;
+}
+
+div.contents dl > dd > div {
+	float: left;
+	text-align: right;
+}
+
+div.contents dl > dd > div.total {
+	width: 50px;
+}
+
+div.contents dl > dd > div.rate {
+	width: 90px;
+}

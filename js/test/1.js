@@ -3,9 +3,11 @@
 	$(function () {
 		
 		var pages = new Pages("div.contents"),
-			squares = $("#squares");
 			timer = new Timer(),
 			timerId = null,
+			sound = "";
+		
+		var squares = $("#squares"),
 			cells = squares.find("td"),
 			next = $("div.next"),
 			time = $("div.time");
@@ -52,6 +54,23 @@
 					
 					$("#result").text(result + " 秒");
 					
+					// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+					$.cookie.json = true;
+					
+					var cookie = $.cookie("record");
+					
+					if (typeof cookie !== "undefined") {
+						
+						if (cookie.test1[sound].time > result) {
+							
+							cookie.test1[sound].time = result;
+							cookie.test1[sound].date = (new Date()).getTime();
+							
+							$.cookie("record", cookie, { path: "/", expires: 365 });
+						}
+					}
+					//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+					
 					pages.next();
 					
 				} else {
@@ -65,15 +84,21 @@
 			}
 		});
 		
-		function load(sound) {
+		function load(s) {
 			
-			if (sound) {
+			$("#link").hide();
+			
+			if (s) {
+				
+				sound = "on";
 				
 				pages.next();
 				
 				setTimeout(sPage, 1000);
 				
 			} else {
+				
+				sound = "off";
 				
 				sPage();
 			}

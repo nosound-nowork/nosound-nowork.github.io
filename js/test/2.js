@@ -10,8 +10,10 @@
 		var pages = new Pages("div.contents"),
 			timer = new Timer(),
 			timerId = null,
-			time = $("div.time"),
+			sound = "",
 			count = { total: 0, correct: 0 };
+		
+		var time = $("div.time");
 		
 		$("#sound_slow").click(function () { load("slow"); });
 		
@@ -45,12 +47,44 @@
 			
 			timer.stop();
 			time.hide();
-			pages.end();
 			
-			var rate = Math.round(count.correct / count.total * 1000) / 10;
+			clearInterval(timerId);
 			
-			$("#answer").text(count.total);
+			var rate = count.correct == 0 ? 0.0 : Math.round(count.correct / count.total * 1000) / 10;
+			
+			$("#total").text(count.total);
 			$("#rate").text(rate);
+			
+			// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			$.cookie.json = true;
+			
+			var cookie = $.cookie("record");
+			
+			if (typeof cookie !== "undefined") {
+				
+				if (cookie.test2[sound].total.total < count.total) {
+					
+					cookie.test2[sound].total.total = count.total;
+					cookie.test2[sound].total.correct = count.correct;
+					cookie.test2[sound].total.rate = rate;
+					cookie.test2[sound].total.date = (new Date()).getTime();
+					
+					$.cookie("record", cookie, { path: "/", expires: 365 });
+				}
+				
+				if (cookie.test2[sound].rate.rate < rate) {
+					
+					cookie.test2[sound].rate.total = count.total;
+					cookie.test2[sound].rate.correct = count.correct;
+					cookie.test2[sound].rate.rate = rate;
+					cookie.test2[sound].rate.date = (new Date()).getTime();
+					
+					$.cookie("record", cookie, { path: "/", expires: 365 });
+				}
+			}
+			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			
+			pages.end();
 		}
 		
 		function nextQ() {
@@ -65,15 +99,19 @@
 			}
 		}
 		
-		function load(sound) {
+		function load(s) {
 			
-			if (sound == "slow") {
+			$("#link").hide();
+			
+			if (s == "slow") {
 				
 				
-			} else if (sound == "fast") {
+			} else if (s == "fast") {
 				
 				
 			}
+			
+			sound = s;
 			
 			pages.next();
 			

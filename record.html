@@ -31,18 +31,54 @@
 		
 		<div class="header">
 			<div>
-				<span>あなたの記録</span>
+				<div class="title">あなたの記録</div>
+				<div class="link"><a href="./">トップページ</a></div>
 			</div>
 		</div>
 		
 		<div class="contents">
+			
+			<h1>○○○○テスト</h1>
 			<dl>
-				<dt>○○○○テスト</dt>
-				<dd><span id="test1"></span> 秒</dd>
-				<dt>××××テスト</dt>
-				<dd><span id="test2_answer"></span> 問</dd>
-				<dd><span id="test2_rate"></span> ％</dd>
+				<dt>音なし</dt>
+				<dd><span id="test1_off">--.--</span> 秒</dd>
+				<dt>音あり</dt>
+				<dd><span id="test1_on">--.--</span> 秒</dd>
 			</dl>
+			
+			<h1>××××テスト</h1>
+			<ol>
+				<li>
+					<h2>テンポ（遅）</h2>
+					<dl>
+						<dt>最高回答数</dt>
+						<dd>
+							<div class="total"><span id="test2_slow_total_total">-</span> 問</div>
+							<div class="rate">(<span id="test2_slow_total_rate">-.-</span> ％)</div>
+						</dd>
+						<dt>最高正解率</dt>
+						<dd>
+							<div class="total"><span id="test2_slow_rate_total">-</span> 問</div>
+							<div class="rate">(<span id="test2_slow_rate_rate">-.-</span> ％)</div>
+						</dd>
+					</dl>
+				</li>
+				<li>
+					<h2>テンポ（速）</h2>
+					<dl>
+						<dt>最高回答数</dt>
+						<dd>
+							<div class="total"><span id="test2_fast_total_total">-</span> 問</div>
+							<div class="rate">(<span id="test2_fast_total_rate">-.-</span> ％)</div>
+						</dd>
+						<dt>最高正解率</dt>
+						<dd>
+							<div class="total"><span id="test2_fast_rate_total">-</span> 問</div>
+							<div class="rate">(<span id="test2_fast_rate_rate">-.-</span> ％)</div>
+						</dd>
+					</dl>
+				</li>
+			</ol>
 		</div>
 		
 		<div class="footer">
