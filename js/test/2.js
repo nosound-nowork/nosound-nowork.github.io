@@ -71,7 +71,7 @@
 		
 		$("#sound_slow").on(TOUCH_EVENT, function () { load("slow"); });
 		
-		$("#sound_fast").on(TOUCH_EVENT, (function () { load("fast"); });
+		$("#sound_fast").on(TOUCH_EVENT, function () { load("fast"); });
 		
 		$("#start").on(TOUCH_EVENT, function () {
 			
