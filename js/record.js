@@ -4,7 +4,7 @@
 		
 		$.cookie.json = true;
 		
-		$("div.footer > span").on(TOUCH_EVENT, function () {
+		$("div.footer > span").on(TOUCH_EVENT, function (e) {
 			
 			if (confirm("Remove Cookie?")) {
 				
@@ -12,6 +12,8 @@
 				
 				location.reload(true);
 			}
+			
+			e.preventDefault();
 		});
 		
 		var cookie = $.cookie("record");

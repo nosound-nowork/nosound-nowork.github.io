@@ -69,11 +69,11 @@
 		
 		pages.top();
 		
-		$("#sound_slow").on(TOUCH_EVENT, function () { load("slow"); });
+		$("#sound_slow").on(TOUCH_EVENT, function (e) { load("slow"); e.preventDefault(); });
 		
-		$("#sound_fast").on(TOUCH_EVENT, function () { load("fast"); });
+		$("#sound_fast").on(TOUCH_EVENT, function (e) { load("fast"); e.preventDefault(); });
 		
-		$("#start").on(TOUCH_EVENT, function () {
+		$("#start").on(TOUCH_EVENT, function (e) {
 			
 			pages.next();
 			
@@ -95,11 +95,15 @@
 				}
 				
 			}, 123);
+			
+			e.preventDefault();
 		});
 		
-		$("#back").on(TOUCH_EVENT, function () {
+		$("#back").on(TOUCH_EVENT, function (e) {
 			
 			pages.top();
+			
+			e.preventDefault();
 		});
 		
 		function nextQ() {
@@ -167,7 +171,7 @@
 							var char = value.charAt(i),
 								cell = $(cells[i]).addClass("q_" + char).data("char", char);
 							
-							cell.on(TOUCH_EVENT, function () {
+							cell.on(TOUCH_EVENT, function (e) {
 								
 								var c = $(this).data("char");
 								
@@ -179,6 +183,8 @@
 									
 									nextQ();
 								}
+								
+								e.preventDefault();
 							});
 						}
 						
@@ -202,13 +208,15 @@
 							
 							if (value.answer == j) answer.addClass("correct");
 							
-							answer.on(TOUCH_EVENT, function () {
+							answer.on(TOUCH_EVENT, function (e) {
 								
 								count.total++;
 								
 								if ($(this).hasClass("correct")) count.correct++;
 								
 								nextQ();
+								
+								e.preventDefault();
 							});
 							
 							(j < 2 ? ol1 : ol2).append($("<li>").append(answer));
