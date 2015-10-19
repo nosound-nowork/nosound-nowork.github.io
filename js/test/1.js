@@ -54,11 +54,11 @@
 		
 		pages.top();
 		
-		$("#sound_off").on(TOUCH_EVENT, function () { load("off"); });
+		$("#sound_off").on(TOUCH_EVENT, function (e) { load("off"); e.preventDefault(); });
 		
-		$("#sound_on").on(TOUCH_EVENT, function () { load("on"); });
+		$("#sound_on").on(TOUCH_EVENT, function (e) { load("on"); e.preventDefault(); });
 		
-		$("#start").on(TOUCH_EVENT, function () {
+		$("#start").on(TOUCH_EVENT, function (e) {
 			
 			shuffle(25);
 			
@@ -73,14 +73,18 @@
 				sec.text((timer.now() / 1000).toFixed(2));
 				
 			}, 123);
+			
+			e.preventDefault();
 		});
 		
-		$("#back").on(TOUCH_EVENT, function () {
+		$("#back").on(TOUCH_EVENT, function (e) {
 			
 			pages.top();
+			
+			e.preventDefault();
 		});
 		
-		cells.on(TOUCH_EVENT, function () {
+		cells.on(TOUCH_EVENT, function (e) {
 			
 			var n = next.text();
 			
@@ -101,6 +105,8 @@
 					setTimeout(function () { next.removeClass("highlight"); }, 200);
 				}
 			}
+			
+			e.preventDefault();
 		});
 		
 		function load(s) {
