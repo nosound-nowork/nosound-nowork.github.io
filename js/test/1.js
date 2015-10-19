@@ -2,8 +2,6 @@
 	
 	$(function () {
 		
-		alert(TOUCH_EVENT);
-		
 		var timer = new Timer(),
 			timerId = null,
 			sound = "";
