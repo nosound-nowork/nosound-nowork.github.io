@@ -33,10 +33,6 @@ div.container.iPhone > div.header > div > div.time {
 	margin-top: 22px;
 }
 
-div.contents {
-	padding-top: 75px;
-}
-
 div.contents > div {
 	display: none;
 }

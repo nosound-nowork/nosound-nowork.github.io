@@ -1,9 +1,5 @@
 @charset "utf-8";
 
-div.contents {
-	padding-top: 75px;
-}
-
 div.contents > h1 {
 	width: 200px;
 	margin: 12px 15px;
