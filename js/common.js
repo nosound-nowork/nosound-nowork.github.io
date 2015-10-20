@@ -1,6 +1,6 @@
 (function ($) {
 	
-	window.TOUCH_EVENT = window.ontouchstart === null ? "touchstart" : "click";
+	window.TOUCH_EVENT = window.ontouchstart === null ? "touchend" : "click";
 	
 	$(function () {
 		
@@ -46,6 +46,7 @@
 			if ((this._n.children().length > c) && (c >= 0)) {
 				this._c = c;
 				this._n.children().hide().filter(":eq(" + c + ")").show();
+				window.scrollTo(0, 0);
 				if (c == 0) this._tf.apply(this);
 				if (c == (this._n.children().length - 1)) this._ef.apply(this);
 			}

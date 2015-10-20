@@ -54,9 +54,9 @@
 		
 		pages.top();
 		
-		$("#sound_off").on(TOUCH_EVENT, function (e) { load("off"); e.preventDefault(); });
+		$("#sound_off").on(TOUCH_EVENT, function (e) { load("off"); e.prevetDefault(); });
 		
-		$("#sound_on").on(TOUCH_EVENT, function (e) { load("on"); e.preventDefault(); });
+		$("#sound_on").on(TOUCH_EVENT, function (e) { load("on"); e.prevetDefault(); });
 		
 		$("#start").on(TOUCH_EVENT, function (e) {
 			
@@ -74,14 +74,14 @@
 				
 			}, 123);
 			
-			e.preventDefault();
+			e.prevetDefault();
 		});
 		
 		$("#back").on(TOUCH_EVENT, function (e) {
 			
 			pages.top();
 			
-			e.preventDefault();
+			e.prevetDefault();
 		});
 		
 		cells.on(TOUCH_EVENT, function (e) {
@@ -106,7 +106,7 @@
 				}
 			}
 			
-			e.preventDefault();
+			e.prevetDefault();
 		});
 		
 		function load(s) {

@@ -69,9 +69,9 @@
 		
 		pages.top();
 		
-		$("#sound_slow").on(TOUCH_EVENT, function (e) { load("slow"); e.preventDefault(); });
+		$("#sound_slow").on(TOUCH_EVENT, function (e) { load("slow"); e.prevetDefault(); });
 		
-		$("#sound_fast").on(TOUCH_EVENT, function (e) { load("fast"); e.preventDefault(); });
+		$("#sound_fast").on(TOUCH_EVENT, function (e) { load("fast"); e.prevetDefault(); });
 		
 		$("#start").on(TOUCH_EVENT, function (e) {
 			
@@ -96,14 +96,14 @@
 				
 			}, 123);
 			
-			e.preventDefault();
+			e.prevetDefault();
 		});
 		
 		$("#back").on(TOUCH_EVENT, function (e) {
 			
 			pages.top();
 			
-			e.preventDefault();
+			e.prevetDefault();
 		});
 		
 		function nextQ() {
@@ -184,7 +184,7 @@
 									nextQ();
 								}
 								
-								e.preventDefault();
+								e.prevetDefault();
 							});
 						}
 						
@@ -216,7 +216,7 @@
 								
 								nextQ();
 								
-								e.preventDefault();
+								e.prevetDefault();
 							});
 							
 							(j < 2 ? ol1 : ol2).append($("<li>").append(answer));

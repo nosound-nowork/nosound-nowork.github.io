@@ -10,7 +10,15 @@ div.contents > div.text > div.theme {
 	font-size: 25px;
 }
 
+div.container.android > div.contents > div.text > div.theme {
+	font-size: 30px;
+}
+
+div.container.iPhone > div.contents > div.text > div.theme {
+	font-size: 28px;
+}
+
 div.contents > div.text > div.subtheme {
 	margin: 0 0 20px 0;
-	font-size: 14px;
+	font-size: 13px;
 }

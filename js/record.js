@@ -6,19 +6,19 @@
 		
 		$("div.footer > span").on(TOUCH_EVENT, function (e) {
 			
-			if (confirm("Remove Cookie?")) {
+			if (confirm("Are you sure you want to delete the cookie?")) {
 				
 				$.cookie("record", "", { path: "/", expires: -1 });
 				
 				location.reload(true);
+				
+				e.prevetDefault();
 			}
-			
-			e.preventDefault();
 		});
 		
 		var cookie = $.cookie("record");
 		
-		if (cookie !== "undefined") {
+		if (typeof cookie !== "undefined") {
 			
 			if (cookie.test1.off.date > 0) {
 				
@@ -59,9 +59,13 @@
 		
 		pages.top();
 		
-		$("#report").on(TOUCH_EVENT, function () {
+		$("#report").on(TOUCH_EVENT, function (e) {
+			
+			$("div.container").removeClass("page_t");
 			
 			pages.end();
+			
+			e.prevetDefault();
 		});
 		
 		$("#age").on("change", mailto);
@@ -70,9 +74,9 @@
 		
 		function mailto() {
 			
-			$("#mail").attr("href",
-				"mailto:nosound.nowork@gmail.com?" +
-				"subject=" + encodeURIComponent("ユニシス研究会：静岡グループ　計測結果報告") + "&" +
+			$("#mailto").attr("href",
+				"mailto:" + "nosound.nowork" + "@" + "gmail.com?" +
+				"subject=" + encodeURIComponent("ユニシス研究会：静岡G　記録報告") + "&" +
 				"body=" +
 					encodeURIComponent("［年齢］") + br() + sp(4) +
 					encodeURIComponent($("#age > option:selected").text()) + br() + sp(1) + br() +
@@ -90,7 +94,7 @@
 					$("#test2_fast_total_total").parent().parent().text() + br() +
 					sp(8) + encodeURIComponent("最高正解率：") +
 					$("#test2_fast_rate_total").parent().parent().text() + br() + br() +
-					encodeURIComponent("［その他 感想など］") + br() + sp(1) + br()
+					encodeURIComponent("［その他 感想など］") + br()
 			);
 		}
 		

@@ -32,11 +32,6 @@ div.contents > div.page_q > table td {
 	color: #ffffff;
 	font-size: 28px;
 	cursor: default;
-	
-	user-select: none;
-	-ms-user-select: none;
-	-moz-user-select: none;
-	-webkit-user-select: none;
 }
 
 div.contents > div.page_q > table td.q_1 {

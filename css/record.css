@@ -4,13 +4,19 @@ div.contents {
 	font-size: 14px;
 }
 
+div.contents > div > ol.buttons {
+	margin-top: 8px;
+	margin-bottom: 18px;
+	font-size: 16px;
+}
+
 div.contents > div {
 	display: none;
 }
 
 div.contents > div > h1 {
 	width: 200px;
-	margin: 12px 15px;
+	margin: 10px 15px;
 	color: #0070c0;
 	font-size: 16px;
 	font-weight: bold;
@@ -90,9 +96,14 @@ div.contents > div dl > dd > div.rate {
 	width: 90px;
 }
 
-div.contents > div > ol.result > li:nth-child(2) > dl {
+div.contents > div > ol.result > li > dl {
 	margin-top: 0px;
 	margin-bottom: 5px;
+}
+
+div.contents > div > ol.result > li:nth-child(2) > dl {
+	margin-top: 0;
+	margin-bottom: 0;
 }
 
 div.contents > div.page_e > dl {
@@ -104,6 +115,14 @@ div.contents > div.page_e > dl > dt {
 	width: 50px;
 	padding: 6px 0 0 0;
 	text-decoration: none;
+}
+
+div.container.android > div.contents > div.page_e > dl > dt {
+	padding-top: 9px;
+}
+
+div.container.iPhone > div.contents > div.page_e > dl > dt {
+	padding-top: 2px;
 }
 
 div.contents > div.page_e > dl > dd {
@@ -125,6 +144,6 @@ div.contents > div > hr {
 
 div.contents > div > div.policy {
 	width: 272px;
-	margin: 0 auto;
+	margin: 0 auto 20px;
 	line-height: 1.5;
 }
