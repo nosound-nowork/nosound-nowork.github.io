@@ -9,4 +9,50 @@
 		if (navigator.userAgent.indexOf('iPhone') > 0 ) $("div.container").addClass("iPhone");
 	});
 	
+	var Pages = function (node) {
+		this._n = $(node);
+	};
+	
+	Pages.prototype = {
+		_n: null,
+		_c: 0,
+		_tf: $.noop,
+		_ef: $.noop,
+		onTop: function (f) {
+			if ($.isFunction(f)) this._tf = f;
+			return this;
+		},
+		onEnd: function (f) {
+			if ($.isFunction(f)) this._ef = f;
+			return this;
+		},
+		next: function () {
+			if (this._n.children().length > this._c) this.jump(this._c + 1);
+			return this;
+		},
+		prev: function () {
+			if (this._c > 0) this.jump(this._c - 1);
+			return this;
+		},
+		top: function () {
+			this.jump(0);
+			return this;
+		},
+		end: function () {
+			this.jump(this._n.children().length - 1);
+			return this;
+		},
+		jump: function (c) {
+			if ((this._n.children().length > c) && (c >= 0)) {
+				this._c = c;
+				this._n.children().hide().filter(":eq(" + c + ")").show();
+				if (c == 0) this._tf.apply(this);
+				if (c == (this._n.children().length - 1)) this._ef.apply(this);
+			}
+			return this;
+		}
+	};
+	
+	window.Pages = Pages;
+	
 })(jQuery);

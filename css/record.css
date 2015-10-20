@@ -1,58 +1,66 @@
 @charset "utf-8";
 
-div.contents > h1 {
+div.contents {
+	font-size: 14px;
+}
+
+div.contents > div {
+	display: none;
+}
+
+div.contents > div > h1 {
 	width: 200px;
 	margin: 12px 15px;
 	color: #0070c0;
-	font-size: 20px;
+	font-size: 16px;
 	font-weight: bold;
 }
 
-div.contents > ol {
+div.contents > div > ol.result {
 	margin: 0;
 	padding: 0;
 	list-style-type: none;
 }
 
-div.contents > ol > li {
+div.contents > div > ol.result > li {
 	margin: 0 0 5px 0;
 	overflow: hidden;
 }
 
-div.contents > ol > li > h2 {
+div.contents > div > ol.result > li > h2 {
 	width: 200px;
-	margin: 0 0 10px 30px;
+	margin: 0 0 7px 30px;
 	text-decoration: underline;
-	font-size: 16px;
+	font-size: 14px;
 	font-weight: normal;
 }
 
-div.contents dl {
+div.contents > div dl {
 	width: 240px;
 	margin: 0 0 10px 45px;
 	overflow: hidden;
 }
 
-div.contents dl > * {
+div.contents > div dl > * {
 	margin: 0 0 5px 0;
 	float: left;
 }
 
-div.contents > dl > * {
-	margin-bottom: 10px;
+div.contents > div > dl > * {
+	margin-bottom: 7px;
 	float: left;
 }
 
-div.contents dl > dt {
+div.contents > div dl > dt {
 	width: 100px;
 	clear: left;
 }
 
-div.contents > dl > dt {
+div.contents > div > dl > dt {
 	text-decoration: underline;
 }
 
-div.contents dl > dd {
+div.contents > div dl > dd {
 	width: 140px;
 	margin: 0px;
 	clear: right;
@@ -60,15 +68,63 @@ div.contents dl > dd {
 	text-align: left;
 }
 
-div.contents dl > dd > div {
+div.contents > div > dl > dt {
+	width: 80px;
+}
+
+div.contents > div > dl > dd {
+	width: 80px;
+	text-align: right;
+}
+
+div.contents > div dl > dd > div {
 	float: left;
 	text-align: right;
 }
 
-div.contents dl > dd > div.total {
+div.contents > div dl > dd > div.total {
 	width: 50px;
 }
 
-div.contents dl > dd > div.rate {
+div.contents > div dl > dd > div.rate {
 	width: 90px;
+}
+
+div.contents > div > ol.result > li:nth-child(2) > dl {
+	margin-top: 0px;
+	margin-bottom: 5px;
+}
+
+div.contents > div.page_e > dl {
+	width: 150px;
+	margin: 20px auto 15px;
+}
+
+div.contents > div.page_e > dl > dt {
+	width: 50px;
+	padding: 6px 0 0 0;
+	text-decoration: none;
+}
+
+div.contents > div.page_e > dl > dd {
+	width: 100px;
+	text-align: left;
+}
+
+div.contents > div.page_e > dl > dd > select {
+	width: 100px;
+	padding: 5px;
+	font-family: sans-serif;
+}
+
+div.contents > div > hr {
+	border: solid #afafaf;
+	border-width: 1px 0 0 0;
+	margin: 25px 0;
+}
+
+div.contents > div > div.policy {
+	width: 272px;
+	margin: 0 auto;
+	line-height: 1.5;
 }

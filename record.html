@@ -38,47 +38,81 @@
 		
 		<div class="contents">
 			
-			<h1>○○○○テスト</h1>
-			<dl>
-				<dt>音なし</dt>
-				<dd><span id="test1_off">--.--</span> 秒</dd>
-				<dt>音あり</dt>
-				<dd><span id="test1_on">--.--</span> 秒</dd>
-			</dl>
+			<div class="page_s">
+				<h1>○○○○テスト</h1>
+				<dl>
+					<dt>音なし</dt>
+					<dd><span id="test1_off">--.--</span> 秒</dd>
+					<dt>音あり</dt>
+					<dd><span id="test1_on">--.--</span> 秒</dd>
+				</dl>
+				<h1>××××テスト</h1>
+				<ol class="result">
+					<li>
+						<h2>テンポ - 遅い</h2>
+						<dl>
+							<dt>最高回答数</dt>
+							<dd>
+								<div class="total"><span id="test2_slow_total_total">-</span> 問</div>
+								<div class="rate">(<span id="test2_slow_total_rate">-.-</span> ％)</div>
+							</dd>
+							<dt>最高正解率</dt>
+							<dd>
+								<div class="total"><span id="test2_slow_rate_total">-</span> 問</div>
+								<div class="rate">(<span id="test2_slow_rate_rate">-.-</span> ％)</div>
+							</dd>
+						</dl>
+					</li>
+					<li>
+						<h2>テンポ - 速い</h2>
+						<dl>
+							<dt>最高回答数</dt>
+							<dd>
+								<div class="total"><span id="test2_fast_total_total">-</span> 問</div>
+								<div class="rate">(<span id="test2_fast_total_rate">-.-</span> ％)</div>
+							</dd>
+							<dt>最高正解率</dt>
+							<dd>
+								<div class="total"><span id="test2_fast_rate_total">-</span> 問</div>
+								<div class="rate">(<span id="test2_fast_rate_rate">-.-</span> ％)</div>
+							</dd>
+						</dl>
+					</li>
+				</ol>
+				<ol class="buttons">
+					<li><a href="javascript:void(0);" id="report">記録を報告する</a></li>
+				</ol>
+			</div>
 			
-			<h1>××××テスト</h1>
-			<ol>
-				<li>
-					<h2>テンポ - 遅い</h2>
-					<dl>
-						<dt>最高回答数</dt>
-						<dd>
-							<div class="total"><span id="test2_slow_total_total">-</span> 問</div>
-							<div class="rate">(<span id="test2_slow_total_rate">-.-</span> ％)</div>
-						</dd>
-						<dt>最高正解率</dt>
-						<dd>
-							<div class="total"><span id="test2_slow_rate_total">-</span> 問</div>
-							<div class="rate">(<span id="test2_slow_rate_rate">-.-</span> ％)</div>
-						</dd>
-					</dl>
-				</li>
-				<li>
-					<h2>テンポ - 速い</h2>
-					<dl>
-						<dt>最高回答数</dt>
-						<dd>
-							<div class="total"><span id="test2_fast_total_total">-</span> 問</div>
-							<div class="rate">(<span id="test2_fast_total_rate">-.-</span> ％)</div>
-						</dd>
-						<dt>最高正解率</dt>
-						<dd>
-							<div class="total"><span id="test2_fast_rate_total">-</span> 問</div>
-							<div class="rate">(<span id="test2_fast_rate_rate">-.-</span> ％)</div>
-						</dd>
-					</dl>
-				</li>
-			</ol>
+			<div class="page_e">
+				<dl>
+					<dt>年齢</dt>
+					<dd>
+						<select id="age">
+							<option value="00">未回答</option>
+							<option value="20">20～29歳</option>
+							<option value="30">30～39歳</option>
+							<option value="40">40～49歳</option>
+							<option value="50">50～59歳</option>
+							<option value="60">60～69歳</option>
+							<option value="70">70歳～</option>
+						</select>
+					</dd>
+				</dl>
+				<ol class="buttons">
+					<li><a href="javascript:void(0);" id="mail">報告メール作成</a></li>
+				</ol>
+				<hr>
+				<div class="policy">
+					あなたの記録をメールで送信します。<br>
+					上の［報告メール作成］ボタンをタップすると、<br>
+					メール作成画面が開きます。<br><br>
+					収集した記録は、すべて匿名データとして扱い、<br>
+					メールアドレス等の個人を特定可能な情報は一切使用しません。
+					<br><br>
+					↑これ書けば、こういう機能もアリなのかなぁ？
+				</div>
+			</div>
 		</div>
 		
 		<div class="footer">
