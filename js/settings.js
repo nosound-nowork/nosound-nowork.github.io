@@ -48,8 +48,9 @@
 	/**
 	 * Google Analytics
 	 */
-	if (location.hostname == "nosound-nowork.github.io") {
+	if (location.hash === "") {
 		
+		document.write("<!-- Google Analytics -->");
 		document.write("<script>");
 		document.write("  (function(i,s,o,g,r,a,m){i['GoogleAnalyticsObject']=r;i[r]=i[r]||function(){");
 		document.write("  (i[r].q=i[r].q||[]).push(arguments)},i[r].l=1*new Date();a=s.createElement(o),");

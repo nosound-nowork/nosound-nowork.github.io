@@ -4,9 +4,22 @@
 	
 	$(function () {
 		
-		if (navigator.userAgent.indexOf('Android') > 0 ) $("div.container").addClass("android");
+		if (navigator.userAgent.indexOf('Android') > 0) $("div.container").addClass("android");
 		
-		if (navigator.userAgent.indexOf('iPhone') > 0 ) $("div.container").addClass("iPhone");
+		if (navigator.userAgent.indexOf('iPhone') > 0) $("div.container").addClass("iPhone");
+		
+		if (location.hash !== "") $("div.container").addClass("admin");
+		
+		$("a").each(function () {
+			
+			var $this = $(this),
+				href = $this.attr("href");
+			
+			if (href.indexOf("javascript") !== 0) {
+				
+				$this.attr("href", href + location.hash);
+			}
+		});
 	});
 	
 	var Pages = function (node) {
