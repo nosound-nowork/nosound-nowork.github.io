@@ -34,6 +34,10 @@
 			
 			$("#result").text(result + " 秒");
 			
+			// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - -
+			
+			
+			
 			// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 			$.cookie.json = true;
 			
@@ -49,7 +53,6 @@
 					$.cookie("record", cookie, { path: "/", expires: 365 });
 				}
 			}
-			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		});
 		
 		pages.top();

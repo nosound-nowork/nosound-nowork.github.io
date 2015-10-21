@@ -1,7 +1,8 @@
 (function ($) {
 	
 	var SETTINGS = {
-		IMG_PATH: "../img/q/",
+		JSON_PATH: "data/",
+		IMG_PATH: "img/q/",
 		Q:{ MAX: 13, DICE: 3, IMAGE: 5, CALC: 5 }
 	};
 	
@@ -37,6 +38,11 @@
 			$("#total").text(count.total);
 			$("#rate").text(rate);
 			
+			// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - -
+			
+			
+			
+			
 			// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - -
 			$.cookie.json = true;
 			
@@ -64,7 +70,6 @@
 					$.cookie("record", cookie, { path: "/", expires: 365 });
 				}
 			}
-			//- - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		});
 		
 		pages.top();
@@ -134,9 +139,9 @@
 			
 			pages.next();
 			
-			$.getJSON("../test/q.json", function (data) {
+			$.getJSON(SETTINGS.JSON_PATH + "q.json", function (data) {
 				
-				var dice = random(data.dice.questions, SETTINGS.Q.DICE),
+				var dice = random(data.dice.q, SETTINGS.Q.DICE),
 					image = random(data.image, SETTINGS.Q.IMAGE),
 					calc = random(data.calc, SETTINGS.Q.CALC),
 					ePage = $("div.page_e");
@@ -188,25 +193,25 @@
 							});
 						}
 						
-						pageQ.append($("<h2>").text(data.dice.description)).append(table);
+						pageQ.append($("<h2>").text(data.dice.d)).append(table);
 						
 					} else {
 						
-						pageQ.append($("<h2>").text(value.question));
+						pageQ.append($("<h2>").text(value.q));
 						
-						if (typeof value.file !== "undefined") {
+						if (typeof value.f !== "undefined") {
 							
-							pageQ.append($("<img>").attr("src", SETTINGS.IMG_PATH + value.file));
+							pageQ.append($("<img>").attr("src", SETTINGS.IMG_PATH + value.f));
 						}
 						
 						var ol1 = $("<ol>").addClass("buttons"),
 							ol2 = $("<ol>").addClass("buttons");
 						
-						$.each(value.selections, function (j, val) {
+						$.each(value.s, function (j, val) {
 							
 							var answer = $("<a>").attr("href", "javascript:void(0);").text(val);
 							
-							if (value.answer == j) answer.addClass("correct");
+							if (value.a == j) answer.addClass("correct");
 							
 							answer.on(TOUCH_EVENT, function (e) {
 								
