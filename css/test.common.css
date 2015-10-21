@@ -7,22 +7,10 @@ div.header > div > div {
 
 div.header > div > div.time {
 	width: 150px;
-	margin: 32px 15px 0;
+	margin: 25px 15px 0;
 	float: right;
 	font-size: 30px;
 	display: none;
-}
-
-@-moz-document url-prefix() {
-	div.header > div > div.time {
-		margin-top: 33px;
-	}
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	div.header > div > div.time {
-		margin-top: 25px;
-	}
 }
 
 div.container.android > div.header > div > div.time {

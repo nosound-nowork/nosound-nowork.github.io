@@ -6,6 +6,7 @@ html, body {
 	height: 100%;
 	font-size: 16px;
 	font-family: sans-serif;
+	font-family: "ヒラギノ角ゴ ProN W3", "Hiragino Kaku Gothic ProN", "Meiryo UI", メイリオ, sans-serif;
 	
 	user-select: none;
 	-ms-user-select: none;
@@ -67,18 +68,12 @@ div.footer {
 
 div.footer > span {
 	position: relative;
-	top: 7px;
+	top: 4px;
 	color: #ffffff;
 }
 
 div.container.admin > div.footer > span {
 	color: #ffd966;
-}
-
-@media screen and (-webkit-min-device-pixel-ratio:0) {
-	div.footer > span {
-		top: 4px;
-	}
 }
 
 div.android > div.footer > span {

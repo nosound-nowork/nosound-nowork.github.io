@@ -12,45 +12,46 @@
 			next = $("div.next"),
 			time = $("div.time");
 		
-		var pages = new Pages("div.contents");
-		
-		pages.onTop(function () {
+		var pages = new Pages("div.contents", {
 			
-			link.show();
-			
-			time.hide();
-		});
-		
-		pages.onEnd(function () {
-			
-			timer.stop();
-			
-			next.hide();
-			time.hide();
-			
-			clearInterval(timerId);
-			
-			var result = (timer.result() / 1000).toFixed(2);
-			
-			$("#result").text(result + " 秒");
-			
-			// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - -
-			
-			
-			
-			// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			$.cookie.json = true;
-			
-			var cookie = $.cookie("record");
-			
-			if (typeof cookie !== "undefined") {
+			onTop: function () {
 				
-				if (cookie.test1[sound].time > result) {
+				link.show();
+				
+				time.hide();
+			},
+			
+			onEnd: function () {
+				
+				timer.stop();
+				
+				next.hide();
+				time.hide();
+				
+				clearInterval(timerId);
+				
+				var result = (timer.result() / 1000).toFixed(2);
+				
+				$("#result").text(result + " 秒");
+				
+				// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - - - -
+				
+				
+				
+				// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				$.cookie.json = true;
+				
+				var cookie = $.cookie("record");
+				
+				if (typeof cookie !== "undefined") {
 					
-					cookie.test1[sound].time = result;
-					cookie.test1[sound].date = (new Date()).getTime();
-					
-					$.cookie("record", cookie, { path: "/", expires: 365 });
+					if (cookie.test1[sound].time > result) {
+						
+						cookie.test1[sound].time = result;
+						cookie.test1[sound].date = (new Date()).getTime();
+						
+						$.cookie("record", cookie, { path: "/", expires: 365 });
+					}
 				}
 			}
 		});
@@ -117,7 +118,7 @@
 				
 			} else if (s == "on") {
 				
-				pages.next(function () { setTimeout(sPage, 1000); });
+				pages.next(function () { setTimeout(sPage, 2500); });
 			}
 			
 			sound = s;

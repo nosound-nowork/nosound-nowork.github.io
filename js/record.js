@@ -4,15 +4,18 @@
 		
 		$.cookie.json = true;
 		
-		$("div.footer > span").on(TOUCH_EVENT, function () {
+		if ($("div.container").hasClass("admin")) {
 			
-			if (confirm("Are you sure you want to delete the cookie?")) {
+			$("div.footer > span").on(TOUCH_EVENT, function () {
 				
-				$.cookie("record", "", { path: "/", expires: -1 });
-				
-				location.reload(true);
-			}
-		});
+				if (confirm("Are you sure you want to delete the cookie?")) {
+					
+					$.cookie("record", "", { path: "/", expires: -1 });
+					
+					location.reload(true);
+				}
+			});
+		}
 		
 		var cookie = $.cookie("record");
 		

@@ -16,58 +16,59 @@
 		var link = $("#link"),
 			time = $("div.time");
 		
-		var pages = new Pages("div.contents");
-		
-		pages.onTop(function () {
+		var pages = new Pages("div.contents", {
 			
-			link.show();
-			
-			time.hide();
-		});
-		
-		pages.onEnd(function () {
-			
-			timer.stop();
-			
-			time.hide();
-			
-			clearInterval(timerId);
-			
-			var rate = count.correct == 0 ? 0.0 : Math.round(count.correct / count.total * 1000) / 10;
-			
-			$("#total").text(count.total);
-			$("#rate").text(rate);
-			
-			// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - -
-			
-			
-			
-			
-			// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - -
-			$.cookie.json = true;
-			
-			var cookie = $.cookie("record");
-			
-			if (typeof cookie !== "undefined") {
+			onTop: function () {
 				
-				if (cookie.test2[sound].total.total < count.total) {
-					
-					cookie.test2[sound].total.total = count.total;
-					cookie.test2[sound].total.correct = count.correct;
-					cookie.test2[sound].total.rate = rate;
-					cookie.test2[sound].total.date = (new Date()).getTime();
-					
-					$.cookie("record", cookie, { path: "/", expires: 365 });
-				}
+				link.show();
 				
-				if (cookie.test2[sound].rate.rate < rate) {
+				time.hide();
+			},
+			
+			onEnd: function () {
+				
+				timer.stop();
+				
+				time.hide();
+				
+				clearInterval(timerId);
+				
+				var rate = count.correct == 0 ? 0.0 : Math.round(count.correct / count.total * 1000) / 10;
+				
+				$("#total").text(count.total);
+				$("#rate").text(rate);
+				
+				// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - - - -
+				
+				
+				
+				
+				// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				$.cookie.json = true;
+				
+				var cookie = $.cookie("record");
+				
+				if (typeof cookie !== "undefined") {
 					
-					cookie.test2[sound].rate.total = count.total;
-					cookie.test2[sound].rate.correct = count.correct;
-					cookie.test2[sound].rate.rate = rate;
-					cookie.test2[sound].rate.date = (new Date()).getTime();
+					if (cookie.test2[sound].total.total < count.total) {
+						
+						cookie.test2[sound].total.total = count.total;
+						cookie.test2[sound].total.correct = count.correct;
+						cookie.test2[sound].total.rate = rate;
+						cookie.test2[sound].total.date = (new Date()).getTime();
+						
+						$.cookie("record", cookie, { path: "/", expires: 365 });
+					}
 					
-					$.cookie("record", cookie, { path: "/", expires: 365 });
+					if (cookie.test2[sound].rate.rate < rate) {
+						
+						cookie.test2[sound].rate.total = count.total;
+						cookie.test2[sound].rate.correct = count.correct;
+						cookie.test2[sound].rate.rate = rate;
+						cookie.test2[sound].rate.date = (new Date()).getTime();
+						
+						$.cookie("record", cookie, { path: "/", expires: 365 });
+					}
 				}
 			}
 		});
@@ -149,7 +150,7 @@
 					
 					$.each(calc, function (index, value) { ePage.before(makePageQ("calc", value)); });
 					
-					setTimeout(function () { pages.next(function () { time.show(); }); }, 1000);
+					setTimeout(function () { pages.next(function () { time.show(); }); }, 2500);
 					
 					function makePageQ(type, value) {
 						

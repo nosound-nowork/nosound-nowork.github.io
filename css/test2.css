@@ -105,7 +105,6 @@ div.contents > div.page_e > dl > dd {
 
 div.container.android > div.contents > div.page_e > dl > dt,
 div.container.iPhone > div.contents > div.page_e > dl > dt {
-	width: 130px;
 	margin-left: 37px;
 }
 
