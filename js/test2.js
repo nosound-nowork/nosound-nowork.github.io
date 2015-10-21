@@ -170,22 +170,20 @@
 							
 							for (var i = 0; i < value.length; i++) {
 								
-								var char = value.charAt(i),
-									cell = $(cells[i]).addClass("q_" + char).data("char", char);
-								
-								cell.on(TOUCH_EVENT, function () {
+								$(cells[i]).on(TOUCH_EVENT, function () {
 									
-									var c = $(this).data("char");
+									var $this = $(this);
 									
-									if ((c == "1") || (c == "3")) {
+									if ($this.hasClass("q_1") || $this.hasClass("q_3")) {
 										
 										count.total++;
 										
-										if (c == "3") count.correct++;
+										if ($this.hasClass("q_3")) count.correct++;
 										
 										nextQ();
 									}
-								});
+									
+								}).addClass("q_" + value.charAt(i));
 							}
 							
 							pageQ.append($("<h2>").text(data.dice.d)).append(table);
