@@ -59,7 +59,7 @@
 					_this._n.children().hide().filter(":eq(" + c + ")").show();
 					window.scrollTo(0, 0);
 					if ($.isFunction(f)) f.apply(_this);
-				}, 100);
+				}, 250);
 			}
 			return this;
 		}

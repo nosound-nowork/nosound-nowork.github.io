@@ -12,7 +12,7 @@ div.container.android > div.header > div > div.next {
 }
 
 div.container.iPhone > div.header > div > div.next {
-	margin-top: 1px;
+	margin-top: -9px;
 }
 
 div.header > div > div.next.highlight {
