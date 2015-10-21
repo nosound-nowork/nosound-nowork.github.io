@@ -90,8 +90,8 @@
 			
 			if ($(this).hasClass("sq_" + n)) {
 				
-				if (n == 5) {
-//				if (n == 25) {
+//				if (n == 5) {
+				if (n == 25) {
 //				if (n == 50) {
 					
 					pages.end();

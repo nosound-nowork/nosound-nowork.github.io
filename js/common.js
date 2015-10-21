@@ -45,6 +45,7 @@
 		jump: function (c, f) {
 			if ((this._n.children().length > c) && (c >= 0)) {
 				var _this = this;
+				// delay for touch event
 				setTimeout(function () {
 					_this._c = c;
 					_this._n.children().hide().filter(":eq(" + c + ")").show();
