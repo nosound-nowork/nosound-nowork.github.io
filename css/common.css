@@ -65,14 +65,14 @@ div.footer {
 	text-align: center;
 }
 
-div.container.admin > div.footer {
-	background-color: #c00000;
-}
-
 div.footer > span {
 	position: relative;
 	top: 7px;
 	color: #ffffff;
+}
+
+div.container.admin > div.footer > span {
+	color: #ffd966;
 }
 
 @media screen and (-webkit-min-device-pixel-ratio:0) {
