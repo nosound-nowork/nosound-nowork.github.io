@@ -57,44 +57,41 @@
 		
 		pages.top();
 		
-		$("#sound_off").on(TOUCH_EVENT, function (e) { load("off"); e.prevetDefault(); });
+		$("#sound_off").on(TOUCH_EVENT, function () { load("off"); });
 		
-		$("#sound_on").on(TOUCH_EVENT, function (e) { load("on"); e.prevetDefault(); });
+		$("#sound_on").on(TOUCH_EVENT, function () { load("on"); });
 		
-		$("#start").on(TOUCH_EVENT, function (e) {
+		$("#start").on(TOUCH_EVENT, function () {
 			
 			shuffle(25);
 			
-			pages.next();
-			
-			timer.start();
-			
-			var sec = $("#sec");
-			
-			timerId = setInterval(function () {
+			pages.next(function () {
 				
-				sec.text((timer.now() / 1000).toFixed(2));
+				timer.start();
 				
-			}, 123);
-			
-			e.prevetDefault();
+				var sec = $("#sec");
+				
+				timerId = setInterval(function () {
+					
+					sec.text((timer.now() / 1000).toFixed(2));
+					
+				}, 123);
+			});
 		});
 		
-		$("#back").on(TOUCH_EVENT, function (e) {
+		$("#back").on(TOUCH_EVENT, function () {
 			
 			pages.top();
-			
-			e.prevetDefault();
 		});
 		
-		cells.on(TOUCH_EVENT, function (e) {
+		cells.on(TOUCH_EVENT, function () {
 			
 			var n = next.text();
 			
 			if ($(this).hasClass("sq_" + n)) {
 				
-//				if (n == 5) {
-				if (n == 25) {
+				if (n == 5) {
+//				if (n == 25) {
 //				if (n == 50) {
 					
 					pages.end();
@@ -108,8 +105,6 @@
 					setTimeout(function () { next.removeClass("highlight"); }, 200);
 				}
 			}
-			
-			e.prevetDefault();
 		});
 		
 		function load(s) {
@@ -122,18 +117,14 @@
 				
 			} else if (s == "on") {
 				
-				pages.next();
-				
-				setTimeout(sPage, 1000);
+				pages.next(function () { setTimeout(sPage, 1000); });
 			}
 			
 			sound = s;
 			
 			function sPage() {
 				
-				time.show();
-				
-				pages.jump(2);
+				pages.jump(2, function () { time.show(); });
 			}
 		}
 		

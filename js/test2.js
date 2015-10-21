@@ -74,41 +74,38 @@
 		
 		pages.top();
 		
-		$("#sound_slow").on(TOUCH_EVENT, function (e) { load("slow"); e.prevetDefault(); });
+		$("#sound_slow").on(TOUCH_EVENT, function () { load("slow"); });
 		
-		$("#sound_fast").on(TOUCH_EVENT, function (e) { load("fast"); e.prevetDefault(); });
+		$("#sound_fast").on(TOUCH_EVENT, function () { load("fast"); });
 		
-		$("#start").on(TOUCH_EVENT, function (e) {
+		$("#start").on(TOUCH_EVENT, function () {
 			
-			pages.next();
-			
-			timer.start();
-			
-			var sec = $("#sec");
-			
-			timerId = setInterval(function () {
+			pages.next(function () {
 				
-				var s = (30 - timer.now() / 1000).toFixed(2);
+				timer.start();
 				
-				if (s < 0) {
-					
-					pages.end();
-					
-				} else {
-					
-					sec.text(s);
-				}
+				var sec = $("#sec");
 				
-			}, 123);
-			
-			e.prevetDefault();
+				timerId = setInterval(function () {
+					
+					var s = (30 - timer.now() / 1000).toFixed(2);
+					
+					if (s < 0) {
+						
+						pages.end();
+						
+					} else {
+						
+						sec.text(s);
+					}
+					
+				}, 123);
+			});
 		});
 		
-		$("#back").on(TOUCH_EVENT, function (e) {
+		$("#back").on(TOUCH_EVENT, function () {
 			
 			pages.top();
-			
-			e.prevetDefault();
 		});
 		
 		function nextQ() {
@@ -137,101 +134,98 @@
 			
 			sound = s;
 			
-			pages.next();
-			
-			$.getJSON(SETTINGS.JSON_PATH + "q.json", function (data) {
+			pages.next(function () {
 				
-				var dice = random(data.dice.q, SETTINGS.Q.DICE),
-					image = random(data.image, SETTINGS.Q.IMAGE),
-					calc = random(data.calc, SETTINGS.Q.CALC),
-					ePage = $("div.page_e");
-				
-				$.each(dice, function (index, value) { ePage.before(makePageQ("dice", value)); });
-				
-				$.each(image, function (index, value) { ePage.before(makePageQ("image", value)); });
-				
-				$.each(calc, function (index, value) { ePage.before(makePageQ("calc", value)); });
-				
-				setTimeout(function () { time.show(); pages.next(); }, 1000);
-				
-				function makePageQ(type, value) {
+				$.getJSON(SETTINGS.JSON_PATH + "q.json", function (data) {
 					
-					var pageQ = $("<div>").addClass("page_q").addClass(type);
+					var dice = random(data.dice.q, SETTINGS.Q.DICE),
+						image = random(data.image, SETTINGS.Q.IMAGE),
+						calc = random(data.calc, SETTINGS.Q.CALC),
+						ePage = $("div.page_e");
 					
-					if (type == "dice") {
+					$.each(dice, function (index, value) { ePage.before(makePageQ("dice", value)); });
+					
+					$.each(image, function (index, value) { ePage.before(makePageQ("image", value)); });
+					
+					$.each(calc, function (index, value) { ePage.before(makePageQ("calc", value)); });
+					
+					setTimeout(function () { pages.next(function () { time.show(); }); }, 1000);
+					
+					function makePageQ(type, value) {
 						
-						var table = $(
-							"<table><tbody>" +
-								"<tr><td></td><td></td><td></td></tr>" + "<tr><td></td><td></td><td></td></tr>" +
-								"<tr><td></td><td></td><td></td></tr>" + "<tr><td></td><td></td><td></td></tr>" +
-							"</tbody></table>"
-						);
+						var pageQ = $("<div>").addClass("page_q").addClass(type);
 						
-						var cells = table.find("td");
-						
-						value = String(value);
-						
-						for (var i = 0; i < value.length; i++) {
+						if (type == "dice") {
 							
-							var char = value.charAt(i),
-								cell = $(cells[i]).addClass("q_" + char).data("char", char);
+							var table = $(
+								"<table><tbody>" +
+									"<tr><td></td><td></td><td></td></tr>" + "<tr><td></td><td></td><td></td></tr>" +
+									"<tr><td></td><td></td><td></td></tr>" + "<tr><td></td><td></td><td></td></tr>" +
+								"</tbody></table>"
+							);
 							
-							cell.on(TOUCH_EVENT, function (e) {
+							var cells = table.find("td");
+							
+							value = String(value);
+							
+							for (var i = 0; i < value.length; i++) {
 								
-								var c = $(this).data("char");
+								var char = value.charAt(i),
+									cell = $(cells[i]).addClass("q_" + char).data("char", char);
 								
-								if ((c == "1") || (c == "3")) {
+								cell.on(TOUCH_EVENT, function () {
+									
+									var c = $(this).data("char");
+									
+									if ((c == "1") || (c == "3")) {
+										
+										count.total++;
+										
+										if (c == "3") count.correct++;
+										
+										nextQ();
+									}
+								});
+							}
+							
+							pageQ.append($("<h2>").text(data.dice.d)).append(table);
+							
+						} else {
+							
+							pageQ.append($("<h2>").text(value.q));
+							
+							if (typeof value.f !== "undefined") {
+								
+								pageQ.append($("<img>").attr("src", SETTINGS.IMG_PATH + value.f));
+							}
+							
+							var ol1 = $("<ol>").addClass("buttons"),
+								ol2 = $("<ol>").addClass("buttons");
+							
+							$.each(value.s, function (j, val) {
+								
+								var answer = $("<a>").attr("href", "javascript:void(0);").text(val);
+								
+								if (value.a == j) answer.addClass("correct");
+								
+								answer.on(TOUCH_EVENT, function () {
 									
 									count.total++;
 									
-									if (c == "3") count.correct++;
+									if ($(this).hasClass("correct")) count.correct++;
 									
 									nextQ();
-								}
+								});
 								
-								e.prevetDefault();
-							});
-						}
-						
-						pageQ.append($("<h2>").text(data.dice.d)).append(table);
-						
-					} else {
-						
-						pageQ.append($("<h2>").text(value.q));
-						
-						if (typeof value.f !== "undefined") {
-							
-							pageQ.append($("<img>").attr("src", SETTINGS.IMG_PATH + value.f));
-						}
-						
-						var ol1 = $("<ol>").addClass("buttons"),
-							ol2 = $("<ol>").addClass("buttons");
-						
-						$.each(value.s, function (j, val) {
-							
-							var answer = $("<a>").attr("href", "javascript:void(0);").text(val);
-							
-							if (value.a == j) answer.addClass("correct");
-							
-							answer.on(TOUCH_EVENT, function (e) {
-								
-								count.total++;
-								
-								if ($(this).hasClass("correct")) count.correct++;
-								
-								nextQ();
-								
-								e.prevetDefault();
+								(j < 2 ? ol1 : ol2).append($("<li>").append(answer));
 							});
 							
-							(j < 2 ? ol1 : ol2).append($("<li>").append(answer));
-						});
+							pageQ.append(ol1).append(ol2);
+						}
 						
-						pageQ.append(ol1).append(ol2);
+						return pageQ;
 					}
-					
-					return pageQ;
-				}
+				});
 			});
 		}
 		

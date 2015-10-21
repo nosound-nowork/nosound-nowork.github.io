@@ -4,15 +4,13 @@
 		
 		$.cookie.json = true;
 		
-		$("div.footer > span").on(TOUCH_EVENT, function (e) {
+		$("div.footer > span").on(TOUCH_EVENT, function () {
 			
 			if (confirm("Are you sure you want to delete the cookie?")) {
 				
 				$.cookie("record", "", { path: "/", expires: -1 });
 				
 				location.reload(true);
-				
-				e.prevetDefault();
 			}
 		});
 		
@@ -59,14 +57,7 @@
 		
 		pages.top();
 		
-		$("#report").on(TOUCH_EVENT, function (e) {
-			
-			$("div.container").removeClass("page_t");
-			
-			pages.end();
-			
-			e.prevetDefault();
-		});
+		$("#report").on(TOUCH_EVENT, function () { pages.end(); });
 		
 		$("#age").on("change", mailto);
 		
@@ -78,33 +69,29 @@
 				"mailto:" + "nosound.nowork" + "@" + "gmail.com?" +
 				"subject=" + encodeURIComponent("ユニシス研究会：静岡G　記録報告") + "&" +
 				"body=" +
-					encodeURIComponent("［年齢］") + br() + sp(4) +
-					encodeURIComponent($("#age > option:selected").text()) + br() + sp(1) + br() +
-					encodeURIComponent("［○○○○テスト］") +  br() +
-					sp(8) + encodeURIComponent("音なし：") + $("#test1_off").parent().text() + br() +
-					sp(8) + encodeURIComponent("音あり：") + $("#test1_on").parent().text() + br() +
-					encodeURIComponent("［××××テスト］")  +  br() +
-					sp(4) + encodeURIComponent("テンポ - 遅い") +  br() +
+					encodeURIComponent("［年齢］") + br(1) + sp(4) +
+					encodeURIComponent($("#age > option:selected").text()) + br(1) + sp(1) + br(1) +
+					encodeURIComponent("［○○○○テスト］") +  br(1) +
+					sp(8) + encodeURIComponent("音なし：") + $("#test1_off").parent().text() + br(1) +
+					sp(8) + encodeURIComponent("音あり：") + $("#test1_on").parent().text() + br(1) +
+					encodeURIComponent("［××××テスト］")  +  br(1) +
+					sp(4) + encodeURIComponent("テンポ - 遅い") +  br(1) +
 					sp(8) + encodeURIComponent("最高回答数：") +
-					$("#test2_slow_total_total").parent().parent().text() + br() +
+					$("#test2_slow_total_total").parent().parent().text() + br(1) +
 					sp(8) + encodeURIComponent("最高正解率：") +
-					$("#test2_slow_rate_total").parent().parent().text() +  br() +
-					sp(4) + encodeURIComponent("テンポ - 早い") +  br() +
+					$("#test2_slow_rate_total").parent().parent().text() +  br(1) +
+					sp(4) + encodeURIComponent("テンポ - 早い") +  br(1) +
 					sp(8) + encodeURIComponent("最高回答数：") +
-					$("#test2_fast_total_total").parent().parent().text() + br() +
+					$("#test2_fast_total_total").parent().parent().text() + br(1) +
 					sp(8) + encodeURIComponent("最高正解率：") +
-					$("#test2_fast_rate_total").parent().parent().text() + br() + br() +
-					encodeURIComponent("［その他 感想など］") + br()
+					$("#test2_fast_rate_total").parent().parent().text() + br(2) +
+					encodeURIComponent("［その他 感想など］") + br(1)
 			);
 		}
 		
-		function sp(n) {
-			return Array(n + 1).join("%20");
-		}
+		function sp(n) { return Array(n + 1).join("%20"); }
 		
-		function br() {
-			return "%0d%0a";
-		}
+		function br(n) { return Array(n + 1).join("%0d%0a");}
 	});
 	
 })(jQuery);
