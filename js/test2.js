@@ -104,10 +104,9 @@
 			});
 		});
 		
-		$("#back").on(TOUCH_EVENT, function () {
-			
-			pages.top();
-		});
+		$("#back").on(TOUCH_EVENT, function () { pages.top(); });
+		
+		$("#again").on(TOUCH_EVENT, function () { location.reload(); });
 		
 		function nextQ() {
 			

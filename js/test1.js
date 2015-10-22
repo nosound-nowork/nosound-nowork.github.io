@@ -64,9 +64,9 @@
 		
 		$("#start").on(TOUCH_EVENT, function () {
 			
-			shuffle(25);
-			
 			pages.next(function () {
+				
+				shuffle(25);
 				
 				timer.start();
 				
@@ -80,10 +80,9 @@
 			});
 		});
 		
-		$("#back").on(TOUCH_EVENT, function () {
-			
-			pages.top();
-		});
+		$("#back").on(TOUCH_EVENT, function () { pages.top(); });
+		
+		$("#again").on(TOUCH_EVENT, function () { location.reload(); });
 		
 		cells.on(TOUCH_EVENT, function () {
 			
