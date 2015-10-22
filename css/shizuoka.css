@@ -1,13 +1,10 @@
 @charset "utf-8";
 
-div.contents > div.text > div {
-	color: #0070c0;
-	text-align: center;
-	font-weight: bold;
-}
-
 div.contents > div.text > div.theme {
+	text-align: center;
+	color: #0070c0;
 	font-size: 25px;
+	font-weight: bold;
 }
 
 div.container.android > div.contents > div.text > div.theme {
@@ -15,10 +12,25 @@ div.container.android > div.contents > div.text > div.theme {
 }
 
 div.container.iPhone > div.contents > div.text > div.theme {
-	font-size: 28px;
+	font-size: 25px;
 }
 
 div.contents > div.text > div.subtheme {
 	margin: 0 0 20px 0;
+	text-align: center;
+	color: #0070c0;
 	font-size: 13px;
+	font-weight: bold;
+}
+
+div.contents > div.text > div > span {
+	font-weight: bold;
+}
+
+div.contents > div.text > div > span.keyword1 {
+	color: #0070c0;
+}
+
+div.contents > div.text > div > span.keyword2 {
+	color: #ff6600;
 }

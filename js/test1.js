@@ -32,7 +32,7 @@
 				
 				var result = (timer.result() / 1000).toFixed(2);
 				
-				$("#result").text(result + " 秒");
+				$("#result").text(result);
 				
 				// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - - - -
 				

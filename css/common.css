@@ -45,6 +45,10 @@ div.header > div > div.link {
 	text-align: right;
 }
 
+div.container.iPhone > div.header > div > div.link {
+	margin-top: 38px;
+}
+
 div.header > div > div.link > a {
 	color: #ffffff;
 	font-size: 14px;

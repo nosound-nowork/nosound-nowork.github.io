@@ -20,6 +20,29 @@
 				$this.attr("href", href + location.hash);
 			}
 		});
+		
+		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+		if ($("div.container").hasClass("admin")) {
+			if ($("img.logo").length > 0) {
+				$("ol.buttons:eq(0) > li > a:eq(0)").text("Quick Touch");
+				$("ol.buttons:eq(0) > li > a:eq(1)").text("Rapid Answer");
+			}
+			if ($("#sound_off").length > 0) {
+				$("h1").text("Quick Touch");
+			}
+			if ($("#sound_slow").length > 0) {
+				$("h1").text("Rapid Answer");
+			}
+			if ($("span.caution").length > 0) {
+				$("h1:eq(0)").text("Quick Touch");
+				$("h1:eq(1)").text("Rapid Answer");
+			}
+			if ($("#test1_off").length > 0) {
+				$("h1:eq(0)").text("Quick Touch");
+				$("h1:eq(1)").text("Rapid Answer");
+			}
+		}
+		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 	});
 	
 	var Pages = function (node, options) {

@@ -49,4 +49,22 @@
 	
 	window.Timer = Timer;
 	
+	// Google Analytics Event Tracking
+	$.extend({
+		ga_send: function (action, category, label, value) {
+			if (!$("div.container").hasClass("admin")) {
+				alert("ga send.");
+				ga("send", "event", action, category, label, value);
+			}
+		}
+	});
+	
+	$(function () {
+		
+		$("div.footer").on(TOUCH_EVENT, function () {
+			
+			$.ga_send("Event", "Tracking", "Test", 30.53);
+		});
+	});
+	
 })(jQuery);

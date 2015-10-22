@@ -38,10 +38,15 @@ div.contents > div.page_q > table td {
 }
 
 div.contents > div.page_e > div {
-	margin: 30px 0;
+	margin: 20px 0;
 	padding: 0;
 	text-align: center;
 	color: #ff6600;
-	font-size: 32px;
+	font-size: 30px;
 	font-weight: bold;
+}
+
+
+div.contents > div.page_e > div > span {
+	font-size: 50px;
 }

@@ -186,11 +186,11 @@
 								}).addClass("q_" + value.charAt(i));
 							}
 							
-							pageQ.append($("<h2>").text(data.dice.d)).append(table);
+							pageQ.append($("<h3>").text(data.dice.d)).append(table);
 							
 						} else {
 							
-							pageQ.append($("<h2>").text(value.q));
+							pageQ.append($("<h3>").text(value.q));
 							
 							if (typeof value.f !== "undefined") {
 								

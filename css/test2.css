@@ -1,20 +1,20 @@
 @charset "utf-8";
 
-div.contents > div > h2 {
+div.contents > div > h3 {
 	width: 270px;
 	padding: 0;
 	font-size: 16px;
 }
 
-div.contents > div.dice > h2 {
+div.contents > div.dice > h3 {
 	margin: 20px auto;
 }
 
-div.contents > div.image > h2 {
+div.contents > div.image > h3 {
 	margin: 20px auto 2px;
 }
 
-div.contents > div.calc > h2 {
+div.contents > div.calc > h3 {
 	margin: 20px auto 14px;
 }
 
@@ -75,7 +75,7 @@ div.contents > div.page_q > ul > li > span.a {
 
 div.contents > div.page_e > dl {
 	width: auto;
-	margin: 40px auto 19px;
+	margin: 20px auto 12px;
 	padding: 0;
 	overflow: hidden;
 }
@@ -90,25 +90,38 @@ div.contents > div.page_e > dl > * {
 	float: left;
 	text-align: right;
 	color: #ff6600;
-	font-size: 32px;
+	font-size: 20px;
 	font-weight: bold;
 }
 
 div.contents > div.page_e > dl > dt {
-	width: 130px;
-	margin-left: 28px;
+	width: 120px;
+	margin-top: 21px;
+	margin-left: 20px;
 }
 
 div.contents > div.page_e > dl > dd {
-	width: 130px;
+	width: 120px;
 }
 
-div.container.android > div.contents > div.page_e > dl > dt,
+div.contents > div.page_e > dl > dd > span {
+	font-size: 40px;
+}
+
+div.container.android > div.contents > div.page_e > dl > dt {
+	margin-top: 17px;
+	margin-left: 25px;
+}
+
 div.container.iPhone > div.contents > div.page_e > dl > dt {
-	margin-left: 37px;
+	margin-top: 22px;
+	margin-left: 20px;
 }
 
-div.container.android > div.contents > div.page_e > dl > dd,
-div.container.iPhone > div.contents > div.page_e > dl > dd {
+div.container.android > div.contents > div.page_e > dl > dd {
 	width: 110px;
+}
+
+div.container.iPhone > div.contents > div.page_e > dl > dd {
+	width: 125px;
 }
