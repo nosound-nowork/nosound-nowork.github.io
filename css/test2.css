@@ -101,11 +101,11 @@ div.contents > div.page_e > dl > * {
 div.contents > div.page_e > dl > dt {
 	width: 120px;
 	margin-top: 21px;
-	margin-left: 20px;
+	margin-left: 15px;
 }
 
 div.contents > div.page_e > dl > dd {
-	width: 120px;
+	width: 130px;
 }
 
 div.contents > div.page_e > dl > dd > span {
