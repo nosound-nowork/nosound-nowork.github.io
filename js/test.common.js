@@ -51,20 +51,30 @@
 	
 	// Google Analytics Event Tracking
 	$.extend({
-		ga_send: function (action, category, label, value) {
+		
+		ga_send: function (category, action, label, value) {
+			
 			if (!$("div.container").hasClass("admin")) {
-				alert("ga send sample.");
-				ga("send", "event", action, category, label, value);
+				
+				var params = {
+					"hitType": "event",
+					"eventCategory": category,
+					"eventAction": action,
+				};
+				
+				if ((typeof label !== "undefined") && (label !== "")) {
+					
+					params.eventLabel = label;
+				}
+				
+				if (typeof value !== "undefined") {
+					
+					params.eventValue = value;
+				}
+				
+//				ga('send', params);
 			}
 		}
-	});
-	
-	$(function () {
-		
-		$("div.footer").on(TOUCH_EVENT, function () {
-			
-			$.ga_send("Event", "Tracking", "Sample", 150);
-		});
 	});
 	
 })(jQuery);

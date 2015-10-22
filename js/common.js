@@ -23,23 +23,25 @@
 		
 		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 		if ($("div.container").hasClass("admin")) {
+			var test1 = "Quick Touch",
+				test2 = "Rapid Answer";
 			if ($("img.logo").length > 0) {
-				$("ol.buttons:eq(0) > li > a:eq(0)").text("Quick Touch");
-				$("ol.buttons:eq(0) > li > a:eq(1)").text("Rapid Answer");
+				$("ol.buttons:eq(0) > li > a:eq(0)").text(test1);
+				$("ol.buttons:eq(0) > li > a:eq(1)").text(test2);
 			}
 			if ($("#sound_off").length > 0) {
-				$("h1").text("Quick Touch");
+				$("h1").text(test1);
 			}
 			if ($("#sound_slow").length > 0) {
-				$("h1").text("Rapid Answer");
+				$("h1").text(test2);
 			}
 			if ($("span.caution").length > 0) {
-				$("h1:eq(0)").text("Quick Touch");
-				$("h1:eq(1)").text("Rapid Answer");
+				$("h1:eq(0)").text(test1);
+				$("h1:eq(1)").text(test2);
 			}
 			if ($("#test1_off").length > 0) {
-				$("h1:eq(0)").text("Quick Touch");
-				$("h1:eq(1)").text("Rapid Answer");
+				$("h1:eq(0)").text(test1);
+				$("h1:eq(1)").text(test2);
 			}
 		}
 		// - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -

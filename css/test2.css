@@ -73,6 +73,10 @@ div.contents > div.page_q > ul > li > span.a {
 	margin: 0 0 0 20px;
 }
 
+div.contents > div.page_e > h1 {
+	margin-bottom: 13px;
+}
+
 div.contents > div.page_e > dl {
 	width: auto;
 	margin: 20px auto 12px;

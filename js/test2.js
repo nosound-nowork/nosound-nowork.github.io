@@ -39,9 +39,13 @@
 				$("#rate").text(rate);
 				
 				// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - - - -
-				
-				
-				
+				if (sound !== "") {
+					
+					var s = sound === "slow" ? "Slow" : "Fast";
+					
+					$.ga_send("Rapid Answer", "Tempo " + s, "total", count.total);
+					$.ga_send("Rapid Answer", "Tempo " + s, "correct", count.correct);
+				}
 				
 				// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 				$.cookie.json = true;

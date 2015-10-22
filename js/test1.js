@@ -35,8 +35,12 @@
 				$("#result").text(result);
 				
 				// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - - - -
-				
-				
+				if (sound !== "") {
+					
+					var s = sound === "off" ? "Off" : "On";
+					
+					$.ga_send("Quick Touch", "Sound " + s, "", result * 100);
+				}
 				
 				// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 				$.cookie.json = true;
