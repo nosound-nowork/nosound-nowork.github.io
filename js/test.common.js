@@ -53,7 +53,7 @@
 	$.extend({
 		ga_send: function (action, category, label, value) {
 			if (!$("div.container").hasClass("admin")) {
-				alert("ga send.");
+				alert("ga send sample.");
 				ga("send", "event", action, category, label, value);
 			}
 		}
@@ -63,7 +63,7 @@
 		
 		$("div.footer").on(TOUCH_EVENT, function () {
 			
-			$.ga_send("Event", "Tracking", "Sample", 1);
+			$.ga_send("Event", "Tracking", "Sample", 12.34);
 		});
 	});
 	
