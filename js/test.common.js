@@ -63,7 +63,7 @@
 		
 		$("div.footer").on(TOUCH_EVENT, function () {
 			
-			$.ga_send("Event", "Tracking", "Test", 30.53);
+			$.ga_send("Event", "Tracking", "Sample", 1);
 		});
 	});
 	
