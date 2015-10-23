@@ -29,12 +29,19 @@ div.contents > div > h1 {
 	margin: 20px 0 15px;
 	padding: 0;
 	text-align: center;
-	font-size: 36px;
 	color: #0070c0;
 }
 
 div.container.android > div.contents > div > h1 {
 	font-size: 40px;
+}
+
+div.contents > div > h1 > span.title {
+	font-size: 36px;
+}
+
+div.contents > div > h1 > span.sound {
+	font-size: 22px;
 }
 
 div.contents > div > h2 {

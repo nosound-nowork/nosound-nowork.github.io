@@ -117,9 +117,13 @@
 			
 			if (s == "off") {
 				
+				$("span.sound").text("（音なし）");
+				
 				sPage();
 				
 			} else if (s == "on") {
+				
+				$("span.sound").text("（音あり）");
 				
 				pages.next(function () { setTimeout(sPage, 2500); });
 			}

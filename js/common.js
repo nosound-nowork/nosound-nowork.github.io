@@ -30,10 +30,10 @@
 				$("ol.buttons:eq(0) > li > a:eq(1)").text(test2);
 			}
 			if ($("#sound_off").length > 0) {
-				$("h1").text(test1);
+				$("h1 > span.title").text(test1);
 			}
 			if ($("#sound_slow").length > 0) {
-				$("h1").text(test2);
+				$("h1 > span.title").text(test2);
 			}
 			if ($("span.caution").length > 0) {
 				$("h1:eq(0)").text(test1);

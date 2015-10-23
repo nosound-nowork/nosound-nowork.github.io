@@ -3,7 +3,8 @@
 	var SETTINGS = {
 		JSON_PATH: "data/",
 		IMG_PATH: "img/q/",
-		Q:{ MAX: 13, DICE: 3, IMAGE: 5, CALC: 5 }
+		LIMIT: 30,
+		Q:{ MAX: 13, DICE: 5, IMAGE: 5, CALC: 5 }
 	};
 	
 	$(function () {
@@ -14,7 +15,8 @@
 			count = { total: 0, correct: 0 };
 		
 		var link = $("#link"),
-			time = $("div.time");
+			time = $("div.time"),
+			sec = $("#sec");
 		
 		var pages = new Pages("div.contents", {
 			
@@ -23,6 +25,8 @@
 				link.show();
 				
 				time.hide();
+				
+				sec.text(SETTINGS.LIMIT.toFixed(2));
 			},
 			
 			onEnd: function () {
@@ -89,11 +93,9 @@
 				
 				timer.start();
 				
-				var sec = $("#sec");
-				
 				timerId = setInterval(function () {
 					
-					var s = (30 - timer.now() / 1000).toFixed(2);
+					var s = (SETTINGS.LIMIT - timer.now() / 1000).toFixed(2);
 					
 					if (s < 0) {
 						
@@ -130,9 +132,12 @@
 			
 			if (s == "slow") {
 				
+				$("span.sound").text("（テンポ - 遅い）");
+				
 				
 			} else if (s == "fast") {
 				
+				$("span.sound").text("（テンポ - 速い）");
 				
 			}
 			
@@ -142,37 +147,47 @@
 				
 				$.getJSON(SETTINGS.JSON_PATH + "q.json", function (data) {
 					
-					var dice = random(data.dice.q, SETTINGS.Q.DICE),
-						image = random(data.image, SETTINGS.Q.IMAGE),
-						calc = random(data.calc, SETTINGS.Q.CALC),
-						ePage = $("div.page_e");
+					var ePage = $("div.page_e");
 					
-					$.each(dice, function (index, value) { ePage.before(makePageQ("dice", value)); });
+					$.each(
+						random(data.dice.q, SETTINGS.Q.DICE, "dice"),
+						function (index, value) { ePage.before(makePageQ(value)); }
+					);
 					
-					$.each(image, function (index, value) { ePage.before(makePageQ("image", value)); });
+					$.each(
+						random(data.image, SETTINGS.Q.IMAGE, "image"),
+						function (index, value) { ePage.before(makePageQ(value)); }
+					);
 					
-					$.each(calc, function (index, value) { ePage.before(makePageQ("calc", value)); });
+					$.each(
+						random(data.calc, SETTINGS.Q.CALC, "calc"),
+						function (index, value) { ePage.before(makePageQ(value)); }
+					);
 					
 					setTimeout(function () { pages.next(function () { time.show(); }); }, 2500);
 					
-					function makePageQ(type, value) {
+					function makePageQ(item) {
 						
-						var pageQ = $("<div>").addClass("page_q").addClass(type);
+						var pageQ = $("<div>").addClass("page_q").addClass(item.type);
 						
-						if (type == "dice") {
+						if (item.type == "dice") {
+							
+							pageQ.append($("<h3>").html(data.dice.d));
 							
 							var table = $(
 								"<table><tbody>" +
-									"<tr><td></td><td></td><td></td></tr>" + "<tr><td></td><td></td><td></td></tr>" +
-									"<tr><td></td><td></td><td></td></tr>" + "<tr><td></td><td></td><td></td></tr>" +
+									"<tr><td></td><td></td><td></td></tr>" +
+									"<tr><td></td><td></td><td></td></tr>" +
+									"<tr><td></td><td></td><td></td></tr>" +
+									"<tr><td></td><td></td><td></td></tr>" +
 								"</tbody></table>"
 							);
 							
 							var cells = table.find("td");
 							
-							value = String(value);
+							item.value = String(item.value);
 							
-							for (var i = 0; i < value.length; i++) {
+							for (var i = 0; i < item.value.length; i++) {
 								
 								$(cells[i]).on(TOUCH_EVENT, function () {
 									
@@ -187,28 +202,28 @@
 										nextQ();
 									}
 									
-								}).addClass("q_" + value.charAt(i));
+								}).addClass("q_" + item.value.charAt(i));
 							}
 							
-							pageQ.append($("<h3>").text(data.dice.d)).append(table);
+							pageQ.append(table);
 							
 						} else {
 							
-							pageQ.append($("<h3>").text(value.q));
+							pageQ.append($("<h3>").html(item.value.q));
 							
-							if (typeof value.f !== "undefined") {
+							if (typeof item.value.f !== "undefined") {
 								
-								pageQ.append($("<img>").attr("src", SETTINGS.IMG_PATH + value.f));
+								pageQ.append($("<img>").attr("src", SETTINGS.IMG_PATH + item.value.f));
 							}
 							
 							var ol1 = $("<ol>").addClass("buttons"),
 								ol2 = $("<ol>").addClass("buttons");
 							
-							$.each(value.s, function (j, val) {
+							$.each(item.value.s, function (j, val) {
 								
 								var answer = $("<a>").attr("href", "javascript:void(0);").text(val);
 								
-								if (value.a == j) answer.addClass("correct");
+								if (item.value.a == j) answer.addClass("correct");
 								
 								answer.on(TOUCH_EVENT, function () {
 									
@@ -231,7 +246,7 @@
 			});
 		}
 		
-		function random(ary, n) {
+		function random(ary, n, t) {
 			
 			if (ary.length < n) return;
 			
@@ -239,7 +254,16 @@
 			
 			while (n > 0) {
 				
-				ret.push(ary.splice(Math.floor(Math.random() * ary.length), 1)[0]);
+				var v = ary.splice(Math.floor(Math.random() * ary.length), 1)[0];
+				
+				if (typeof t === "undefined") {
+					
+					ret.push(v);
+					
+				} else {
+					
+					ret.push({ type: t, value: v });
+				}
 				
 				n--;
 			}
