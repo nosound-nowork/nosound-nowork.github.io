@@ -1,7 +1,7 @@
 (function ($) {
 	
 	var SETTINGS = {
-		SOUND_PATH: "data/sound/"
+		SOUND_PATH: "data/
 	};
 	
 	$(function () {

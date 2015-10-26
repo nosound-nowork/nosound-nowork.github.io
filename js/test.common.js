@@ -81,6 +81,8 @@
 		
 		load: function (file) {
 			
+			alert(file);
+			
 			this._ready = false;
 			
 			this.audio.src = file;

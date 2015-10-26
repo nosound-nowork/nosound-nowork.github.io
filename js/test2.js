@@ -2,10 +2,10 @@
 	
 	var SETTINGS = {
 		JSON_PATH: "data/",
-		SOUND_PATH: "data/sound/",
+		SOUND_PATH: "data/",
 		IMG_PATH: "img/q/",
 		LIMIT: 30,
-		Q:{ MAX: 13, DICE: 5, IMAGE: 5, CALC: 5 }
+		Q: { MAX: 13, DICE: 5, IMAGE: 5, CALC: 5 }
 	};
 	
 	$(function () {
@@ -180,9 +180,11 @@
 								load: function () { pages.next(function () { time.show(); }); }
 							});
 							
-							var file = (type == "slow" ? "slow" : type == "fast" ? "fast" : "") + sound.extension();
+//							var file = (type == "slow" ? "slow" : type == "fast" ? "fast" : "") + sound.extension();
+							var file = SETTINGS.SOUND_PATH + "music" + sound.extension();
 							
-							sound.load(SETTINGS.SOUND_PATH + file);
+//							sound.load(SETTINGS.SOUND_PATH + file);
+							sound.load(file);
 							
 						} else {
 							
