@@ -55,7 +55,7 @@
 		
 		options: {
 			loop: true,
-			autoplay: true,
+			autoPlay: true,
 			currentTime: 0,
 			playbackRate: 1.0,
 			load: $.noop,
@@ -81,8 +81,6 @@
 		
 		load: function (file) {
 			
-			alert(file);
-			
 			this._ready = false;
 			
 			this.audio.src = file;
@@ -94,10 +92,10 @@
 			
 			if (this._ready) {
 				
-				if (this.audio.currentTime === 0) {
-					
-					this.audio.currentTime = this.options.currentTime;
-				}
+//				if (this.audio.currentTime === 0) {
+//
+//					this.audio.currentTime = this.options.currentTime;
+//				}
 				
 				this.audio.playbackRate = this.options.playbackRate;
 				
@@ -117,38 +115,43 @@
 			
 			this.pause();
 			
-			this.audio.currentTime = 0;
+//			this.audio.currentTime = 0;
 		},
 		
 		init: function (options) {
 			
-			alert(window.HTMLAudioElement);
-			
-			if (window.HTMLAudioElement) return;
+			if (!window.HTMLAudioElement) return;
 			
 			$.extend(this.options, options);
 			
 			this.audio = new Audio();
 			
 			this.audio.preload = "none";
-			this.audio.autoplay = false;
+			this.audio.autoPlay = false;
 			
-			this.audio.canplaythrough = function () {
-				
-				if (this.options.autoplay) this.play();
-				
-				this.options.load.apply(this);
-			};
+			var _this = this;
 			
-			this.audio.ended = function () {
+			this.audio.addEventListener("canplaythrough", function() {
 				
-				if (this.options.loop) this.play();
-			};
+				_this._ready = true;
+				
+				if (_this.options.autoPlay) _this.play();
+				
+				_this.options.load.apply(_this);
+				
+			}, false);
 			
-			this.audio.error = function () {
+			this.audio.addEventListener("ended", function() {
 				
-				this.options.error.apply(this);
-			};
+				if (_this.options.loop) _this.play();
+				
+			}, false);
+			
+			this.audio.addEventListener("error", function() {
+				
+				_this.options.error.apply(_this);
+				
+			}, false);
 		}
 	};
 	

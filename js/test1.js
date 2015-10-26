@@ -142,7 +142,7 @@
 						if (sound === null) {
 							
 							sound = new Sound({
-								load: ePage
+								load: sPage
 							});
 							
 							var file = "sound" + sound.extension();
