@@ -1,10 +1,15 @@
 (function ($) {
 	
+	var SETTINGS = {
+		SOUND_PATH: "data/sound/"
+	};
+	
 	$(function () {
 		
 		var timer = new Timer(),
 			timerId = null,
-			sound = "";
+			sound = null;
+			type = "";
 		
 		var squares = $("#squares"),
 			cells = squares.find("td"),
@@ -35,11 +40,11 @@
 				$("#result").text(result);
 				
 				// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - - - -
-				if (sound !== "") {
+				if (type !== "") {
 					
-					var s = sound === "off" ? "Off" : "On";
+					var t = type === "off" ? "Off" : "On";
 					
-					$.ga_send("Quick Touch", "Sound " + s, "", result * 100);
+					$.ga_send("Quick Touch", "Sound " + t, "", result * 100);
 				}
 				
 				// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -49,10 +54,10 @@
 				
 				if (typeof cookie !== "undefined") {
 					
-					if (cookie.test1[sound].time > result) {
+					if (cookie.test1[type].time > result) {
 						
-						cookie.test1[sound].time = result;
-						cookie.test1[sound].date = (new Date()).getTime();
+						cookie.test1[type].time = result;
+						cookie.test1[type].date = (new Date()).getTime();
 						
 						$.cookie("record", cookie, { path: "/", expires: 365 });
 					}
@@ -84,7 +89,12 @@
 			});
 		});
 		
-		$("#back").on(TOUCH_EVENT, function () { pages.top(); });
+		$("#back").on(TOUCH_EVENT, function () {
+			
+			if ($("div.container").hasClass("admin") && (sound !== null)) sound.stop();
+			
+			pages.top();
+		});
 		
 		$("#again").on(TOUCH_EVENT, function () { location.reload(); });
 		
@@ -111,24 +121,47 @@
 			}
 		});
 		
-		function load(s) {
+		function load(t) {
 			
 			link.hide();
 			
-			if (s == "off") {
+			if (t == "off") {
 				
 				$("span.sound").text("（音なし）");
 				
 				sPage();
 				
-			} else if (s == "on") {
+			} else if (t == "on") {
 				
 				$("span.sound").text("（音あり）");
 				
-				pages.next(function () { setTimeout(sPage, 2500); });
+				if ($("div.container").hasClass("admin")) {
+					
+					pages.next(function () {
+						
+						if (sound === null) {
+							
+							sound = new Sound({
+								load: ePage
+							});
+							
+							var file = "sound" + sound.extension();
+							
+							sound.load(SETTINGS.SOUND_PATH + file);
+							
+						} else {
+							
+							sound.play();
+						}
+					});
+					
+				} else {
+					
+					pages.next(function () { setTimeout(sPage, 2500); });
+				}
 			}
 			
-			sound = s;
+			type = t;
 			
 			function sPage() {
 				

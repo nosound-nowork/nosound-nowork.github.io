@@ -2,6 +2,7 @@
 	
 	var SETTINGS = {
 		JSON_PATH: "data/",
+		SOUND_PATH: "data/sound/",
 		IMG_PATH: "img/q/",
 		LIMIT: 30,
 		Q:{ MAX: 13, DICE: 5, IMAGE: 5, CALC: 5 }
@@ -11,7 +12,8 @@
 		
 		var timer = new Timer(),
 			timerId = null,
-			sound = "",
+			sound = null,
+			type = "",
 			count = { total: 0, correct: 0 };
 		
 		var link = $("#link"),
@@ -43,12 +45,12 @@
 				$("#rate").text(rate);
 				
 				// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - - - -
-				if (sound !== "") {
+				if (type !== "") {
 					
-					var s = sound === "slow" ? "Slow" : "Fast";
+					var t = type === "slow" ? "Slow" : "Fast";
 					
-					$.ga_send("Rapid Answer", "Tempo " + s, "total", count.total);
-					$.ga_send("Rapid Answer", "Tempo " + s, "correct", count.correct);
+					$.ga_send("Rapid Answer", "Tempo " + t, "total", count.total);
+					$.ga_send("Rapid Answer", "Tempo " + t, "correct", count.correct);
 				}
 				
 				// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -58,22 +60,22 @@
 				
 				if (typeof cookie !== "undefined") {
 					
-					if (cookie.test2[sound].total.total < count.total) {
+					if (cookie.test2[type].total.total < count.total) {
 						
-						cookie.test2[sound].total.total = count.total;
-						cookie.test2[sound].total.correct = count.correct;
-						cookie.test2[sound].total.rate = rate;
-						cookie.test2[sound].total.date = (new Date()).getTime();
+						cookie.test2[type].total.total = count.total;
+						cookie.test2[type].total.correct = count.correct;
+						cookie.test2[type].total.rate = rate;
+						cookie.test2[type].total.date = (new Date()).getTime();
 						
 						$.cookie("record", cookie, { path: "/", expires: 365 });
 					}
 					
-					if (cookie.test2[sound].rate.rate < rate) {
+					if (cookie.test2[type].rate.rate < rate) {
 						
-						cookie.test2[sound].rate.total = count.total;
-						cookie.test2[sound].rate.correct = count.correct;
-						cookie.test2[sound].rate.rate = rate;
-						cookie.test2[sound].rate.date = (new Date()).getTime();
+						cookie.test2[type].rate.total = count.total;
+						cookie.test2[type].rate.correct = count.correct;
+						cookie.test2[type].rate.rate = rate;
+						cookie.test2[type].rate.date = (new Date()).getTime();
 						
 						$.cookie("record", cookie, { path: "/", expires: 365 });
 					}
@@ -110,7 +112,12 @@
 			});
 		});
 		
-		$("#back").on(TOUCH_EVENT, function () { pages.top(); });
+		$("#back").on(TOUCH_EVENT, function () {
+			
+			if ($("div.container").hasClass("admin") && (sound !== null)) sound.stop();
+			
+			pages.top();
+		});
 		
 		$("#again").on(TOUCH_EVENT, function () { location.reload(); });
 		
@@ -126,22 +133,22 @@
 			}
 		}
 		
-		function load(s) {
+		function load(t) {
 			
 			link.hide();
 			
-			if (s == "slow") {
+			if (t == "slow") {
 				
 				$("span.sound").text("（テンポ - 遅い）");
 				
 				
-			} else if (s == "fast") {
+			} else if (t == "fast") {
 				
 				$("span.sound").text("（テンポ - 速い）");
 				
 			}
 			
-			sound = s;
+			type = t;
 			
 			pages.next(function () {
 				
@@ -164,7 +171,28 @@
 						function (index, value) { ePage.before(makePageQ(value)); }
 					);
 					
-					setTimeout(function () { pages.next(function () { time.show(); }); }, 2500);
+					if ($("div.container").hasClass("admin")) {
+						
+						if (sound === null) {
+							
+							sound = new Sound({
+								starttime: 0,
+								load: function () { pages.next(function () { time.show(); }); }
+							});
+							
+							var file = (type == "slow" ? "slow" : type == "fast" ? "fast" : "") + sound.extension();
+							
+							sound.load(SETTINGS.SOUND_PATH + file);
+							
+						} else {
+							
+							sound.play();
+						}
+						
+					} else {
+						
+						setTimeout(function () { pages.next(function () { time.show(); }); }, 2500);
+					}
 					
 					function makePageQ(item) {
 						

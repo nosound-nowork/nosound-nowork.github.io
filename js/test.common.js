@@ -49,6 +49,109 @@
 	
 	window.Timer = Timer;
 	
+	var Sound = function (options) { this.init(options); };
+	
+	Sound.prototype = {
+		
+		options: {
+			loop: true,
+			autoplay: true,
+			currentTime: 0,
+			playbackRate: 1.0,
+			load: $.noop,
+			error: $.noop,
+		},
+		
+		_ready: false,
+		
+		audio: null,
+		
+		canPlayMP3: function () {
+			return this.audio.canPlayType("audio/mpeg") !== "";
+		},
+		
+		canPlayOgg: function () {
+			return this.audio.canPlayType("audio/ogg") !== "";
+		},
+		
+		extension: function () {
+			
+			return this.canPlayMP3() ? ".mp3" : this.canPlayOgg() ? ".ogg" : "";
+		},
+		
+		load: function (file) {
+			
+			this._ready = false;
+			
+			this.audio.src = file;
+			
+			this.audio.load();
+		},
+		
+		play: function () {
+			
+			if (this._ready) {
+				
+				if (this.audio.currentTime === 0) {
+					
+					this.audio.currentTime = this.options.currentTime;
+				}
+				
+				this.audio.playbackRate = this.options.playbackRate;
+				
+				this.audio.play();
+			}
+		},
+		
+		pause: function () {
+			
+			if (!this.audio.paused) {
+				
+				this.audio.pause();
+			}
+		},
+		
+		stop: function () {
+			
+			this.pause();
+			
+			this.audio.currentTime = 0;
+		},
+		
+		init: function (options) {
+			
+			alert(window.HTMLAudioElement);
+			
+			if (window.HTMLAudioElement) return;
+			
+			$.extend(this.options, options);
+			
+			this.audio = new Audio();
+			
+			this.audio.preload = "none";
+			this.audio.autoplay = false;
+			
+			this.audio.canplaythrough = function () {
+				
+				if (this.options.autoplay) this.play();
+				
+				this.options.load.apply(this);
+			};
+			
+			this.audio.ended = function () {
+				
+				if (this.options.loop) this.play();
+			};
+			
+			this.audio.error = function () {
+				
+				this.options.error.apply(this);
+			};
+		}
+	};
+	
+	window.Sound = Sound;
+	
 	// Google Analytics Event Tracking
 	$.extend({
 		
