@@ -2,7 +2,7 @@
 	
 	var SETTINGS = {
 		FPS: 1000 / 60,
-		SOUND_FILE: "data/sound/test1"
+		SOUND_FILE: "data/sound/test1.noise"
 	};
 	
 	$(function () {
@@ -35,6 +35,8 @@
 				time.hide();
 				
 				clearInterval(timerId);
+				
+				if (sound !== null) sound.stop();
 				
 				var result = (timer.result() / 1000).toFixed(2);
 				

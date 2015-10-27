@@ -9,7 +9,7 @@
 		},
 		IMG_PATH: "img/q/",
 		LIMIT: 30,
-		Q: { MAX: 13, DICE: 5, IMAGE: 5, CALC: 5 }
+		Q: { MAX: 15, DICE: 5, IMAGE: 5, CALC: 5 }
 	};
 	
 	$(function () {
@@ -42,6 +42,8 @@
 				time.hide();
 				
 				clearInterval(timerId);
+				
+				if (sound !== null) sound.stop();
 				
 				var rate = count.correct == 0 ? 0.0 : Math.round(count.correct / count.total * 1000) / 10;
 				
@@ -103,13 +105,13 @@
 					
 					var s = (SETTINGS.LIMIT - timer.now() / 1000).toFixed(2);
 					
-					if (s < 0) {
+					if (s > 0) {
 						
-						pages.end();
+						sec.text(s);
 						
 					} else {
 						
-						sec.text(s);
+						pages.end();
 					}
 					
 				}, SETTINGS.FPS);
@@ -193,7 +195,9 @@
 					
 					$.getJSON(SETTINGS.JSON_PATH + "q.json", function (data) {
 						
-						var ePage = $("div.page_e").empty();
+						$("div.page_q").remove();
+						
+						var ePage = $("div.page_e");
 						
 						$.each(
 							random(data.dice.q, SETTINGS.Q.DICE, "dice"),

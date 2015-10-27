@@ -54,7 +54,7 @@
 	
 	Pages.prototype = {
 		_n: null,
-		_c: 0,
+		_c: -1,
 		settings:{
 			onTop: $.noop,
 			onEnd: $.noop
@@ -76,7 +76,7 @@
 			return this;
 		},
 		jump: function (c, f) {
-			if ((this._n.children().length > c) && (c >= 0)) {
+			if ((this._c !== c) && (this._n.children().length > c) && (c >= 0)) {
 				var _this = this;
 				// delay for touch event
 				setTimeout(function () {
