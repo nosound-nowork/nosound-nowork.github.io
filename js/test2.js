@@ -2,7 +2,7 @@
 	
 	var SETTINGS = {
 		JSON_PATH: "data/",
-		SOUND_PATH: "data/",
+		SOUND_FILE: "data/sound/test2",
 		IMG_PATH: "img/q/",
 		LIMIT: 30,
 		Q: { MAX: 13, DICE: 5, IMAGE: 5, CALC: 5 }
@@ -173,18 +173,17 @@
 					
 					if ($("div.container").hasClass("admin")) {
 						
-						if (sound === null) {
+						if ((sound === null) || (!sound.ready)) {
 							
 							sound = new Sound({
-								starttime: 0,
-								load: function () { pages.next(function () { time.show(); }); }
+								currentTime: 10,
+								playbackRate: (type == "slow" ? 0.7 : type == "fast" ? 1.5 : 1.0)
+								load: function () {
+									pages.next(function () { time.show(); });
+								}
 							});
 							
-//							var file = (type == "slow" ? "slow" : type == "fast" ? "fast" : "") + sound.extension();
-							var file = SETTINGS.SOUND_PATH + "music" + sound.extension();
-							
-//							sound.load(SETTINGS.SOUND_PATH + file);
-							sound.load(file);
+							sound.load(SETTINGS.SOUND_FILE + sound.extension());
 							
 						} else {
 							

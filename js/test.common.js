@@ -62,15 +62,17 @@
 			error: $.noop,
 		},
 		
-		_ready: false,
+		ready: false,
 		
 		audio: null,
 		
 		canPlayMP3: function () {
+			
 			return this.audio.canPlayType("audio/mpeg") !== "";
 		},
 		
 		canPlayOgg: function () {
+			
 			return this.audio.canPlayType("audio/ogg") !== "";
 		},
 		
@@ -81,7 +83,7 @@
 		
 		load: function (file) {
 			
-			this._ready = false;
+			this.ready = false;
 			
 			this.audio.src = file;
 			
@@ -90,12 +92,12 @@
 		
 		play: function () {
 			
-			if (this._ready) {
+			if (this.ready) {
 				
-//				if (this.audio.currentTime === 0) {
-//
-//					this.audio.currentTime = this.options.currentTime;
-//				}
+				if (this.audio.currentTime === 0) {
+					
+					this.audio.currentTime = this.options.currentTime;
+				}
 				
 				this.audio.playbackRate = this.options.playbackRate;
 				
@@ -115,7 +117,7 @@
 			
 			this.pause();
 			
-//			this.audio.currentTime = 0;
+			this.audio.currentTime = 0;
 		},
 		
 		init: function (options) {
@@ -133,17 +135,35 @@
 			
 			this.audio.addEventListener("canplaythrough", function() {
 				
-				_this._ready = true;
+				_this.audio.muted = true;
 				
-				if (_this.options.autoPlay) _this.play();
+				_this.audio.play();
 				
-				_this.options.load.apply(_this);
+				setTimeout(function () {
+					
+					_this.audio.pause();
+					
+					_this.audio.muted = false;
+					_this.audio.currentTime = 0;
+					
+					_this.ready = true;
+					
+					if (_this.options.autoPlay) _this.play();
+					
+					_this.options.load.apply(_this);
+					
+				}, 1000);
 				
 			}, false);
 			
 			this.audio.addEventListener("ended", function() {
 				
-				if (_this.options.loop) _this.play();
+				if (_this.options.loop) {
+					
+					_this.audio.currentTime = 0;
+					
+					_this.play();
+				}
 				
 			}, false);
 			

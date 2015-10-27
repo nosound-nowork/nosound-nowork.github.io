@@ -1,7 +1,7 @@
 (function ($) {
 	
 	var SETTINGS = {
-		SOUND_PATH: "data/"
+		SOUND_FILE: "data/sound/test1"
 	};
 	
 	$(function () {
@@ -139,15 +139,13 @@
 					
 					pages.next(function () {
 						
-						if (sound === null) {
+						if ((sound === null) || (!sound.ready)) {
 							
 							sound = new Sound({
 								load: sPage
 							});
 							
-							var file = "sound" + sound.extension();
-							
-							sound.load(SETTINGS.SOUND_PATH + file);
+							sound.load(SETTINGS.SOUND_FILE + sound.extension());
 							
 						} else {
 							
