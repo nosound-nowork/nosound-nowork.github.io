@@ -177,7 +177,7 @@
 							
 							sound = new Sound({
 								currentTime: 10,
-								playbackRate: (type == "slow" ? 0.7 : type == "fast" ? 1.5 : 1.0)
+								playbackRate: (type == "slow" ? 0.7 : type == "fast" ? 1.5 : 1.0),
 								load: function () {
 									pages.next(function () { time.show(); });
 								}
