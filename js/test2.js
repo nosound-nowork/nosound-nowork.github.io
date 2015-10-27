@@ -1,6 +1,7 @@
 (function ($) {
 	
 	var SETTINGS = {
+		FPS: 1000 / 60,
 		JSON_PATH: "data/",
 		SOUND_FILE: "data/sound/test2",
 		IMG_PATH: "img/q/",
@@ -108,7 +109,7 @@
 						sec.text(s);
 					}
 					
-				}, 123);
+				}, SETTINGS.FPS);
 			});
 		});
 		
@@ -171,6 +172,7 @@
 						function (index, value) { ePage.before(makePageQ(value)); }
 					);
 					
+					// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 					if ($("div.container").hasClass("admin")) {
 						
 						if ((sound === null) || (!sound.ready)) {
@@ -185,11 +187,15 @@
 							
 						} else {
 							
-							sound.options.playbackRate = playbackRate();
-							
-							sound.play();
-							
-							sPage();
+							setTimeout(function () {
+								
+								sound.options.playbackRate = playbackRate();
+								
+								sound.play();
+								
+								sPage();
+								
+							}, 1000);
 						}
 						
 						function playbackRate() {

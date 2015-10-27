@@ -1,6 +1,7 @@
 (function ($) {
 	
 	var SETTINGS = {
+		FPS: 1000 / 60,
 		SOUND_FILE: "data/sound/test1"
 	};
 	
@@ -85,7 +86,7 @@
 					
 					sec.text((timer.now() / 1000).toFixed(2));
 					
-				}, 123);
+				}, SETTINGS.FPS);
 			});
 		});
 		
@@ -149,9 +150,13 @@
 							
 						} else {
 							
-							sound.play();
-							
-							sPage();
+							setTimeout(function () {
+								
+								sound.play();
+								
+								sPage();
+								
+							}, 1000);
 						}
 					});
 					

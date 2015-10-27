@@ -53,6 +53,8 @@
 	
 	Sound.prototype = {
 		
+		file: "",
+		
 		options: {
 			loop: true,
 			autoPlay: true,
@@ -83,6 +85,7 @@
 		
 		load: function (file) {
 			
+			this.file = file;
 			this.ready = false;
 			
 			this.audio.src = file;
@@ -137,9 +140,13 @@
 				
 				_this.audio.muted = true;
 				
+				alert("play");
+				
 				_this.audio.play();
 				
 				setTimeout(function () {
+					
+					alert("pause");
 					
 					_this.audio.pause();
 					
