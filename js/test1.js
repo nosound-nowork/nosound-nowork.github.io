@@ -136,6 +136,7 @@
 				
 				$("span.sound").text("（音あり）");
 				
+				// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 				if ($("div.container").hasClass("admin")) {
 					
 					pages.next(function () {

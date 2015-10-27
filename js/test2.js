@@ -178,7 +178,7 @@
 						if ((sound === null) || (!sound.ready)) {
 							
 							sound = new Sound({
-								currentTime: 10,
+//								currentTime: 10,
 								playbackRate: playbackRate(),
 								load: sPage
 							});
