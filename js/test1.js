@@ -150,6 +150,8 @@
 						} else {
 							
 							sound.play();
+							
+							sPage();
 						}
 					});
 					

@@ -177,22 +177,34 @@
 							
 							sound = new Sound({
 								currentTime: 10,
-								playbackRate: (type == "slow" ? 0.7 : type == "fast" ? 1.5 : 1.0),
-								load: function () {
-									pages.next(function () { time.show(); });
-								}
+								playbackRate: playbackRate(),
+								load: sPage
 							});
 							
 							sound.load(SETTINGS.SOUND_FILE + sound.extension());
 							
 						} else {
 							
+							sound.options.playbackRate = playbackRate();
+							
 							sound.play();
+							
+							sPage();
+						}
+						
+						function playbackRate() {
+							
+							return type == "slow" ? 0.7 : type == "fast" ? 1.5 : 1.0;
 						}
 						
 					} else {
 						
-						setTimeout(function () { pages.next(function () { time.show(); }); }, 2500);
+						setTimeout(sPage, 2500);
+					}
+					
+					function sPage() {
+						
+						pages.next(function () { time.show(); });
 					}
 					
 					function makePageQ(item) {
