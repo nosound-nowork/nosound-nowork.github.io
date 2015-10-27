@@ -3,7 +3,10 @@
 	var SETTINGS = {
 		FPS: 1000 / 60,
 		JSON_PATH: "data/",
-		SOUND_FILE: "data/sound/test2",
+		SOUND_FILE: {
+			SLOW: "data/sound/test2.slow",
+			FAST: "data/sound/test2.fast"
+		},
 		IMG_PATH: "img/q/",
 		LIMIT: 30,
 		Q: { MAX: 13, DICE: 5, IMAGE: 5, CALC: 5 }
@@ -138,158 +141,155 @@
 			
 			link.hide();
 			
+			var soundFile = "",
+				currentTime = 0;
+			
 			if (t == "slow") {
 				
 				$("span.sound").text("（テンポ - 遅い）");
 				
+				soundFile = SETTINGS.SOUND_FILE.SLOW;
+				currentTime = 16.5;
 				
 			} else if (t == "fast") {
 				
 				$("span.sound").text("（テンポ - 速い）");
 				
+				soundFile = SETTINGS.SOUND_FILE.FAST;
+				currentTime = 13;
 			}
 			
 			type = t;
 			
 			pages.next(function () {
 				
-				$.getJSON(SETTINGS.JSON_PATH + "q.json", function (data) {
+				// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+				if ($("div.container").hasClass("admin")) {
 					
-					var ePage = $("div.page_e");
-					
-					$.each(
-						random(data.dice.q, SETTINGS.Q.DICE, "dice"),
-						function (index, value) { ePage.before(makePageQ(value)); }
-					);
-					
-					$.each(
-						random(data.image, SETTINGS.Q.IMAGE, "image"),
-						function (index, value) { ePage.before(makePageQ(value)); }
-					);
-					
-					$.each(
-						random(data.calc, SETTINGS.Q.CALC, "calc"),
-						function (index, value) { ePage.before(makePageQ(value)); }
-					);
-					
-					// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-					if ($("div.container").hasClass("admin")) {
+					if (sound === null) {
 						
-						if ((sound === null) || (!sound.ready)) {
-							
-							sound = new Sound({
-//								currentTime: 10,
-								playbackRate: playbackRate(),
-								load: sPage
-							});
-							
-							sound.load(SETTINGS.SOUND_FILE + sound.extension());
-							
-						} else {
-							
-							setTimeout(function () {
-								
-								sound.options.playbackRate = playbackRate();
-								
-								sound.play();
-								
-								sPage();
-								
-							}, 1000);
-						}
+						sound = new Sound({ load: sPage });
+					}
+					
+					soundFile = soundFile + sound.extension();
+					
+					sound.options.currentTime = currentTime;
+					
+					if ((sound.file === soundFile) && sound.ready) {
 						
-						function playbackRate() {
-							
-							return type == "slow" ? 0.7 : type == "fast" ? 1.5 : 1.0;
-						}
+						setTimeout(function () { sound.play(sPage); }, 1000);
 						
 					} else {
 						
-						setTimeout(sPage, 2500);
+						sound.load(soundFile);
 					}
 					
-					function sPage() {
+				} else {
+					
+					setTimeout(sPage, 2500);
+				}
+				
+				function sPage() {
+					
+					$.getJSON(SETTINGS.JSON_PATH + "q.json", function (data) {
+						
+						var ePage = $("div.page_e").empty();
+						
+						$.each(
+							random(data.dice.q, SETTINGS.Q.DICE, "dice"),
+							function (index, value) { ePage.before(makePageQ(value)); }
+						);
+						
+						$.each(
+							random(data.image, SETTINGS.Q.IMAGE, "image"),
+							function (index, value) { ePage.before(makePageQ(value)); }
+						);
+						
+						$.each(
+							random(data.calc, SETTINGS.Q.CALC, "calc"),
+							function (index, value) { ePage.before(makePageQ(value)); }
+						);
 						
 						pages.next(function () { time.show(); });
-					}
-					
-					function makePageQ(item) {
 						
-						var pageQ = $("<div>").addClass("page_q").addClass(item.type);
-						
-						if (item.type == "dice") {
+						function makePageQ(item) {
 							
-							pageQ.append($("<h3>").html(data.dice.d));
+							var pageQ = $("<div>").addClass("page_q").addClass(item.type);
 							
-							var table = $(
-								"<table><tbody>" +
-									"<tr><td></td><td></td><td></td></tr>" +
-									"<tr><td></td><td></td><td></td></tr>" +
-									"<tr><td></td><td></td><td></td></tr>" +
-									"<tr><td></td><td></td><td></td></tr>" +
-								"</tbody></table>"
-							);
-							
-							var cells = table.find("td");
-							
-							item.value = String(item.value);
-							
-							for (var i = 0; i < item.value.length; i++) {
+							if (item.type == "dice") {
 								
-								$(cells[i]).on(TOUCH_EVENT, function () {
+								pageQ.append($("<h3>").html(data.dice.d));
+								
+								var table = $(
+									"<table><tbody>" +
+										"<tr><td></td><td></td><td></td></tr>" +
+										"<tr><td></td><td></td><td></td></tr>" +
+										"<tr><td></td><td></td><td></td></tr>" +
+										"<tr><td></td><td></td><td></td></tr>" +
+									"</tbody></table>"
+								);
+								
+								var cells = table.find("td");
+								
+								item.value = String(item.value);
+								
+								for (var i = 0; i < item.value.length; i++) {
 									
-									var $this = $(this);
+									$(cells[i]).on(TOUCH_EVENT, function () {
+										
+										var $this = $(this);
+										
+										if ($this.hasClass("q_1") || $this.hasClass("q_3")) {
+											
+											count.total++;
+											
+											if ($this.hasClass("q_3")) count.correct++;
+											
+											nextQ();
+										}
+										
+									}).addClass("q_" + item.value.charAt(i));
+								}
+								
+								pageQ.append(table);
+								
+							} else {
+								
+								pageQ.append($("<h3>").html(item.value.q));
+								
+								if (typeof item.value.f !== "undefined") {
 									
-									if ($this.hasClass("q_1") || $this.hasClass("q_3")) {
+									pageQ.append($("<img>").attr("src", SETTINGS.IMG_PATH + item.value.f));
+								}
+								
+								var ol1 = $("<ol>").addClass("buttons"),
+									ol2 = $("<ol>").addClass("buttons");
+								
+								$.each(item.value.s, function (j, val) {
+									
+									var answer = $("<a>").attr("href", "javascript:void(0);").text(val);
+									
+									if (item.value.a == j) answer.addClass("correct");
+									
+									answer.on(TOUCH_EVENT, function () {
 										
 										count.total++;
 										
-										if ($this.hasClass("q_3")) count.correct++;
+										if ($(this).hasClass("correct")) count.correct++;
 										
 										nextQ();
-									}
+									});
 									
-								}).addClass("q_" + item.value.charAt(i));
-							}
-							
-							pageQ.append(table);
-							
-						} else {
-							
-							pageQ.append($("<h3>").html(item.value.q));
-							
-							if (typeof item.value.f !== "undefined") {
-								
-								pageQ.append($("<img>").attr("src", SETTINGS.IMG_PATH + item.value.f));
-							}
-							
-							var ol1 = $("<ol>").addClass("buttons"),
-								ol2 = $("<ol>").addClass("buttons");
-							
-							$.each(item.value.s, function (j, val) {
-								
-								var answer = $("<a>").attr("href", "javascript:void(0);").text(val);
-								
-								if (item.value.a == j) answer.addClass("correct");
-								
-								answer.on(TOUCH_EVENT, function () {
-									
-									count.total++;
-									
-									if ($(this).hasClass("correct")) count.correct++;
-									
-									nextQ();
+									(j < 2 ? ol1 : ol2).append($("<li>").append(answer));
 								});
 								
-								(j < 2 ? ol1 : ol2).append($("<li>").append(answer));
-							});
+								pageQ.append(ol1).append(ol2);
+							}
 							
-							pageQ.append(ol1).append(ol2);
+							return pageQ;
 						}
-						
-						return pageQ;
-					}
-				});
+					});
+				}
 			});
 		}
 		

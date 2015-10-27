@@ -141,23 +141,18 @@
 					
 					pages.next(function () {
 						
-						if ((sound === null) || (!sound.ready)) {
+						if (sound === null) {
 							
-							sound = new Sound({
-								load: sPage
-							});
+							sound = new Sound({ load: sPage });
+						}
+						
+						if (sound.ready) {
 							
-							sound.load(SETTINGS.SOUND_FILE + sound.extension());
+							setTimeout(function () { sound.play(sPage); }, 1000);
 							
 						} else {
 							
-							setTimeout(function () {
-								
-								sound.play();
-								
-								sPage();
-								
-							}, 1000);
+							sound.load(SETTINGS.SOUND_FILE + sound.extension());
 						}
 					});
 					
