@@ -134,20 +134,19 @@
 	
 	Sound.prototype = {
 		
-		src: "",
-		
 		options: {
 			loop: true,
 			autoPlay: true,
 			currentTime: 0,
-			playbackRate: 1.0,
 			load: $.noop,
-			error: $.noop,
+			error: $.noop
 		},
 		
-		ready: false,
-		
 		audio: null,
+		
+		src: "",
+		
+		ready: false,
 		
 		canPlayMP3: function () {
 			
@@ -178,16 +177,21 @@
 			
 			if (this.ready) {
 				
+				// android audio bug fix
 				if (this.audio.currentTime === 0) {
 					
-					if (this.options.currentTime !== 0) {
+					if (this.options.currentTime > 0) {
 						
-						this.audio.currentTime = (this.options.currentTime - 0.25);	// android audio bug fix
+						var t = this.options.currentTime - 0.25;
+						
+						if (t > 0) {
+							
+							this.audio.currentTime = t;
+						}
 					}
 				}
 				
-				this.audio.playbackRate = this.options.playbackRate;
-				this.audio.muted = true;	// android audio bug fix
+				this.audio.muted = true;
 				
 				this.audio.play();
 				
@@ -195,7 +199,7 @@
 				
 				setTimeout(function () {
 					
-					_this.audio.muted = false;	// android audio bug fix
+					_this.audio.muted = false;
 					
 					if ($.isFunction(callback)) callback.apply(_this);
 					
@@ -235,16 +239,30 @@
 				
 				if (!_this.ready) {
 					
-					_this.ready = true;
+					_this.audio.muted = true;
 					
-					if (_this.options.autoPlay) {
+					_this.audio.play();
+					
+					// android audio bug fix
+					setTimeout(function () {
 						
-						_this.play(function () { _this.options.load.apply(_this); });
+						_this.audio.pause();
 						
-					} else {
+						_this.audio.muted = false;
+						_this.audio.currentTime = 0;
 						
-						_this.options.load.apply(_this);
-					}
+						_this.ready = true;
+						
+						if (_this.options.autoPlay) {
+							
+							_this.play(function () { _this.options.load.apply(_this); });
+							
+						} else {
+							
+							_this.options.load.apply(_this);
+						}
+						
+					}, 1000);
 				}
 				
 			}, false);

@@ -95,7 +95,7 @@
 		
 		$("#back").on(TOUCH_EVENT, function () {
 			
-			if ($("div.container").hasClass("admin") && (sound !== null)) sound.stop();
+			if (sound !== null) sound.stop();
 			
 			pages.top();
 		});
@@ -141,29 +141,22 @@
 			pages.next(function () {
 				
 				// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-				if ($("div.container").hasClass("admin")) {
+				if (sound === null) {
 					
-					if (sound === null) {
-						
-						sound = new Sound({ load: sPage });
-					}
+					sound = new Sound({ load: sPage });
+				}
+				
+				soundSrc = soundSrc + sound.extension();
+				
+				sound.options.currentTime = currentTime;
+				
+				if ((sound.src === soundSrc) && sound.ready) {
 					
-					soundSrc = soundSrc + sound.extension();
-					
-					sound.options.currentTime = currentTime;
-					
-					if ((sound.src === soundSrc) && sound.ready) {
-						
-						setTimeout(function () { sound.play(sPage); }, 1000);
-						
-					} else {
-						
-						sound.load(soundSrc);
-					}
+					setTimeout(function () { sound.play(sPage); }, 1000);
 					
 				} else {
 					
-					setTimeout(sPage, 2500);
+					sound.load(soundSrc);
 				}
 				
 				function sPage() {

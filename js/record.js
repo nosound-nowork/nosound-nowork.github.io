@@ -74,10 +74,10 @@
 				"body=" +
 					encodeURIComponent("［年齢］") + br(1) + sp(4) +
 					encodeURIComponent($("#age > option:selected").text()) + br(1) + sp(1) + br(1) +
-					encodeURIComponent("［○○○テスト］") +  br(1) +
+					encodeURIComponent("［Quick Touch］") +  br(1) +
 					sp(8) + encodeURIComponent("音なし：") + $("#test1_off").parent().text() + br(1) +
 					sp(8) + encodeURIComponent("音あり：") + $("#test1_on").parent().text() + br(1) +
-					encodeURIComponent("［×××テスト］")  +  br(1) +
+					encodeURIComponent("［Rapid Answer］")  +  br(1) +
 					sp(4) + encodeURIComponent("テンポ - 遅い") +  br(1) +
 					sp(8) + encodeURIComponent("最高回答数：") +
 					$("#test2_slow_total_total").parent().parent().text() + br(1) +

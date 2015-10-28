@@ -82,7 +82,7 @@
 		
 		$("#back").on(TOUCH_EVENT, function () {
 			
-			if ($("div.container").hasClass("admin") && (sound !== null)) sound.stop();
+			if (sound !== null) sound.stop();
 			
 			pages.top();
 		});
@@ -127,29 +127,22 @@
 				$("span.sound").text("（音あり）");
 				
 				// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-				if ($("div.container").hasClass("admin")) {
+				pages.next(function () {
 					
-					pages.next(function () {
+					if (sound === null) {
 						
-						if (sound === null) {
-							
-							sound = new Sound({ load: sPage });
-						}
+						sound = new Sound({ load: sPage });
+					}
+					
+					if (sound.ready) {
 						
-						if (sound.ready) {
-							
-							setTimeout(function () { sound.play(sPage); }, 1000);
-							
-						} else {
-							
-							sound.load(SETTINGS.SOUND_SRC + sound.extension());
-						}
-					});
-					
-				} else {
-					
-					pages.next(function () { setTimeout(sPage, 2500); });
-				}
+						setTimeout(function () { sound.play(sPage); }, 1000);
+						
+					} else {
+						
+						sound.load(SETTINGS.SOUND_SRC + sound.extension());
+					}
+				});
 			}
 			
 			type = t;
