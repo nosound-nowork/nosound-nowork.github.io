@@ -1,14 +1,12 @@
 (function ($) {
 	
 	var SETTINGS = {
-		FPS: 1000 / 60,
-		SOUND_FILE: "data/sound/test1.noise"
+		SOUND_SRC: "data/sound/test1.noise"
 	};
 	
 	$(function () {
 		
-		var timer = new Timer(),
-			timerId = null,
+		var timer = new Timer("#sec"),
 			sound = null;
 			type = "";
 		
@@ -33,8 +31,6 @@
 				
 				next.hide();
 				time.hide();
-				
-				clearInterval(timerId);
 				
 				if (sound !== null) sound.stop();
 				
@@ -81,14 +77,6 @@
 				shuffle(25);
 				
 				timer.start();
-				
-				var sec = $("#sec");
-				
-				timerId = setInterval(function () {
-					
-					sec.text((timer.now() / 1000).toFixed(2));
-					
-				}, SETTINGS.FPS);
 			});
 		});
 		
@@ -154,7 +142,7 @@
 							
 						} else {
 							
-							sound.load(SETTINGS.SOUND_FILE + sound.extension());
+							sound.load(SETTINGS.SOUND_SRC + sound.extension());
 						}
 					});
 					
@@ -166,10 +154,7 @@
 			
 			type = t;
 			
-			function sPage() {
-				
-				pages.jump(2, function () { time.show(); });
-			}
+			function sPage() { pages.jump(2, function () { time.show(); }); }
 		}
 		
 		function shuffle(m) {

@@ -1,9 +1,8 @@
 (function ($) {
 	
 	var SETTINGS = {
-		FPS: 1000 / 60,
 		JSON_PATH: "data/",
-		SOUND_FILE: {
+		SOUND_SRC: {
 			SLOW: "data/sound/test2.slow",
 			FAST: "data/sound/test2.fast"
 		},
@@ -14,15 +13,13 @@
 	
 	$(function () {
 		
-		var timer = new Timer(),
-			timerId = null,
+		var timer = new Timer("#sec", { limit: SETTINGS.LIMIT, timeup: function () { pages.end(); } }),
 			sound = null,
 			type = "",
 			count = { total: 0, correct: 0 };
 		
 		var link = $("#link"),
-			time = $("div.time"),
-			sec = $("#sec");
+			time = $("div.time");
 		
 		var pages = new Pages("div.contents", {
 			
@@ -31,8 +28,6 @@
 				link.show();
 				
 				time.hide();
-				
-				sec.text(SETTINGS.LIMIT.toFixed(2));
 			},
 			
 			onEnd: function () {
@@ -40,8 +35,6 @@
 				timer.stop();
 				
 				time.hide();
-				
-				clearInterval(timerId);
 				
 				if (sound !== null) sound.stop();
 				
@@ -97,25 +90,7 @@
 		
 		$("#start").on(TOUCH_EVENT, function () {
 			
-			pages.next(function () {
-				
-				timer.start();
-				
-				timerId = setInterval(function () {
-					
-					var s = (SETTINGS.LIMIT - timer.now() / 1000).toFixed(2);
-					
-					if (s > 0) {
-						
-						sec.text(s);
-						
-					} else {
-						
-						pages.end();
-					}
-					
-				}, SETTINGS.FPS);
-			});
+			pages.next(function () { timer.start(); });
 		});
 		
 		$("#back").on(TOUCH_EVENT, function () {
@@ -143,21 +118,21 @@
 			
 			link.hide();
 			
-			var soundFile = "",
+			var soundSrc = "",
 				currentTime = 0;
 			
 			if (t == "slow") {
 				
 				$("span.sound").text("（テンポ - 遅い）");
 				
-				soundFile = SETTINGS.SOUND_FILE.SLOW;
+				soundSrc = SETTINGS.SOUND_SRC.SLOW;
 				currentTime = 16.5;
 				
 			} else if (t == "fast") {
 				
 				$("span.sound").text("（テンポ - 速い）");
 				
-				soundFile = SETTINGS.SOUND_FILE.FAST;
+				soundSrc = SETTINGS.SOUND_SRC.FAST;
 				currentTime = 13;
 			}
 			
@@ -173,17 +148,17 @@
 						sound = new Sound({ load: sPage });
 					}
 					
-					soundFile = soundFile + sound.extension();
+					soundSrc = soundSrc + sound.extension();
 					
 					sound.options.currentTime = currentTime;
 					
-					if ((sound.file === soundFile) && sound.ready) {
+					if ((sound.src === soundSrc) && sound.ready) {
 						
 						setTimeout(function () { sound.play(sPage); }, 1000);
 						
 					} else {
 						
-						sound.load(soundFile);
+						sound.load(soundSrc);
 					}
 					
 				} else {

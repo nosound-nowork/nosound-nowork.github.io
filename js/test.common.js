@@ -22,28 +22,109 @@
 		}, { path: "/", expires: 365 });
 	}
 	
-	var Timer = function () {};
+	var Timer = function (n, o) { this.init(n, o); };
 	
 	Timer.prototype = {
+		
+		_n: null,
+		
 		_s: null,
+		
 		_e: null,
+		
+		_id: null,
+		
+		options: {
+			limit: 0,
+			timeup: $.noop,
+			fps: 30
+		},
+		
 		start: function () {
+			
+			this.reset();
+			
 			this._s = new Date();
+			
+			var _this = this;
+			
+			this._id = setInterval(function () {
+				
+				var t = _this.now() / 1000;
+				
+				if (_this.options.limit === 0) {
+					
+					_this._n.text(t.toFixed(2));
+					
+				} else {
+					
+					var l = _this.options.limit - t;
+					
+					if (l > 0) {
+						
+						t = l;
+						
+					} else {
+						
+						t = 0;
+						
+						_this.stop();
+						
+						_this.options.timeup.apply(_this);
+					}
+				}
+				
+				_this._n.text(t.toFixed(2));
+				
+			}, 1000 / this.options.fps);
+			
+			return this;
 		},
+		
 		stop: function () {
+			
 			this._e = new Date();
+			
+			clearInterval(this._id);
+			
+			this._id = null;
+			
+			return this;
 		},
+		
 		now: function () {
+			
 			if (this._s == null) return false;
+			
 			return (new Date()).getTime() - this._s.getTime();
 		},
+		
 		result: function () {
+			
 			if ((this._s == null) || (this._e == null)) return false;
+			
 			return this._e.getTime() - this._s.getTime();
 		},
+		
 		reset: function () {
+			
 			this._s = null;
 			this._e = null;
+			
+			clearInterval(this._id);
+			
+			this._id = null;
+			
+			return this;
+		},
+		
+		init: function (n, o) {
+			
+			this._n = $(n);
+			
+			$.extend(this.options, o);
+			
+			this._n.text(this.options.limit.toFixed(2));
 		}
 	};
 	
@@ -53,7 +134,7 @@
 	
 	Sound.prototype = {
 		
-		file: "",
+		src: "",
 		
 		options: {
 			loop: true,
@@ -83,12 +164,12 @@
 			return this.canPlayMP3() ? ".mp3" : this.canPlayOgg() ? ".ogg" : "";
 		},
 		
-		load: function (file) {
+		load: function (src) {
 			
-			this.file = file;
+			this.src = src;
 			this.ready = false;
 			
-			this.audio.src = file;
+			this.audio.src = src;
 			
 			this.audio.load();
 		},
