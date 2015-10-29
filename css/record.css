@@ -143,7 +143,7 @@ div.contents > div.page_e > dl > dd > select {
 div.contents > div > hr {
 	border: solid #afafaf;
 	border-width: 1px 0 0 0;
-	margin: 25px 0;
+	margin: 22px 0 25px;
 }
 
 div.contents > div > div.policy {

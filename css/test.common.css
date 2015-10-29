@@ -25,26 +25,39 @@ div.contents > div {
 	display: none;
 }
 
-div.contents > div > h1 {
-	margin: 20px 0 15px;
+div.contents > div > div.title > * {
 	padding: 0;
 	text-align: center;
 	color: #0070c0;
 }
 
-div.container.android > div.contents > div > h1 {
-	font-size: 40px;
-}
-
-div.contents > div > h1 > span.title {
+div.contents > div > div.title > h1 {
+	margin: 20px 0 5px;
 	font-size: 36px;
 }
 
-div.contents > div > h1 > span.sound {
-	font-size: 22px;
+div.container.iPhone > div.contents > div > div.title > h1 {
+	margin-bottom: 0;
 }
 
-div.contents > div > h2 {
+div.container > div.contents > div.page_m > div.title > h1 {
+	margin-bottom: 15px;
+}
+
+div.container.android > div.contents > div > div.title > h1 {
+	font-size: 42px;
+}
+
+div.contents > div > div.title > h2 {
+	margin: 5px 0 20px;
+	font-size: 24px;
+}
+
+div.container.iPhone > div.contents > div > div.title > h2 {
+	margin-top: 0;
+}
+
+div.contents > div > h3 {
 	margin: 27px 0;
 	padding: 0;
 	text-align: center;

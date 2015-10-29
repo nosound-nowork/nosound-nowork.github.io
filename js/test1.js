@@ -32,6 +32,8 @@
 				next.hide();
 				time.hide();
 				
+				link.show();
+				
 				if (sound !== null) sound.stop();
 				
 				var result = (timer.result() / 1000).toFixed(2);
@@ -91,12 +93,12 @@
 		
 		cells.on(TOUCH_EVENT, function () {
 			
-			var n = next.text();
+			var n = parseInt(next.text());
 			
 			if ($(this).hasClass("sq_" + n)) {
 				
 //				if (n == 5) {
-				if (n == 25) {
+				if (n === 25) {
 //				if (n == 50) {
 					
 					pages.end();
@@ -116,15 +118,17 @@
 			
 			link.hide();
 			
-			if (t == "off") {
+			var title = "";
+			
+			if (t === "off") {
 				
-				$("span.sound").text("（音なし）");
+				title = "（音なし）";
 				
 				sPage();
 				
-			} else if (t == "on") {
+			} else if (t === "on") {
 				
-				$("span.sound").text("（音あり）");
+				title = "（音あり）";
 				
 				// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 				pages.next(function () {
@@ -146,6 +150,8 @@
 			}
 			
 			type = t;
+			
+			$("div.title > h2").text(title);
 			
 			function sPage() { pages.jump(2, function () { time.show(); }); }
 		}

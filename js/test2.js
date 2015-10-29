@@ -36,6 +36,8 @@
 				
 				time.hide();
 				
+				link.show();
+				
 				if (sound !== null) sound.stop();
 				
 				var rate = count.correct == 0 ? 0.0 : Math.round(count.correct / count.total * 1000) / 10;
@@ -104,7 +106,7 @@
 		
 		function nextQ() {
 			
-			if (count.total == SETTINGS.Q.MAX) {
+			if (count.total === SETTINGS.Q.MAX) {
 				
 				pages.end();
 				
@@ -118,25 +120,28 @@
 			
 			link.hide();
 			
-			var soundSrc = "",
+			var title = "",
+				soundSrc = "",
 				currentTime = 0;
 			
-			if (t == "slow") {
+			if (t === "slow") {
 				
-				$("span.sound").text("（テンポ - 遅い）");
+				title = "（テンポ - 遅い）";
 				
 				soundSrc = SETTINGS.SOUND_SRC.SLOW;
-				currentTime = 16.5;
+				currentTime = 16;
 				
-			} else if (t == "fast") {
+			} else if (t === "fast") {
 				
-				$("span.sound").text("（テンポ - 速い）");
+				title = "（テンポ - 速い）";
 				
 				soundSrc = SETTINGS.SOUND_SRC.FAST;
 				currentTime = 13;
 			}
 			
 			type = t;
+			
+			$("div.title > h2").text(title);
 			
 			pages.next(function () {
 				
@@ -190,7 +195,7 @@
 							
 							if (item.type == "dice") {
 								
-								pageQ.append($("<h3>").html(data.dice.d));
+								pageQ.append($("<h4>").html(data.dice.d));
 								
 								var table = $(
 									"<table><tbody>" +
@@ -227,7 +232,7 @@
 								
 							} else {
 								
-								pageQ.append($("<h3>").html(item.value.q));
+								pageQ.append($("<h4>").html(item.value.q));
 								
 								if (typeof item.value.f !== "undefined") {
 									

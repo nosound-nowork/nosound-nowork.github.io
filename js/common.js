@@ -15,7 +15,7 @@
 			var $this = $(this),
 				href = $this.attr("href");
 			
-			if (href.indexOf("javascript") !== 0) {
+			if (href.indexOf("javascript:") !== 0) {
 				
 				$this.attr("href", href + location.hash);
 			}

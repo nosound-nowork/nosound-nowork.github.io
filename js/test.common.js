@@ -239,17 +239,30 @@
 				
 				if (!_this.ready) {
 					
-					_this.audio.muted = true;
-					
-					_this.audio.play();
-					
 					// android audio bug fix
-					setTimeout(function () {
+					if ($("div.container").hasClass("android")) {
 						
-						_this.audio.pause();
+						_this.audio.muted = true;
 						
-						_this.audio.muted = false;
-						_this.audio.currentTime = 0;
+						_this.audio.play();
+						
+						setTimeout(function () {
+							
+							_this.audio.pause();
+							
+							_this.audio.muted = false;
+							_this.audio.currentTime = 0;
+							
+							complete();
+							
+						}, 1000);
+						
+					} else {
+						
+						complete();
+					}
+					
+					function complete() {
 						
 						_this.ready = true;
 						
@@ -261,8 +274,7 @@
 							
 							_this.options.load.apply(_this);
 						}
-						
-					}, 1000);
+					}
 				}
 				
 			}, false);
