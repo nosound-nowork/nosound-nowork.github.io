@@ -70,27 +70,25 @@
 			
 			$("#mailto").attr("href",
 				"mailto:" + "nosound.nowork" + "@" + "gmail.com?" +
-				"subject=" + encodeURIComponent("ユニシス研究会：静岡G　記録報告") + "&" +
+				"subject=" + ec("ユニシス研究会：静岡G　記録報告") + "&" +
 				"body=" +
-					encodeURIComponent("［年齢］") + br(1) + sp(4) +
-					encodeURIComponent($("#age > option:selected").text()) + br(1) + sp(1) + br(1) +
-					encodeURIComponent("［Quick Touch］") +  br(1) +
-					sp(8) + encodeURIComponent("音なし：") + $("#test1_off").parent().text() + br(1) +
-					sp(8) + encodeURIComponent("音あり：") + $("#test1_on").parent().text() + br(1) +
-					encodeURIComponent("［Rapid Answer］")  +  br(1) +
-					sp(4) + encodeURIComponent("テンポ - 遅い") +  br(1) +
-					sp(8) + encodeURIComponent("最高回答数：") +
-					$("#test2_off_total_total").parent().parent().text() + br(1) +
-					sp(8) + encodeURIComponent("最高正解率：") +
-					$("#test2_off_rate_total").parent().parent().text() +  br(1) +
-					sp(4) + encodeURIComponent("テンポ - 早い") +  br(1) +
-					sp(8) + encodeURIComponent("最高回答数：") +
-					$("#test2_on_total_total").parent().parent().text() + br(1) +
-					sp(8) + encodeURIComponent("最高正解率：") +
-					$("#test2_on_rate_total").parent().parent().text() + br(2) +
-					encodeURIComponent("［その他 感想など］") + br(1)
+					ec("［年齢］") + br(1) + sp(4) +
+					ec($("#age > option:selected").text()) + br(2) +
+					ec("［Quick Touch］") +  br(1) +
+					sp(4) + ec("テンポ - 遅い：") + $("#test1_slow").parent().text() + br(1) +
+					sp(4) + ec("テンポ - 速い：") + $("#test1_fast").parent().text() + br(2) +
+					ec("［Rapid Answer］")  +  br(1) +
+					sp(4) + ec("音なし") +  br(1) +
+					sp(8) + ec("最高回答数：") + $("#test2_off_total_total").parents("dd").text() + br(1) +
+					sp(8) + ec("最高正解率：") + $("#test2_off_rate_total").parents("dd").text() +  br(1) +
+					sp(4) + ec("音あり") +  br(1) +
+					sp(8) + ec("最高回答数：") + $("#test2_on_total_total").parents("dd").text() + br(1) +
+					sp(8) + ec("最高正解率：") + $("#test2_on_rate_total").parents("dd").text() + br(2) +
+					ec("［その他 感想など］") + br(1)
 			);
 		}
+		
+		function ec(s) { return encodeURIComponent(s); }
 		
 		function sp(n) { return Array(n + 1).join("%20"); }
 		
