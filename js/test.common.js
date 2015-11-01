@@ -2,19 +2,35 @@
 	
 	$.cookie.json = true;
 	
-	if (typeof $.cookie("record") === "undefined") {
+	var cookie = $.cookie("record");
+	
+	if (typeof cookie === "undefined") {
+		
+		initCookie();
+		
+	} else {
+		
+		if ((typeof cookie.test1 === "undefined") || (typeof cookie.test2 === "undefined") ||
+			(typeof cookie.test1.slow === "undefined") || (typeof cookie.test1.fast === "undefined") ||
+			(typeof cookie.test2.off === "undefined") || (typeof cookie.test2.on === "undefined")) {
+			
+			initCookie();
+		}
+	}
+	
+	function initCookie() {
 		
 		$.cookie("record", {
 			test1: {
-				off: { time: 99999, date: 0 },
-				on: { time: 99999, date: 0 }
+				slow: { time: 99999, date: 0 },
+				fast: { time: 99999, date: 0 }
 			},
 			test2: {
-				slow: {
+				off: {
 					total: { total: 0, correct: 0, rate: 0.00, date: 0 },
 					rate: { total: 0, correct: 0, rate: 0.00, date: 0 }
 				},
-				fast: {
+				on: {
 					total: { total: 0, correct: 0, rate: 0.0, date: 0 },
 					rate: { total: 0, correct: 0, rate: 0.0, date: 0 }
 				}
@@ -323,7 +339,7 @@
 					params.eventValue = value;
 				}
 				
-//				ga('send', params);
+				ga("send", params);
 			}
 		}
 	});

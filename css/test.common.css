@@ -71,3 +71,7 @@ div.contents > div > div.summary {
 	padding: 0;
 	line-height: 1.5;
 }
+
+div.contents > div > div.summary > span.caution {
+	color: #d70035;
+}

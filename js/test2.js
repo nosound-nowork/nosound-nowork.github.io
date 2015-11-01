@@ -2,10 +2,7 @@
 	
 	var SETTINGS = {
 		JSON_PATH: "data/",
-		SOUND_SRC: {
-			SLOW: "data/sound/test2.slow",
-			FAST: "data/sound/test2.fast"
-		},
+		SOUND_SRC: "data/sound/test2.rain",
 		IMG_PATH: "img/q/",
 		LIMIT: 30,
 		Q: { MAX: 15, DICE: 5, IMAGE: 5, CALC: 5 }
@@ -48,10 +45,10 @@
 				// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - - - -
 				if (type !== "") {
 					
-					var t = type === "slow" ? "Slow" : "Fast";
+					var t = type === "off" ? "OFF" : "ON";
 					
-					$.ga_send("Rapid Answer", "Tempo " + t, "total", count.total);
-					$.ga_send("Rapid Answer", "Tempo " + t, "correct", count.correct);
+					$.ga_send("Rapid Answer", "Sound " + t, "Total", count.total);
+					$.ga_send("Rapid Answer", "Sound " + t, "Correct", count.correct);
 				}
 				
 				// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -86,9 +83,9 @@
 		
 		pages.top();
 		
-		$("#sound_slow").on(TOUCH_EVENT, function () { load("slow"); });
+		$("#sound_off").on(TOUCH_EVENT, function () { load("off"); });
 		
-		$("#sound_fast").on(TOUCH_EVENT, function () { load("fast"); });
+		$("#sound_on").on(TOUCH_EVENT, function () { load("on"); });
 		
 		$("#start").on(TOUCH_EVENT, function () {
 			
@@ -120,49 +117,39 @@
 			
 			link.hide();
 			
-			var title = "",
-				soundSrc = "",
-				currentTime = 0;
-			
-			if (t === "slow") {
-				
-				title = "（テンポ - 遅い）";
-				
-				soundSrc = SETTINGS.SOUND_SRC.SLOW;
-				currentTime = 16;
-				
-			} else if (t === "fast") {
-				
-				title = "（テンポ - 速い）";
-				
-				soundSrc = SETTINGS.SOUND_SRC.FAST;
-				currentTime = 13;
-			}
-			
 			type = t;
-			
-			$("div.title > h2").text(title);
 			
 			pages.next(function () {
 				
-				// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-				if (sound === null) {
+				var title = "";
+				
+				if (t === "off") {
 					
-					sound = new Sound({ load: sPage });
+					title = "（音なし）";
+					
+					sPage();
+					
+				} else if (t === "on") {
+					
+					title = "（音あり）";
+					
+					// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+					if (sound === null) {
+						
+						sound = new Sound({ load: sPage });
+					}
+					
+					if (sound.ready) {
+						
+						setTimeout(function () { sound.play(sPage); }, 1000);
+						
+					} else {
+						
+						sound.load(SETTINGS.SOUND_SRC + sound.extension());
+					}
 				}
 				
-				soundSrc = soundSrc + sound.extension();
-				
-				sound.options.currentTime = currentTime;
-				
-				if ((sound.src === soundSrc) && sound.ready) {
-					
-					setTimeout(function () { sound.play(sPage); }, 1000);
-					
-				} else {
-					
-					sound.load(soundSrc);
-				}
+				$("div.title > h2").text(title);
 				
 				function sPage() {
 					

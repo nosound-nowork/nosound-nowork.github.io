@@ -1,7 +1,10 @@
 (function ($) {
 	
 	var SETTINGS = {
-		SOUND_SRC: "data/sound/test1.noise"
+		SOUND_SRC: {
+			SLOW: "data/sound/test1.slow",
+			FAST: "data/sound/test1.fast"
+		}
 	};
 	
 	$(function () {
@@ -43,9 +46,9 @@
 				// Send Google Analytics  - - - - - - - - - - - - - - - - - - - - - - - -
 				if (type !== "") {
 					
-					var t = type === "off" ? "Off" : "On";
+					var t = type === "slow" ? "Slow" : "Fast";
 					
-					$.ga_send("Quick Touch", "Sound " + t, "", result * 100);
+					$.ga_send("Quick Touch", "Tempo " + t, "", result * 100);
 				}
 				
 				// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
@@ -68,9 +71,9 @@
 		
 		pages.top();
 		
-		$("#sound_off").on(TOUCH_EVENT, function () { load("off"); });
+		$("#sound_slow").on(TOUCH_EVENT, function () { load("slow"); });
 		
-		$("#sound_on").on(TOUCH_EVENT, function () { load("on"); });
+		$("#sound_fast").on(TOUCH_EVENT, function () { load("fast"); });
 		
 		$("#start").on(TOUCH_EVENT, function () {
 			
@@ -118,40 +121,48 @@
 			
 			link.hide();
 			
-			var title = "";
+			var title = "",
+				soundSrc = "",
+				currentTime = 0;
 			
-			if (t === "off") {
+			if (t === "slow") {
 				
-				title = "（音なし）";
+				title = "（テンポ - 遅い）";
+				soundSrc = SETTINGS.SOUND_SRC.SLOW;
+				currentTime = 16;
 				
-				sPage();
+			} else if (t === "fast") {
 				
-			} else if (t === "on") {
-				
-				title = "（音あり）";
-				
-				// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-				pages.next(function () {
-					
-					if (sound === null) {
-						
-						sound = new Sound({ load: sPage });
-					}
-					
-					if (sound.ready) {
-						
-						setTimeout(function () { sound.play(sPage); }, 1000);
-						
-					} else {
-						
-						sound.load(SETTINGS.SOUND_SRC + sound.extension());
-					}
-				});
+				title = "（テンポ - 速い）";
+				soundSrc = SETTINGS.SOUND_SRC.FAST;
+				currentTime = 13;
 			}
 			
 			type = t;
 			
 			$("div.title > h2").text(title);
+			
+			// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
+			pages.next(function () {
+				
+				if (sound === null) {
+					
+					sound = new Sound({ load: sPage });
+				}
+				
+				soundSrc = soundSrc + sound.extension();
+				
+				sound.options.currentTime = currentTime;
+				
+				if ((sound.src === soundSrc) && sound.ready) {
+					
+					setTimeout(function () { sound.play(sPage); }, 1000);
+					
+				} else {
+					
+					sound.load(soundSrc);
+				}
+			});
 			
 			function sPage() { pages.jump(2, function () { time.show(); }); }
 		}

@@ -51,6 +51,10 @@ div.contents > div dl {
 	overflow: hidden;
 }
 
+div.contents > div > dl {
+	margin-left: 30px;
+}
+
 div.contents > div dl > * {
 	margin: 0 0 5px 0;
 	float: left;
@@ -66,10 +70,6 @@ div.contents > div dl > dt {
 	clear: left;
 }
 
-div.contents > div > dl > dt {
-	text-decoration: underline;
-}
-
 div.contents > div dl > dd {
 	width: 140px;
 	margin: 0px;
@@ -79,7 +79,8 @@ div.contents > div dl > dd {
 }
 
 div.contents > div > dl > dt {
-	width: 80px;
+	width: 85px;
+	text-decoration: underline;
 }
 
 div.contents > div > dl > dd {

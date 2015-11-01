@@ -21,38 +21,38 @@
 		
 		if (typeof cookie !== "undefined") {
 			
-			if (cookie.test1.off.date > 0) {
+			if (cookie.test1.slow.date > 0) {
 				
-				$("#test1_off").text(cookie.test1.off.time);
+				$("#test1_slow").text(cookie.test1.slow.time);
 			}
 			
-			if (cookie.test1.on.date > 0) {
+			if (cookie.test1.fast.date > 0) {
 				
-				$("#test1_on").text(cookie.test1.on.time);
+				$("#test1_fast").text(cookie.test1.fast.time);
 			}
 			
-			if (cookie.test2.slow.total.date > 0) {
+			if (cookie.test2.off.total.date > 0) {
 				
-				$("#test2_slow_total_total").text(cookie.test2.slow.total.total);
-				$("#test2_slow_total_rate").text(cookie.test2.slow.total.rate);
+				$("#test2_off_total_total").text(cookie.test2.off.total.total);
+				$("#test2_off_total_rate").text(cookie.test2.off.total.rate);
 			}
 			
-			if (cookie.test2.slow.rate.date > 0) {
+			if (cookie.test2.off.rate.date > 0) {
 				
-				$("#test2_slow_rate_total").text(cookie.test2.slow.rate.total);
-				$("#test2_slow_rate_rate").text(cookie.test2.slow.rate.rate);
+				$("#test2_off_rate_total").text(cookie.test2.off.rate.total);
+				$("#test2_off_rate_rate").text(cookie.test2.off.rate.rate);
 			}
 			
-			if (cookie.test2.fast.total.date > 0) {
+			if (cookie.test2.on.total.date > 0) {
 				
-				$("#test2_fast_total_total").text(cookie.test2.fast.total.total);
-				$("#test2_fast_total_rate").text(cookie.test2.fast.total.rate);
+				$("#test2_on_total_total").text(cookie.test2.on.total.total);
+				$("#test2_on_total_rate").text(cookie.test2.on.total.rate);
 			}
 			
-			if (cookie.test2.fast.rate.date > 0) {
+			if (cookie.test2.on.rate.date > 0) {
 				
-				$("#test2_fast_rate_total").text(cookie.test2.fast.rate.total);
-				$("#test2_fast_rate_rate").text(cookie.test2.fast.rate.rate);
+				$("#test2_on_rate_total").text(cookie.test2.on.rate.total);
+				$("#test2_on_rate_rate").text(cookie.test2.on.rate.rate);
 			}
 		}
 		
@@ -80,14 +80,14 @@
 					encodeURIComponent("［Rapid Answer］")  +  br(1) +
 					sp(4) + encodeURIComponent("テンポ - 遅い") +  br(1) +
 					sp(8) + encodeURIComponent("最高回答数：") +
-					$("#test2_slow_total_total").parent().parent().text() + br(1) +
+					$("#test2_off_total_total").parent().parent().text() + br(1) +
 					sp(8) + encodeURIComponent("最高正解率：") +
-					$("#test2_slow_rate_total").parent().parent().text() +  br(1) +
+					$("#test2_off_rate_total").parent().parent().text() +  br(1) +
 					sp(4) + encodeURIComponent("テンポ - 早い") +  br(1) +
 					sp(8) + encodeURIComponent("最高回答数：") +
-					$("#test2_fast_total_total").parent().parent().text() + br(1) +
+					$("#test2_on_total_total").parent().parent().text() + br(1) +
 					sp(8) + encodeURIComponent("最高正解率：") +
-					$("#test2_fast_rate_total").parent().parent().text() + br(2) +
+					$("#test2_on_rate_total").parent().parent().text() + br(2) +
 					encodeURIComponent("［その他 感想など］") + br(1)
 			);
 		}
