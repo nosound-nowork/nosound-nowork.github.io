@@ -12,6 +12,7 @@
 	
 	var tags = [
 		{
+			"comment": "Common Page CSS",
 			"name": "link",
 			"attr": {
 				"rel": "stylesheet",
@@ -20,17 +21,26 @@
 			}
 		},
 		{
+			"comment": "jQuery 2.1.4",
 			"name": "script",
 			"attr": {
 				"src": "https://ajax.googleapis.com/ajax/libs/jquery/2.1.4/jquery.min.js"
 			}
 		},
 		{
+			"comment": "jQuery.cookie",
+			"name": "script",
+			"attr": {
+				"src": PATH + "js/jquery.cookie.js"
+			}
+		},
+		{
+			"comment": "Common Page JS",
 			"name": "script",
 			"attr": {
 				"src": PATH + "js/common.js"
 			}
-		},
+		}
 	];
 	
 	for (var i = 0; i < tags.length; i++) {
@@ -40,6 +50,11 @@
 		for (var key in tags[i].attr) {
 			
 			t.push(key + '="' + tags[i].attr[key] + '"');
+		}
+		
+		if ((typeof tags[i].comment === "string") && (tags[i].comment !== "")) {
+			
+			document.write("<!-- " + tags[i].comment + " -->");
 		}
 		
 		document.write("<" + t.join(" ") + ">" + (tags[i].name == "script" ? "</script>" : ""));

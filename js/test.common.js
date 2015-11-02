@@ -1,43 +1,5 @@
 (function ($) {
 	
-	$.cookie.json = true;
-	
-	var cookie = $.cookie("record");
-	
-	if (typeof cookie === "undefined") {
-		
-		initCookie();
-		
-	} else {
-		
-		if ((typeof cookie.test1 === "undefined") || (typeof cookie.test2 === "undefined") ||
-			(typeof cookie.test1.slow === "undefined") || (typeof cookie.test1.fast === "undefined") ||
-			(typeof cookie.test2.off === "undefined") || (typeof cookie.test2.on === "undefined")) {
-			
-			initCookie();
-		}
-	}
-	
-	function initCookie() {
-		
-		$.cookie("record", {
-			test1: {
-				slow: { time: 99999, date: 0 },
-				fast: { time: 99999, date: 0 }
-			},
-			test2: {
-				off: {
-					total: { total: 0, correct: 0, rate: 0.00, date: 0 },
-					rate: { total: 0, correct: 0, rate: 0.00, date: 0 }
-				},
-				on: {
-					total: { total: 0, correct: 0, rate: 0.0, date: 0 },
-					rate: { total: 0, correct: 0, rate: 0.0, date: 0 }
-				}
-			}
-		}, { path: "/", expires: 365 });
-	}
-	
 	var Timer = function (n, o) { this.init(n, o); };
 	
 	Timer.prototype = {
