@@ -74,8 +74,6 @@
 			
 			$.cookie.json = true;
 			
-			alert(JSON.stringify(this._json));
-			
 			$.cookie(this._key, this._json, { path: this._path, expires: this._expires });
 		},
 		

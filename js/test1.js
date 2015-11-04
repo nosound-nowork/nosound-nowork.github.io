@@ -124,7 +124,7 @@
 				
 				title = "（テンポ - 遅い）";
 				soundSrc = SETTINGS.SOUND_SRC.SLOW;
-				currentTime = 16;
+				currentTime = 20.5;
 				
 			} else if (t === "fast") {
 				

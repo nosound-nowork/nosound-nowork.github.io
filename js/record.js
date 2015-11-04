@@ -65,7 +65,7 @@
 			
 			$("#mailto").attr("href",
 				"mailto:" + "nosound.nowork" + "@" + "gmail.com?" +
-				"subject=" + ec("ユニシス研究会：静岡G　記録報告") + "&" +
+				"subject=" + ec("ユニシス研究会：静岡G 記録報告") + "&" +
 				"body=" +
 					ec("［年齢］") + br(1) + sp(4) +
 					ec($("#age > option:selected").text()) + br(2) +
