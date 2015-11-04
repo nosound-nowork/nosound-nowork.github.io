@@ -2,7 +2,7 @@
 	
 	$(function () {
 		
-		$.cookie.json = true;
+		var record = new Cookie();
 		
 		if ($("div.container").hasClass("admin")) {
 			
@@ -10,50 +10,45 @@
 				
 				if (confirm("Are you sure you want to delete the cookie?")) {
 					
-					$.cookie("record", "", { path: "/", expires: -1 });
+					record.remove();
 					
 					location.reload(true);
 				}
 			});
 		}
 		
-		var cookie = $.cookie("record");
+		if (record.get("test1", "slow", "date") > 0) {
+			
+			$("#test1_slow").text(record.get("test1", "slow", "time"));
+		}
 		
-		if (typeof cookie !== "undefined") {
+		if (record.get("test1", "fast", "date") > 0) {
 			
-			if (cookie.test1.slow.date > 0) {
-				
-				$("#test1_slow").text(cookie.test1.slow.time);
-			}
+			$("#test1_fast").text(record.get("test1", "fast", "time"));
+		}
+		
+		if (record.get("test2", "off", "total", "date") > 0) {
 			
-			if (cookie.test1.fast.date > 0) {
-				
-				$("#test1_fast").text(cookie.test1.fast.time);
-			}
+			$("#test2_off_total_total").text(record.get("test2", "off", "total", "total"));
+			$("#test2_off_total_rate").text(record.get("test2", "off", "total", "rate"));
+		}
+		
+		if (record.get("test2", "off", "rate", "date") > 0) {
 			
-			if (cookie.test2.off.total.date > 0) {
-				
-				$("#test2_off_total_total").text(cookie.test2.off.total.total);
-				$("#test2_off_total_rate").text(cookie.test2.off.total.rate);
-			}
+			$("#test2_off_rate_total").text(record.get("test2", "off", "rate", "total"));
+			$("#test2_off_rate_rate").text(record.get("test2", "off", "rate", "rate"));
+		}
+		
+		if (record.get("test2", "on", "total", "date") > 0) {
 			
-			if (cookie.test2.off.rate.date > 0) {
-				
-				$("#test2_off_rate_total").text(cookie.test2.off.rate.total);
-				$("#test2_off_rate_rate").text(cookie.test2.off.rate.rate);
-			}
+			$("#test2_on_total_total").text(record.get("test2", "on", "total", "total"));
+			$("#test2_on_total_rate").text(record.get("test2", "on", "total", "rate"));
+		}
+		
+		if (record.get("test2", "on", "rate", "date") > 0) {
 			
-			if (cookie.test2.on.total.date > 0) {
-				
-				$("#test2_on_total_total").text(cookie.test2.on.total.total);
-				$("#test2_on_total_rate").text(cookie.test2.on.total.rate);
-			}
-			
-			if (cookie.test2.on.rate.date > 0) {
-				
-				$("#test2_on_rate_total").text(cookie.test2.on.rate.total);
-				$("#test2_on_rate_rate").text(cookie.test2.on.rate.rate);
-			}
+			$("#test2_on_rate_total").text(record.get("test2", "on", "rate", "total"));
+			$("#test2_on_rate_rate").text(record.get("test2", "on", "rate", "rate"));
 		}
 		
 		var pages = new Pages("div.contents");

@@ -301,7 +301,10 @@
 					params.eventValue = value;
 				}
 				
-				ga("send", params);
+				if (typeof ga !== "undefined") {
+					
+					ga("send", params);
+				}
 			}
 		}
 	});

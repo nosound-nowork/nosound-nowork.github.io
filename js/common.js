@@ -22,27 +22,17 @@
 		});
 	});
 	
-	$.cookie.json = true;
+	var Cookie = function () { this.load(); };
 	
-	var cookie = $.cookie("record");
-	
-	if (typeof cookie === "undefined") {
+	Cookie.prototype = {
 		
-		initCookie();
+		_key: "record",
 		
-	} else {
+		_path: "/",
 		
-		if ((typeof cookie.test1 === "undefined") || (typeof cookie.test2 === "undefined") ||
-			(typeof cookie.test1.slow === "undefined") || (typeof cookie.test1.fast === "undefined") ||
-			(typeof cookie.test2.off === "undefined") || (typeof cookie.test2.on === "undefined")) {
-			
-			initCookie();
-		}
-	}
-	
-	function initCookie() {
+		_expires: 365,
 		
-		$.cookie("record", {
+		_json: {
 			test1: {
 				slow: { time: 99999, date: 0 },
 				fast: { time: 99999, date: 0 }
@@ -57,8 +47,76 @@
 					rate: { total: 0, correct: 0, rate: 0.0, date: 0 }
 				}
 			}
-		}, { path: "/", expires: 365 });
-	}
+		},
+		
+		load: function () {
+			
+			$.cookie.json = true;
+			
+			var cookie = $.cookie(this._key);
+			
+			if ((typeof cookie !== "undefined") &&
+				(typeof cookie.test1 !== "undefined") && (typeof cookie.test2 !== "undefined") &&
+				(typeof cookie.test1.slow !== "undefined") && (typeof cookie.test1.fast !== "undefined") &&
+				(typeof cookie.test2.off !== "undefined") && (typeof cookie.test2.on !== "undefined")) {
+				
+				this._json = cookie;
+				
+				return true;
+				
+			} else {
+				
+				return false;
+			}
+		},
+		
+		save: function () {
+			
+			$.cookie.json = true;
+			
+			alert(JSON.stringify(this._json));
+			
+			$.cookie(this._key, this._json, { path: this._path, expires: this._expires });
+		},
+		
+		remove: function () {
+			
+			$.cookie.json = true;
+			
+			$.cookie(this._key, {}, { path: this._path, expires: -1 });
+		},
+		
+		get: function ( /* variable */ ) {
+			
+			var ret = this._json;
+			
+			for (var i in arguments) {
+				
+				ret = ret[arguments[i]];
+			}
+			
+			return ret;
+		},
+		
+		set: function (keys, value) {
+			
+			var json = this._json;
+			
+			for (var i = 0; i < keys.length; i++) {
+				
+				if (i === (keys.length - 1)) {
+					
+					json[keys[i]] = value;
+					
+				} else {
+					
+					json = json[keys[i]];
+				}
+			}
+		}
+	};
+	
+	window.Cookie = Cookie;
 	
 	var Pages = function (node, options) {
 		

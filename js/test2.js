@@ -16,7 +16,8 @@
 			count = { total: 0, correct: 0 };
 		
 		var link = $("#link"),
-			time = $("div.time");
+			time = $("div.time"),
+			caution = $("span.caution");
 		
 		var pages = new Pages("div.contents", {
 			
@@ -25,6 +26,8 @@
 				link.show();
 				
 				time.hide();
+				
+				caution.show();
 			},
 			
 			onEnd: function () {
@@ -52,32 +55,25 @@
 				}
 				
 				// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-				$.cookie.json = true;
+				var record = new Cookie();
 				
-				var cookie = $.cookie("record");
-				
-				if (typeof cookie !== "undefined") {
+				if (record.get("test2", type, "total", "total") < count.total) {
 					
-					if (cookie.test2[type].total.total < count.total) {
-						
-						cookie.test2[type].total.total = count.total;
-						cookie.test2[type].total.correct = count.correct;
-						cookie.test2[type].total.rate = rate;
-						cookie.test2[type].total.date = (new Date()).getTime();
-						
-						$.cookie("record", cookie, { path: "/", expires: 365 });
-					}
-					
-					if (cookie.test2[type].rate.rate < rate) {
-						
-						cookie.test2[type].rate.total = count.total;
-						cookie.test2[type].rate.correct = count.correct;
-						cookie.test2[type].rate.rate = rate;
-						cookie.test2[type].rate.date = (new Date()).getTime();
-						
-						$.cookie("record", cookie, { path: "/", expires: 365 });
-					}
+					record.set(["test2", type, "total", "total"], count.total);
+					record.set(["test2", type, "total", "correct"], count.correct);
+					record.set(["test2", type, "total", "rate"], rate);
+					record.set(["test2", type, "total", "date"], (new Date()).getTime());
 				}
+				
+				if (record.get("test2", type, "rate", "rate") < rate) {
+					
+					record.set(["test2", type, "rate", "total"], count.total);
+					record.set(["test2", type, "rate", "correct"], count.correct);
+					record.set(["test2", type, "rate", "rate"], rate);
+					record.set(["test2", type, "rate", "date"], (new Date()).getTime());
+				}
+				
+				record.save();
 			}
 		});
 		
@@ -126,6 +122,8 @@
 				if (t === "off") {
 					
 					title = "（音なし）";
+					
+					caution.hide();
 					
 					sPage();
 					

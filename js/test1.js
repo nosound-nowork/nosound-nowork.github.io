@@ -52,20 +52,15 @@
 				}
 				
 				// Set Cookie - - - - - - - - - - - - - - - - - - - - - - - - - - - - - -
-				$.cookie.json = true;
+				var record = new Cookie();
 				
-				var cookie = $.cookie("record");
-				
-				if (typeof cookie !== "undefined") {
+				if (record.get("test1", type, "time") > result) {
 					
-					if (cookie.test1[type].time > result) {
-						
-						cookie.test1[type].time = result;
-						cookie.test1[type].date = (new Date()).getTime();
-						
-						$.cookie("record", cookie, { path: "/", expires: 365 });
-					}
+					record.set(["test1", type, "time"], result);
+					record.set(["test1", type, "date"], (new Date()).getTime());
 				}
+				
+				record.save();
 			}
 		});
 		
