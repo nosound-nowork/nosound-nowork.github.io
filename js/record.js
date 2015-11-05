@@ -4,19 +4,6 @@
 		
 		var record = new Cookie();
 		
-		if ($("div.container").hasClass("admin")) {
-			
-			$("div.footer > span").on(TOUCH_EVENT, function () {
-				
-				if (confirm("Are you sure you want to delete the cookie?")) {
-					
-					record.remove();
-					
-					location.reload(true);
-				}
-			});
-		}
-		
 		if (record.get("test1", "slow", "date") > 0) {
 			
 			$("#test1_slow").text(record.get("test1", "slow", "time"));
@@ -56,6 +43,19 @@
 		pages.top();
 		
 		$("#report").on(TOUCH_EVENT, function () { pages.end(); });
+		
+		$("#remove").on(TOUCH_EVENT, function () { pages.next(); });
+		
+		$("#yes").on(TOUCH_EVENT, function () {
+			
+			record.remove();
+			
+			pages.next();
+		});
+		
+		$("#no").on(TOUCH_EVENT, function () { pages.prev(); });
+		
+		$("#ok").on(TOUCH_EVENT, function () { location.reload(true); });
 		
 		$("#age").on("change", mailto);
 		

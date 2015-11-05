@@ -147,8 +147,17 @@ div.contents > div > hr {
 	margin: 22px 0 25px;
 }
 
-div.contents > div > div.policy {
+div.contents > div > div {
 	width: 272px;
-	margin: 0 auto 20px;
 	line-height: 1.5;
+}
+
+div.contents > div > div.message {
+	margin: 25px auto 22px;
+	font-size: 17px;
+	line-height: 1.8;
+}
+
+div.contents > div > div.policy {
+	margin: 0 auto 20px;
 }

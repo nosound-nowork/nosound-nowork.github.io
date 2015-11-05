@@ -97,18 +97,6 @@
 		
 		$("#again").on(TOUCH_EVENT, function () { location.reload(); });
 		
-		function nextQ() {
-			
-			if (count.total === SETTINGS.Q.MAX) {
-				
-				pages.end();
-				
-			} else {
-				
-				pages.next();
-			}
-		}
-		
 		function load(t) {
 			
 			link.hide();
@@ -134,7 +122,7 @@
 					// Play Sound - - - - - - - - - - - - - - - - - - - - - - - - - - - -
 					if (sound === null) {
 						
-						sound = new Sound({ load: sPage });
+						sound = new Sound({ load: sPage, currentTime: 1 });
 					}
 					
 					if (sound.ready) {
@@ -173,6 +161,18 @@
 						);
 						
 						pages.next(function () { time.show(); });
+						
+						function nextQ() {
+							
+							if (count.total === SETTINGS.Q.MAX) {
+								
+								pages.end();
+								
+							} else {
+								
+								pages.next();
+							}
+						}
 						
 						function makePageQ(item) {
 							

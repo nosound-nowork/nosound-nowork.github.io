@@ -95,15 +95,16 @@
 			
 			if ($(this).hasClass("sq_" + n)) {
 				
-//				if (n == 5) {
-				if (n === 25) {
-//				if (n == 50) {
+				var debug = location.hash === "#debug";
+				
+				if (n == (debug ? 50 : 25)) {
+//				if (n === 25) {
 					
 					pages.end();
 					
 				} else {
 					
-//					if (n == 25) { shuffle(50); }
+					if (debug && (n == 25)) { shuffle(50); }
 					
 					next.text(parseInt(n) + 1).addClass("highlight");
 					

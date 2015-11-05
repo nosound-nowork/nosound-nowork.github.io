@@ -157,6 +157,8 @@
 				
 				var _this = this;
 				
+				function callback() { if ($.isFunction(func)) func.apply(_this); }
+				
 				if ((this.audio.currentTime === 0) && (this.options.currentTime > 0)) {
 					
 					// android audio bug fix
@@ -194,8 +196,6 @@
 					
 					callback();
 				}
-				
-				function callback() { if ($.isFunction(func)) func.apply(_this); }
 			}
 		},
 		
@@ -227,9 +227,23 @@
 			
 			var _this = this;
 			
-			this.audio.addEventListener("canplaythrough", function() {
+			this.audio.addEventListener("canplaythrough", function () {
 				
 				if (!_this.ready) {
+					
+					function complete() {
+						
+						_this.ready = true;
+						
+						if (_this.options.autoPlay) {
+							
+							_this.play(function () { _this.options.load.apply(_this); });
+							
+						} else {
+							
+							_this.options.load.apply(_this);
+						}
+					}
 					
 					// android audio bug fix
 					if ($("div.container").hasClass("android")) {
@@ -253,25 +267,11 @@
 						
 						complete();
 					}
-					
-					function complete() {
-						
-						_this.ready = true;
-						
-						if (_this.options.autoPlay) {
-							
-							_this.play(function () { _this.options.load.apply(_this); });
-							
-						} else {
-							
-							_this.options.load.apply(_this);
-						}
-					}
 				}
 				
 			}, false);
 			
-			this.audio.addEventListener("ended", function() {
+			this.audio.addEventListener("ended", function () {
 				
 				if (_this.options.loop) {
 					
@@ -282,7 +282,7 @@
 				
 			}, false);
 			
-			this.audio.addEventListener("error", function() {
+			this.audio.addEventListener("error", function () {
 				
 				_this.options.error.apply(_this);
 				
@@ -315,7 +315,9 @@
 					params.eventValue = value;
 				}
 				
-				if (typeof ga !== "undefined") {
+				alert(typeof ga);
+				
+				if (typeof ga !== "function") {
 					
 					ga("send", params);
 				}
