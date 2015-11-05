@@ -317,8 +317,6 @@
 				
 				if (typeof ga === "function") {
 					
-					alert("ga_send");
-					
 					ga("send", params);
 				}
 			}
