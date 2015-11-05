@@ -315,9 +315,9 @@
 					params.eventValue = value;
 				}
 				
-				alert(typeof ga);
-				
-				if (typeof ga !== "function") {
+				if (typeof ga === "function") {
+					
+					alert("ga_send");
 					
 					ga("send", params);
 				}
