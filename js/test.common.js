@@ -151,37 +151,51 @@
 			this.audio.load();
 		},
 		
-		play: function (callback) {
+		play: function (func) {
 			
 			if (this.ready) {
 				
-				// android audio bug fix
-				if (this.audio.currentTime === 0) {
-					
-					if (this.options.currentTime > 0) {
-						
-						var t = this.options.currentTime - 0.25;
-						
-						if (t > 0) {
-							
-							this.audio.currentTime = t;
-						}
-					}
-				}
-				
-				this.audio.muted = true;
-				
-				this.audio.play();
-				
 				var _this = this;
 				
-				setTimeout(function () {
+				if ((this.audio.currentTime === 0) && (this.options.currentTime > 0)) {
 					
-					_this.audio.muted = false;
+					// android audio bug fix
+					if ($("div.container").hasClass("android")) {
+						
+						var delay = 0.5,
+							crrTm = this.options.currentTime - delay;
+						
+						this.audio.currentTime = crrTm > 0 ? crrTm : this.options.currentTime;
+						
+						this.audio.muted = true;
+						
+						this.audio.play();
+						
+						setTimeout(function () {
+							
+							_this.audio.muted = false;
+							
+							callback();
+							
+						}, delay * 1000);
+						
+					} else {
+						
+						this.audio.currentTime = this.options.currentTime;
+						
+						this.audio.play();
+						
+						callback();
+					}
 					
-					if ($.isFunction(callback)) callback.apply(_this);
+				} else {
 					
-				}, 250);
+					this.audio.play();
+					
+					callback();
+				}
+				
+				function callback() { if ($.isFunction(func)) func.apply(_this); }
 			}
 		},
 		
