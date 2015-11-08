@@ -21,14 +21,16 @@
 		
 		var pages = new Pages("div.contents", {
 			
-			onTop: function () {
+			top: function () {
 				
 				link.show();
 				
 				time.hide();
 			},
 			
-			onEnd: function () {
+			end: function () {
+				
+				this.fixed(true);
 				
 				timer.stop();
 				
@@ -95,16 +97,11 @@
 			
 			if ($(this).hasClass("sq_" + n)) {
 				
-				var debug = location.hash === "#debug";
-				
-				if (n == (debug ? 50 : 25)) {
-//				if (n === 25) {
+				if (n === 25) {
 					
 					pages.end();
 					
 				} else {
-					
-					if (debug && (n == 25)) { shuffle(50); }
 					
 					next.text(parseInt(n) + 1).addClass("highlight");
 					

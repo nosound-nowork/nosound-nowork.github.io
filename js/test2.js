@@ -4,8 +4,8 @@
 		JSON_PATH: "data/",
 		SOUND_SRC: "data/sound/test2.rain",
 		IMG_PATH: "img/q/",
-		LIMIT: 30,
-		Q: { MAX: 15, DICE: 5, IMAGE: 5, CALC: 5 }
+		LIMIT: 60,
+		Q: { MAX: 21, DICE: 7, IMAGE: 7, CALC: 7 }
 	};
 	
 	$(function () {
@@ -21,7 +21,7 @@
 		
 		var pages = new Pages("div.contents", {
 			
-			onTop: function () {
+			top: function () {
 				
 				link.show();
 				
@@ -30,7 +30,9 @@
 				caution.show();
 			},
 			
-			onEnd: function () {
+			end: function () {
+				
+				this.fixed(true);
 				
 				timer.stop();
 				

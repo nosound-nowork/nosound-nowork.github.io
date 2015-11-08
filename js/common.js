@@ -120,7 +120,7 @@
 		
 		this._n = $(node);
 		
-		if (typeof options !== "undefined") $.extend(this.settings, options);
+		if (typeof options !== "undefined") $.extend(this.options, options);
 	};
 	
 	Pages.prototype = {
@@ -129,9 +129,35 @@
 		
 		_c: -1,
 		
-		settings:{
-			onTop: $.noop,
-			onEnd: $.noop
+		_fixed: false,
+		
+		options:{
+			top: $.noop,
+			end: $.noop
+		},
+		
+		fixed: function (bool) {
+			
+			if (typeof bool === "undefined") {
+				
+				return this._fixed;
+				
+			} else {
+				
+				this._fixed = bool;
+				
+				return this;
+			}
+		},
+		
+		isTop: function () {
+			
+			return (this._c === 0);
+		},
+		
+		isEnd: function () {
+			
+			return (this._c === (this._n.children().length - 1));
 		},
 		
 		next: function (f) {
@@ -148,36 +174,43 @@
 			return this;
 		},
 		
-		top: function () {
+		top: function (f) {
 			
-			this.jump(0, this.settings.onTop);
+			this.jump(0, f);
 			
 			return this;
 		},
 		
-		end: function () {
+		end: function (f) {
 			
-			this.jump(this._n.children().length - 1, this.settings.onEnd);
+			this.jump(this._n.children().length - 1, f);
 			
 			return this;
 		},
 		
 		jump: function (c, f) {
 			
-			if ((this._c !== c) && (this._n.children().length > c) && (c >= 0)) {
+			if ((this._c !== c) && (this._n.children().length > c) && (c >= 0) && !this.fixed()) {
 				
 				var _this = this;
 				
 				// delay for touch event
 				setTimeout(function () {
 					
-					_this._c = c;
-					
-					_this._n.children().hide().filter(":eq(" + c + ")").show();
-					
-					window.scrollTo(0, 0);
-					
-					if ($.isFunction(f)) f.apply(_this);
+					if (!_this.fixed()) {
+						
+						_this._c = c;
+						
+						_this._n.children().hide().filter(":eq(" + c + ")").show();
+						
+						window.scrollTo(0, 0);
+						
+						if (_this.isTop() && $.isFunction(_this.options.top)) _this.options.top.apply(_this);
+						
+						if (_this.isEnd() && $.isFunction(_this.options.end)) _this.options.end.apply(_this);
+						
+						if ($.isFunction(f)) f.apply(_this);
+					}
 					
 				}, 250);
 			}
