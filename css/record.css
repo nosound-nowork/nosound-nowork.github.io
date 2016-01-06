@@ -141,6 +141,14 @@ div.contents > div.page_e > dl > dd > select {
 	font-family: sans-serif;
 }
 
+div.contents > div > ol.buttons > li.disabled {
+	background-color: #afafaf;
+}
+
+div.contents > div > ol.buttons > li.disabled > a {
+	cursor: default;
+}
+
 div.contents > div > hr {
 	border: solid #afafaf;
 	border-width: 1px 0 0 0;
