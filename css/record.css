@@ -146,6 +146,7 @@ div.contents > div > ol.buttons > li.disabled {
 }
 
 div.contents > div > ol.buttons > li.disabled > a {
+	color: #f0f0f0;
 	cursor: default;
 }
 
