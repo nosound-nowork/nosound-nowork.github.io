@@ -68,7 +68,7 @@
 		
 		$("#mailto").parent().addClass("disabled");
 		
-		$("div.policy").html(
+		$("div.policy").addClass("thanks").html(
 			"記録のご報告は、<br>2015年12月末日で締め切りました。<br><br>ご協力ありがとうございました。"
 		);
 		

@@ -169,3 +169,7 @@ div.contents > div > div.message {
 div.contents > div > div.policy {
 	margin: 0 auto 20px;
 }
+
+div.contents > div > div.thanks {
+	font-size: 17px;
+}
