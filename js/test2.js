@@ -10,11 +10,6 @@
 	
 	$(function () {
 		
-		if ($("div.container").hasClass("admin")) {
-			
-			SETTINGS.Q = { MAX: 9, DICE: 3, IMAGE: 3, CALC: 3 };
-		}
-		
 		var timer = new Timer("#sec", { limit: SETTINGS.LIMIT, timeup: function () { pages.end(); } }),
 			sound = null,
 			type = "",
